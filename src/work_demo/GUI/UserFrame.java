@@ -61,14 +61,10 @@ public class UserFrame extends JFrame {
         this.add(menuBar);
         menuBar.setVisible(true);
         //设置交互
-        home.addActionListener(e->{
-            gameShow.setVisible(true);
-        });
+        home.addActionListener(e-> gameShow.setVisible(true));
         features.addActionListener(e->{});
         discovery.addActionListener(e->{});
-        wishList.addActionListener(e->{
-            new wishlistFrame(curUser);
-        });
+        wishList.addActionListener(e-> new wishlistFrame(curUser));
         collection.addActionListener(e->{});
         download.addActionListener(e->{});
         lock.addActionListener(e->{
@@ -99,11 +95,14 @@ public class UserFrame extends JFrame {
         searchArea.add(searchButton);
         searchArea.add(refresh);
         searchButton.addActionListener(e->{
-            showSearched(typeIn.getText());
+            double min;double max;
+            if (minPriceIn.getText().isEmpty()) min = 0;
+            else min = Double.parseDouble(minPriceIn.getText());
+            if (maxPriceIn.getText().isEmpty()) max = 1e9;
+            else max = Double.parseDouble(maxPriceIn.getText());
+            showSearched(typeIn.getText(),min,max);
         });
-        refresh.addActionListener(e->{
-            refresh("");
-        });
+        refresh.addActionListener(e-> refresh("",0,1000));
         mainPanel.add(searchArea, BorderLayout.NORTH);
     }
 
@@ -124,7 +123,6 @@ public class UserFrame extends JFrame {
         JTable gameTable = new JTable(tableModel);
         JScrollPane jp = new JScrollPane(gameTable);
         gameShow.add(jp, BorderLayout.CENTER);
-        gameTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // 只能单选
         gameTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -138,10 +136,10 @@ public class UserFrame extends JFrame {
             }
         });
         // 加载初始数据
-        refresh("");
+        refresh("",0,1000);
         mainPanel.add(gameShow, BorderLayout.CENTER);//组件添加到主组件
     }
-    public void showSearched(String type) {
+    public void showSearched(String type,double min,double max) {
         // 获取当前表格模型,固定搭配,先记着
         JScrollPane scrollPane = (JScrollPane) gameShow.getComponent(0);
         JTable gameTable = (JTable)scrollPane.getViewport().getView();
@@ -149,13 +147,13 @@ public class UserFrame extends JFrame {
         // 清空现有数据
         tableModel.setRowCount(0);
         //刷新数据
-        refresh(type);
+        refresh(type,min,max);
     }
 
     // 提取刷新数据的公共方法
-    private void refresh(String type) {
+    private void refresh(String type,double min,double max) {
         tableModel.setRowCount(0);
-        List<Game> games = gs.getByType(type);
+        List<Game> games = gs.getBySearch(type,min,max);
         for (Game g : games) {
             tableModel.addRow(new Object[]{
                     g.getName(),
@@ -167,7 +165,6 @@ public class UserFrame extends JFrame {
         gameShow.revalidate();
         gameShow.repaint();
     }
-
     public static void main(String[] args) {
         new UserFrame(new User(0, "test", "123"));
     }

@@ -4,8 +4,6 @@ import work_demo.ENTITY.Game;
 import work_demo.ENTITY.User;
 
 import java.sql.*;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
 
 public class GameSer implements GameDao {
@@ -35,19 +33,19 @@ public class GameSer implements GameDao {
         }
     }
     public boolean addWishlist(Game game, User user) {
-        String sql = "INSERT INTO wishlist (username, gamename, num, time) VALUES (?, ?, 1, ?) " +
-                "ON DUPLICATE KEY UPDATE num = num + 1, time = ?";
+        // 使用ON DUPLICATE KEY UPDATE实现原子操作
+        String sql = "INSERT INTO wishlist (username, gameName, num, time) " +
+                "VALUES (?, ?, 1, NOW()) " +
+                "ON DUPLICATE KEY UPDATE num = num + 1, time = NOW()";
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            Date currentDate = Date.valueOf(LocalDate.now());
             pstmt.setString(1, user.getName());
             pstmt.setString(2, game.getName());
-            pstmt.setDate(3, currentDate);
-            pstmt.setDate(4, currentDate);
 
             return pstmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -62,17 +60,20 @@ public class GameSer implements GameDao {
     public List<Game> query(int id) {
         return List.of();
     }
+
     //检索游戏
-    public List<Game> getByType(String type) {
+    public List<Game> getBySearch(String type,double min,double max) {
         List<Game> games = new ArrayList<>();
-        String sql = "SELECT * FROM games WHERE type LIKE ?"; // 使用LIKE进行模糊查询
+        String sql = "SELECT * FROM games WHERE type LIKE ? and price >= ? and price <= ?"; // 使用LIKE进行模糊查询
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             // 设置参数，使用%实现模糊匹配
+            //后期改为多选按钮筛选,可以更精确类型
             pstmt.setString(1, "%" + type + "%");
-
+            pstmt.setDouble(2, min);
+            pstmt.setDouble(3, max);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Game game = new Game(
@@ -117,7 +118,7 @@ public class GameSer implements GameDao {
     //检索愿望单
     public List<Game> getByUser(String name) {
         List<Game> games = new ArrayList<>();
-        String sql = "SELECT name,price,type,score,wishlist.num FROM wishlist " +
+        String sql = "SELECT name,price,type,score,wishlist.num,games.overview FROM wishlist " +
                 "join games on wishlist.gameName=games.name " +
                 "WHERE username = ? order by wishlist.time desc" ;
         try (Connection conn = DBUtils.getConnection();

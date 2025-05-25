@@ -44,7 +44,6 @@ public class UserSer implements UserDao {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1,user.getName() );
             pstmt.setString(2, user.getPassword());
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
@@ -55,6 +54,7 @@ public class UserSer implements UserDao {
         }
         return false;
     }
+
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
@@ -70,6 +70,7 @@ public class UserSer implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return users;
     }
 

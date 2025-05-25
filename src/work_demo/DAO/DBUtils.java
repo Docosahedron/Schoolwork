@@ -19,31 +19,4 @@ public class DBUtils {
             e.printStackTrace();
         }
     }
-
-
-    /*
-        try (Connection conn = DriverManager.getConnection(url, username, password)) {
-            // 1. 创建Statement
-            Statement stmt = conn.createStatement();
-            // 2. 执行查询
-            ResultSet rs = stmt.executeQuery("SELECT * FROM admins");
-            // 3. 处理结果集
-            while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") +
-                        ", Name: " + rs.getString("name"));
-            }
-
-            // 插入数据示例
-            String insertSQL = "INSERT INTO admins (id,name,password) VALUES (?, ?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(insertSQL);
-            pstmt.setString(1, "001");
-            pstmt.setString(2, "zx");
-            pstmt.setString(3, "zx");
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    */
 }

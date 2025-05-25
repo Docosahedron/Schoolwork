@@ -131,10 +131,7 @@ public class UserFrame extends JFrame {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Game curGame = new Game((String) tableModel.getValueAt(row, 0),
-                                (String) tableModel.getValueAt(row, 1),
-                                (Double) tableModel.getValueAt(row, 2),
-                                (int) tableModel.getValueAt(row, 3));
+                        Game curGame = gs.getByName((String) tableModel.getValueAt(row, 0));
                         new gameDetailsFrame(curGame,curUser);
                     }
                 }

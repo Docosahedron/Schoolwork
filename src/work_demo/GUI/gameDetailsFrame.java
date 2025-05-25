@@ -17,9 +17,9 @@ public class gameDetailsFrame extends JFrame {
     ReviewSer rs =new ReviewSer();
     JPanel pGame = new JPanel();
     JPanel pReview = new JPanel();
-    public gameDetailsFrame(Game curGame, User user) {
-        super(curGame.getName());
-        this.curGame = curGame;
+    public gameDetailsFrame(Game game, User user) {
+        super(game.getName());
+        this.curGame = game;
         this.curUser = user;
 
         // 设置主窗口使用BorderLayout
@@ -175,8 +175,7 @@ public class gameDetailsFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        Game g = new Game("艾尔登法环", "动作角色扮演", 96, 298);
-        g.setNum(50);
+        Game g = new Game("艾尔登法环", "动作角色扮演", 298, 1);
         g.setOverview("《艾尔登法环》是以正统黑暗奇幻世界为舞台的动作RPG游戏。走进辽阔的场景与地下迷宫探索未知，挑战困难重重的险境，享受克服困境时的成就感吧。");
         User u = new User(111, "test", "123");
         new gameDetailsFrame(g, u);

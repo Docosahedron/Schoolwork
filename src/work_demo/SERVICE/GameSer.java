@@ -78,8 +78,10 @@ public class GameSer implements GameDao {
                     Game game = new Game(
                             rs.getString("name"),
                             rs.getString("type"),
+                            rs.getInt("score"),
                             rs.getDouble("price"),
-                            rs.getInt("num")
+                            rs.getInt("num"),
+                            rs.getString("overview")
                     );
                     games.add(game);
                 }
@@ -88,6 +90,29 @@ public class GameSer implements GameDao {
             e.printStackTrace();
         }
         return games;
+    }
+    public Game getByName(String name) {
+        Game game = null;
+        String sql = "SELECT * FROM games WHERE name = ? ";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    game = new Game(
+                            rs.getString("name"),
+                            rs.getString("type"),
+                            rs.getInt("score"),
+                            rs.getDouble("price"),
+                            rs.getInt("num"),
+                            rs.getString("overview")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return game;
     }
     //检索愿望单
     public List<Game> getByUser(String name) {
@@ -103,8 +128,10 @@ public class GameSer implements GameDao {
                     Game game = new Game(
                             rs.getString("name"),
                             rs.getString("type"),
+                            rs.getInt("score"),
                             rs.getDouble("price"),
-                            rs.getInt("num")
+                            rs.getInt("num"),
+                            rs.getString("overview")
                     );
                     games.add(game);
                 }
@@ -124,10 +151,14 @@ public class GameSer implements GameDao {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Game game = new Game(rs.getString("name"),
+                Game game = new Game(
+                        rs.getString("name"),
                         rs.getString("type"),
+                        rs.getInt("score"),
                         rs.getDouble("price"),
-                        rs.getInt("num"));
+                        rs.getInt("num"),
+                        rs.getString("overview")
+                );
                 games.add(game);
             }
         } catch (SQLException e) {

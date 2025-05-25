@@ -10,10 +10,18 @@ public class Game {
     public Game(String name, String type, double price,int num) {
         this.name = name;
         this.type = type;
-        this.score = 90;
+        this.score = -1;
         this.price = price;
         this.num = num;
-        this.overview = "Overview";
+        this.overview = "null";
+    }
+    public Game(String name, String type, int score,double price,int num, String overview) {
+        this.name = name;
+        this.type = type;
+        this.score = score;
+        this.price = price;
+        this.num = num;
+        this.overview = overview;
     }
     public String getName() {
         return name;

@@ -120,6 +120,8 @@ public class UserFrame extends JFrame {
         mainPanel.add(searchArea, BorderLayout.NORTH);
     }
 
+
+    // 商品表格初始化
     public void showAll() {
         gameShow = new JPanel(new BorderLayout());
         // 创建表格模型,重写表格类型,使其只读
@@ -179,7 +181,7 @@ public class UserFrame extends JFrame {
         gameShow.revalidate();
         gameShow.repaint();
     }
-//    public static void main(String[] args) {
-//        new UserFrame(new User(0, "test", "123"));
-//    }
+    public static void main(String[] args) {
+        new UserFrame(new User(0, "test", "123"));
+    }
 }

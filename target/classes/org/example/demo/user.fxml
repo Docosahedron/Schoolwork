@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuButton layoutY="3.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="42.0" text="首页">
+        <items>
+          <MenuItem mnemonicParsing="false" text="首页" />
+        </items>
+      </MenuButton>
+      <ComboBox layoutX="48.0" layoutY="3.0" prefHeight="15.0" prefWidth="67.0" promptText="商场" />
+   </children>
+</Pane>

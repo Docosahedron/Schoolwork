@@ -1,4 +1,7 @@
 package work_demo.GUI;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import org.example.demo.Login;
 import work_demo.ENTITY.*;
 import work_demo.SERVICE.*;
 import javax.swing.*;
@@ -68,8 +71,8 @@ public class UserFrame extends JFrame {
         collection.addActionListener(e->{});
         download.addActionListener(e->{});
         lock.addActionListener(e->{
-            new loginFrame();
             dispose();
+            Login.open();
         });
         exit.addActionListener(e->System.exit(0));
         setJMenuBar(menuBar); // 注意这里使用setJMenuBar而不是add

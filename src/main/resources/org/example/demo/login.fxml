@@ -17,12 +17,12 @@
                <children>
                   <TextField fx:id="usernameField" layoutY="60.0" prefHeight="43.0" prefWidth="401.0" />
                   <PasswordField fx:id="passwordField" layoutY="138.0" prefHeight="43.0" prefWidth="401.0" />
-                  <Text layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="用账户名称登录" wrappingWidth="118.90692138671875">
+                  <Text fill="#caf1f4" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="用账户名称登录" wrappingWidth="118.90692138671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="-1.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密码">
+                  <Text fill="#caf1f4" layoutX="-1.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="密码">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -32,20 +32,20 @@
                         <Font size="26.0" />
                      </font>
                   </Button>
-                  <CheckBox layoutY="187.0" mnemonicParsing="false" text="记住我">
+                  <CheckBox layoutY="187.0" mnemonicParsing="false" text="记住我" textFill="#caf1f4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
                </children>
             </Pane>
-            <Button layoutX="576.0" layoutY="367.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="93.0" text="免费注册账户" />
+            <Button layoutX="576.0" layoutY="367.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="93.0" text="免费注册账户" onAction="#handleRegister" />
             <Text layoutX="471.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="还没有账户？">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Button fx:id="exitButton" layoutX="28.0" layoutY="31.0" mnemonicParsing="false" text="退出"  onAction="#handleExit">
+            <Button fx:id="exitButton" layoutX="28.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleExit" text="退出">
                <font>
                   <Font size="19.0" />
                </font>

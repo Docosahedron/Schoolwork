@@ -1,9 +1,6 @@
 package org.example.demo;
 
-import work_demo.ENTITY.*;
-import work_demo.GUI.AdminFrame;
-import work_demo.GUI.UserFrame;
-import work_demo.SERVICE.*;
+import com.sun.tools.javac.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +8,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import work_demo.ENTITY.*;
+import work_demo.GUI.*;
+import work_demo.DAO.*;
+import work_demo.SERVICE.*;
 
 import javax.swing.*;
 
@@ -62,6 +63,10 @@ public class  LoginController {
     @FXML
     private void handleExit() {
         Platform.exit();
+    }
+    @FXML
+    private void handleRegister() {
+        Login.changeView("register.fxml");
     }
 }
 

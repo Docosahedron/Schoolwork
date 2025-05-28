@@ -1,0 +1,47 @@
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	(revision e23c66173791cc630e4e87a1d435c38ebb807c1c)
++++ /dev/null	(revision e23c66173791cc630e4e87a1d435c38ebb807c1c)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	(revision e23c66173791cc630e4e87a1d435c38ebb807c1c)
++++ /dev/null	(revision e23c66173791cc630e4e87a1d435c38ebb807c1c)
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/workDemo.iml" filepath="$PROJECT_DIR$/workDemo.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"ms-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision e23c66173791cc630e4e87a1d435c38ebb807c1c)
++++ b/.idea/misc.xml	(date 1748400095638)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="ms-21" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>

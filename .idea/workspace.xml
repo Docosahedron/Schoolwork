@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ae74c9ac-576b-45b0-8d6c-ffe54ca95155" name="更改" comment="222">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="zx" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Docosahedron&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Docosahedron/Schoolwork.git&quot;,
+    &quot;accountId&quot;: &quot;f1aac4fd-1f37-448b-a0a9-90494f08acb5&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2x5VBxOthQKmAzB5mc1kJZOGD2D" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "zx",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/working/Java/idea/IdeaProjects/ProductManagement/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "D:/working/Java/idea/IdeaProjects/workDemo/src/Main.java",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.AdminFrame.executor": "Run",
+    "应用程序.GameAddFrame.executor": "Run",
+    "应用程序.HelloApplication.executor": "Run",
+    "应用程序.Login.executor": "Run",
+    "应用程序.MainFrame.executor": "Run",
+    "应用程序.MenuExample.executor": "Run",
+    "应用程序.UserFrame.executor": "Run",
+    "应用程序.WindowTest.executor": "Run",
+    "应用程序.adminFrame.executor": "Run",
+    "应用程序.dataBase.executor": "Run",
+    "应用程序.gameDetailsFrame.executor": "Run",
+    "应用程序.gamesAddFrame.executor": "Run",
+    "应用程序.gdf.executor": "Run",
+    "应用程序.goodsAddFrame.executor": "Run",
+    "应用程序.loginFrame.executor": "Run",
+    "应用程序.registerFrame.executor": "Run",
+    "应用程序.userFrame.executor": "Run"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="workDemo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="workDemo" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="ae74c9ac-576b-45b0-8d6c-ffe54ca95155" name="更改" comment="" />
+      <created>1747227791910</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747227791910</updated>
+      <workItem from="1747227793160" duration="1971000" />
+      <workItem from="1747309731687" duration="237000" />
+      <workItem from="1747317308387" duration="288000" />
+      <workItem from="1747415268825" duration="70000" />
+      <workItem from="1747415367769" duration="274000" />
+      <workItem from="1747415759087" duration="150000" />
+      <workItem from="1747415943499" duration="7000" />
+      <workItem from="1747415955967" duration="8145000" />
+      <workItem from="1747424321858" duration="3825000" />
+      <workItem from="1747505433133" duration="600000" />
+      <workItem from="1747506064767" duration="639000" />
+      <workItem from="1747506849879" duration="1269000" />
+      <workItem from="1747508161914" duration="1000" />
+      <workItem from="1747508290370" duration="32000" />
+      <workItem from="1747508372357" duration="35000" />
+      <workItem from="1747518484538" duration="734000" />
+      <workItem from="1747642216599" duration="4000" />
+      <workItem from="1747642321429" duration="1741000" />
+      <workItem from="1747644415638" duration="260000" />
+      <workItem from="1747644777231" duration="54000" />
+      <workItem from="1747644845915" duration="554000" />
+      <workItem from="1747645988325" duration="3641000" />
+      <workItem from="1747662100368" duration="7352000" />
+      <workItem from="1747671365994" duration="287000" />
+      <workItem from="1747735148370" duration="1481000" />
+      <workItem from="1747741804112" duration="196000" />
+      <workItem from="1747743372480" duration="2476000" />
+      <workItem from="1747920608458" duration="2161000" />
+      <workItem from="1747926098625" duration="8514000" />
+      <workItem from="1748015504789" duration="371000" />
+      <workItem from="1748019878550" duration="7754000" />
+      <workItem from="1748097447620" duration="2000" />
+      <workItem from="1748097462890" duration="5554000" />
+      <workItem from="1748104100922" duration="6521000" />
+      <workItem from="1748110686487" duration="10058000" />
+      <workItem from="1748158846563" duration="2912000" />
+      <workItem from="1748162782056" duration="1418000" />
+      <workItem from="1748181889845" duration="355000" />
+      <workItem from="1748183525481" duration="4118000" />
+      <workItem from="1748189067857" duration="9364000" />
+      <workItem from="1748256380258" duration="162000" />
+      <workItem from="1748256609406" duration="1220000" />
+      <workItem from="1748266735116" duration="2088000" />
+      <workItem from="1748270721674" duration="610000" />
+      <workItem from="1748304215246" duration="1368000" />
+      <workItem from="1748307210972" duration="846000" />
+      <workItem from="1748310249291" duration="3570000" />
+      <workItem from="1748390688495" duration="154000" />
+      <workItem from="1748390901462" duration="1591000" />
+      <workItem from="1748392525611" duration="1480000" />
+      <workItem from="1748394046132" duration="107000" />
+      <workItem from="1748394163045" duration="60000" />
+      <workItem from="1748394292726" duration="832000" />
+      <workItem from="1748395144741" duration="535000" />
+      <workItem from="1748396061358" duration="5000" />
+      <workItem from="1748396072741" duration="276000" />
+      <workItem from="1748399984268" duration="728000" />
+    </task>
+    <task id="LOCAL-00001" summary="测试">
+      <option name="closed" value="true" />
+      <created>1748182131964</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748182131964</updated>
+    </task>
+    <task id="LOCAL-00002" summary="删除部分无用文件">
+      <option name="closed" value="true" />
+      <created>1748184012694</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748184012695</updated>
+    </task>
+    <task id="LOCAL-00003" summary="更改心愿单跳转机制,从原来读取列表数据改为查询游戏名跳转;新增Game类6参构造方法">
+      <option name="closed" value="true" />
+      <created>1748192933866</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748192933866</updated>
+    </task>
+    <task id="LOCAL-00004" summary="完善心愿单添加功能,使得重复数据计数+1.使用unique约束心愿单中username和gameName处理重复数据">
+      <option name="closed" value="true" />
+      <created>1748199243241</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199243241</updated>
+    </task>
+    <task id="LOCAL-00005" summary="1.完善心愿单添加功能,使得重复数据加入心愿单计数+1.功能趋向购物车.&#10;2.更新价格筛选功能&#10;&#10;使用unique约束心愿单中username和gameName处理重复数据">
+      <option name="closed" value="true" />
+      <created>1748199467872</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199467872</updated>
+    </task>
+    <task id="LOCAL-00006" summary="1.完善心愿单添加功能,使得重复数据加入心愿单计数+1.功能趋向购物车.&#10;2.更新价格筛选功能&#10;3.部分按钮更新为lambda表达式&#10;&#10;使用unique约束心愿单中username和gameName处理重复数据.用户界面的home功能和刷新重复,后面要更新home">
+      <option name="closed" value="true" />
+      <created>1748199696748</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199696748</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1.完善心愿单添加功能,使得重复数据加入心愿单计数+1.功能趋向购物车.&#10;2.更新价格筛选功能&#10;3.部分按钮更新为lambda表达式&#10;&#10;使用unique约束心愿单中username和gameName处理重复数据.用户界面的home功能和刷新重复,后面要更新home">
+      <option name="closed" value="true" />
+      <created>1748199729045</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748199729045</updated>
+    </task>
+    <task id="LOCAL-00008" summary="111">
+      <option name="closed" value="true" />
+      <created>1748391043762</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748391043762</updated>
+    </task>
+    <task id="LOCAL-00009" summary="222">
+      <option name="closed" value="true" />
+      <created>1748396118275</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748396118275</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="f92f9618-26ad-49b8-a512-87b83bbaba81" value="TOOL_WINDOW" />
+        <entry key="94486215-7021-4f94-9432-13f4bd4e2c86" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="94486215-7021-4f94-9432-13f4bd4e2c86">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="HIGHLIGHTERS">
+                <map>
+                  <entry key="MY_COMMITS" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="f92f9618-26ad-49b8-a512-87b83bbaba81">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="测试" />
+    <MESSAGE value="删除部分无用文件" />
+    <MESSAGE value="Create README.md" />
+    <MESSAGE value="更改心愿单跳转机制,从原来读取列表数据改为查询游戏名跳转;新增Game类6参构造方法" />
+    <MESSAGE value="完善心愿单添加功能,使得重复数据计数+1.使用unique约束心愿单中username和gameName处理重复数据" />
+    <MESSAGE value="1.完善心愿单添加功能,使得重复数据加入心愿单计数+1.功能趋向购物车.&#10;2.更新价格筛选功能&#10;&#10;使用unique约束心愿单中username和gameName处理重复数据" />
+    <MESSAGE value="1.完善心愿单添加功能,使得重复数据加入心愿单计数+1.功能趋向购物车.&#10;2.更新价格筛选功能&#10;3.部分按钮更新为lambda表达式&#10;&#10;使用unique约束心愿单中username和gameName处理重复数据.用户界面的home功能和刷新重复,后面要更新home" />
+    <MESSAGE value="111" />
+    <MESSAGE value="222" />
+    <option name="LAST_COMMIT_MESSAGE" value="222" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

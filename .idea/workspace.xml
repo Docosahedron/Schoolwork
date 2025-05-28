@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae74c9ac-576b-45b0-8d6c-ffe54ca95155" name="更改" comment="222">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +65,6 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "zx",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/working/Java/idea/IdeaProjects/ProductManagement/src",
@@ -69,7 +74,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "D:/working/Java/idea/IdeaProjects/workDemo/src/Main.java",
-    "project.structure.last.edited": "模块",
+    "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
@@ -183,7 +188,7 @@
       <workItem from="1748395144741" duration="535000" />
       <workItem from="1748396061358" duration="5000" />
       <workItem from="1748396072741" duration="276000" />
-      <workItem from="1748399984268" duration="728000" />
+      <workItem from="1748399984268" duration="1619000" />
     </task>
     <task id="LOCAL-00001" summary="测试">
       <option name="closed" value="true" />
@@ -257,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748396118275</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="222">
+      <option name="closed" value="true" />
+      <created>1748401009492</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748401009492</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

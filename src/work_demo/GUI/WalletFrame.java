@@ -2,38 +2,92 @@ package work_demo.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+
+import work_demo.ENTITY.*;
+import work_demo.DAO.*;
 
 public class WalletFrame extends JFrame {
-    public WalletFrame() {
+    public WalletFrame(User user) {
         initFrame();    // 创建界面
-        initButten();   // 创建按钮
+        initButten(user.getName());   // 创建按钮
         initText();     // 创建文本
         initImage();    // 创建图片
-        initBalance();  // 添加余额模块
+        initBalance(user.getName());  // 添加余额模块
     }
 
-    private void initBalance() {
-        //添加次级标题
+
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+
+    JPanel balancePanel = new JPanel();
+    private void initBalance(String name) {
+        // 添加次级标题
         JLabel balanceTitle = new JLabel("您的账户");
         Font font = new Font("宋体", Font.BOLD, 20);
         balanceTitle.setFont(font);
         balanceTitle.setBounds(560, 160, 240, 25);
         add(balanceTitle);
 
-        //创建余额显示
-        JPanel balancePanel = new JPanel();
+        // 创建余额显示容器
         balancePanel.setLayout(null);
         balancePanel.setBackground(new Color(220, 220, 220, 200));    // 将背景颜色设置为亮灰
         balancePanel.setBounds(560, 185, 220, 125);
         add(balancePanel);
 
-        //创建余额提示
+        // 创建余额提示
         JLabel balanceTitle2 = new JLabel("当前钱包余额");
         Font font2 = new Font("宋体", Font.BOLD, 15);
         balanceTitle2.setFont(font2);
         balanceTitle2.setForeground(Color.BLUE);   //设置字体颜色为蓝色
         balanceTitle2.setBounds(10, 10, 100, 25);
         balancePanel.add(balanceTitle2);
+
+        showBalance(name);
+
+    }
+
+    JLabel balanceNum;
+    private void showBalance(String name) {
+        // 显示余额数量
+        try {
+            conn = DBUtils.getConnection();
+            String sql = "select balance from users where name = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                double balance = rs.getDouble("balance");
+                balanceNum = new JLabel("¥ " + balance);
+                Font font3 = new Font("宋体", Font.BOLD, 24);
+                balanceNum.setFont(font3);
+                balanceNum.setBounds(10, 40, 200, 30);
+                balancePanel.add(balanceNum);
+            } else {
+                balanceNum = new JLabel("未找到余额信息");
+                balanceNum.setBounds(10, 40, 200, 30);
+                balancePanel.add(balanceNum);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JLabel errorLabel = new JLabel("加载余额失败");
+            errorLabel.setForeground(Color.RED);
+            errorLabel.setBounds(10, 40, 200, 30);
+            balancePanel.add(errorLabel);
+        } finally {
+            // 确保资源被关闭
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void initImage() {
@@ -69,7 +123,7 @@ public class WalletFrame extends JFrame {
         this.getContentPane().add(mainTitle);
     }
 
-    private void initButten() {
+    private void initButten(String name) {
         // 充值50元按钮
         JButton c50 = new JButton("充值 ￥ 50");
         c50.setBounds(420,180,120,30);
@@ -86,19 +140,112 @@ public class WalletFrame extends JFrame {
         JButton c500 = new JButton("充值 ￥ 500");
         c500.setBounds(420,480,120,30);
         this.getContentPane().add(c500);
+        // 自定义充值按钮
+        JButton diy = new JButton("自定义充值");
+        diy.setBounds(560, 500,100, 25);
+        this.getContentPane().add(diy);
+
+        diy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PayFrame();
+            }
+        });
+
+        String sql = "update users set balance = balance + ? where name = ?";
+        c50.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    conn = DBUtils.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, 50);
+                    ps.setString(2, name);
+                    ps.executeUpdate();
+                    balancePanel.remove(balanceNum);
+                    revalidate();
+                    repaint();
+                    showBalance(name);
+                    revalidate();
+                    repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        c100.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    conn = DBUtils.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, 100);
+                    ps.setString(2, name);
+                    ps.executeUpdate();
+                    balancePanel.remove(balanceNum);
+                    revalidate();
+                    repaint();
+                    showBalance(name);
+                    revalidate();
+                    repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        c200.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    conn = DBUtils.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, 200);
+                    ps.setString(2, name);
+                    ps.executeUpdate();
+                    balancePanel.remove(balanceNum);
+                    revalidate();
+                    repaint();
+                    showBalance(name);
+                    revalidate();
+                    repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        c500.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    conn = DBUtils.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, 500);
+                    ps.setString(2, name);
+                    ps.executeUpdate();
+                    balancePanel.remove(balanceNum);
+                    revalidate();
+                    repaint();
+                    showBalance(name);
+                    revalidate();
+                    repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     private void initFrame() {
         this.setTitle("我的钱包");
         this.setSize(800, 600);
         this.setDefaultCloseOperation(2);
-        this.setAlwaysOnTop(true);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new WalletFrame();
-    }
+//    public static void main(String[] args) {
+//        User user = new User(2, "lyx", "lyx");
+//        new WalletFrame(user);
+//    }
 }

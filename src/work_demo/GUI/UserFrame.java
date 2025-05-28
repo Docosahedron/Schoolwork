@@ -4,6 +4,8 @@ import work_demo.SERVICE.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class UserFrame extends JFrame {
@@ -73,7 +75,7 @@ public class UserFrame extends JFrame {
 
 
         wallet.addActionListener(e->{
-            new WalletFrame();
+            new WalletFrame(curUser);
         });
 
 
@@ -135,9 +137,9 @@ public class UserFrame extends JFrame {
         JTable gameTable = new JTable(tableModel);
         JScrollPane jp = new JScrollPane(gameTable);
         gameShow.add(jp, BorderLayout.CENTER);
-        gameTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        gameTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
@@ -177,7 +179,7 @@ public class UserFrame extends JFrame {
         gameShow.revalidate();
         gameShow.repaint();
     }
-    public static void main(String[] args) {
-        new UserFrame(new User(0, "test", "123"));
-    }
+//    public static void main(String[] args) {
+//        new UserFrame(new User(0, "test", "123"));
+//    }
 }

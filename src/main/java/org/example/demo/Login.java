@@ -12,8 +12,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Login extends Application {
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 420);
 
@@ -21,7 +24,9 @@ public class Login extends Application {
         stage.show();
         stage.setResizable(false);
     }
-    public static void main(String[] args) {
-        launch();
+    public static void close() {
+        if (primaryStage != null) {
+            primaryStage.close();
+        }
     }
 }

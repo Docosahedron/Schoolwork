@@ -1,5 +1,9 @@
 package org.example.demo;
 
+import work_demo.ENTITY.*;
+import work_demo.GUI.AdminFrame;
+import work_demo.GUI.UserFrame;
+import work_demo.SERVICE.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,8 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class  LoginController {
+import javax.swing.*;
 
+public class  LoginController {
+    UserSer us = new UserSer();
     // 注入 FXML 组件
     @FXML
     private TextField usernameField;
@@ -30,15 +36,16 @@ public class  LoginController {
     // 登录按钮点击事件
     @FXML
     private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        // 简单示例：用户名和密码都不为空即视为登录成功
-        if (username.isEmpty() || password.isEmpty()) {
-            showAlert("提示", "请输入用户名和密码！");
-        } else if ("ad".equals(username) && "ad".equals(password)) {
-            showAlert("登录成功","管理员账号");
-        } else {
+        String nameInput = usernameField.getText();
+        String passwordInput = passwordField.getText();
+        User u = new User(0,nameInput,passwordInput);
+        if(u.getName().equals("ad")&&u.getPassword().equals("ad")){
+            new AdminFrame();
+            Login.close();
+        } else if (us.query(u)) {
+            new UserFrame(u);
+            Login.close();
+        }else {
             showAlert("登录失败", "用户名或密码错误！");
         }
     }

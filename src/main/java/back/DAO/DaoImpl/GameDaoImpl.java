@@ -1,21 +1,19 @@
 package back.DAO.DaoImpl;
 import back.DAO.*;
 import back.ENTITY.Game;
-import back.ENTITY.User;
 
 import java.sql.*;
 import java.util.*;
 
 public class GameDaoImpl implements GameDao {
     public boolean add(Game game){
-        String sql = "INSERT INTO games (name,type,sorce,price,num) VALUES (?,?, ?, ?,?)";
+        String sql = "INSERT INTO games (name,type,sorce,price) VALUES (?,?, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, game.getName());
             pstmt.setString(2, game.getType());
-            pstmt.setDouble(3, game.getPrice());
-            pstmt.setDouble(4,game.getScore());
-            pstmt.setInt(5, game.getNum());
+            pstmt.setInt(3,game.getScore());
+            pstmt.setDouble(4, game.getPrice());
             // 执行插入，返回受影响的行数
             int affectedRows = pstmt.executeUpdate();
             // 如果只需要知道是否成功
@@ -27,25 +25,6 @@ public class GameDaoImpl implements GameDao {
                 return id > 0;
             }
         }*/
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public boolean addWishlist( User user,Game game) {
-        // 使用ON DUPLICATE KEY UPDATE实现原子操作
-        String sql = "INSERT INTO wishlist (username, gameName, num, time) " +
-                "VALUES (?, ?, 1, NOW()) " +
-                "ON DUPLICATE KEY UPDATE num = num + 1, time = NOW()";
-
-        try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, game.getName());
-
-            return pstmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -81,7 +60,6 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("type"),
                             rs.getInt("score"),
                             rs.getDouble("price"),
-                            rs.getInt("num"),
                             rs.getString("overview")
                     );
                     games.add(game);
@@ -92,6 +70,7 @@ public class GameDaoImpl implements GameDao {
         }
         return games;
     }
+    //从名字检索游戏
     public Game getByName(String name) {
         Game game = null;
         String sql = "SELECT * FROM games WHERE name = ? ";
@@ -105,7 +84,6 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("type"),
                             rs.getInt("score"),
                             rs.getDouble("price"),
-                            rs.getInt("num"),
                             rs.getString("overview")
                     );
                 }
@@ -115,26 +93,23 @@ public class GameDaoImpl implements GameDao {
         }
         return game;
     }
-    //检索愿望单
-    public List<Game> getByUser(String name) {
+    //精选游戏
+    public List<Game> getByScore(int score) {
         List<Game> games = new ArrayList<>();
-        String sql = "SELECT name,price,type,score,wishlist.num,games.overview FROM wishlist " +
-                "join games on wishlist.gameName=games.name " +
-                "WHERE username = ? order by wishlist.time desc" ;
+        String sql = "SELECT * FROM games WHERE score >= ? order by score desc";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
+            pstmt.setInt(1, score);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    Game game = new Game(
+                     Game game = new Game(
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
                             rs.getDouble("price"),
-                            rs.getInt("num"),
                             rs.getString("overview")
                     );
-                    games.add(game);
+                     games.add(game);
                 }
             }
         } catch (SQLException e) {
@@ -142,7 +117,7 @@ public class GameDaoImpl implements GameDao {
         }
         return games;
     }
-    //获得所有游戏
+    //获取所有游戏的信息
     public List<Game> getAll() {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games"; // 查询所有游戏数据
@@ -157,7 +132,6 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("type"),
                         rs.getInt("score"),
                         rs.getDouble("price"),
-                        rs.getInt("num"),
                         rs.getString("overview")
                 );
                 games.add(game);

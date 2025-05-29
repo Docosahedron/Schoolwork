@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.*;
 
 public class UserDaoImpl implements UserDao {
+    //添加用户
     @Override
     public boolean add(User user) {
         String sql = "INSERT INTO users (id,name, password,balance) VALUES (?,?, ?, ?)";
@@ -31,14 +32,17 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
     }
+    //删除用户
     @Override
     public void delete(User user) {
 
     }
+    //更新用户信息
     @Override
     public void update(User user) {
 
     }
+    //查询是否有此用户
     public boolean query(User user) {
         String sql = "SELECT COUNT(*) FROM users WHERE name = ? AND password = ?";
         try (Connection conn = DBUtils.getConnection();
@@ -55,6 +59,7 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
+    //获取某个用户的所有信息
     public User getOne(User u) {
         String sql = "SELECT * FROM users WHERE name = ? AND password = ?";
         try (Connection conn = DBUtils.getConnection();
@@ -74,6 +79,7 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+    //获取所有用户的所有信息
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
@@ -91,8 +97,9 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
+    //更新余额
     public boolean updateBalance(User user, double price) {
-        String sql = "update users set balance = balance + ? where name = ? and balance + ? >= 0";
+        String sql = "update ignore users set balance = balance + ? where name = ? and balance + ? >= 0";
         try {Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, price);

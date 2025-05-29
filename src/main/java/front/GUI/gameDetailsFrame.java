@@ -1,9 +1,10 @@
 package front.GUI;
 
 import back.ENTITY.*;
-import back.DAO.DaoImpl.*;
-import back.SERVICE.SerImpl.GameSerImpl;
+import back.SERVICE.SerImpl.ReviewSerImpl;
 import back.SERVICE.SerImpl.UserSerImpl;
+import back.SERVICE.SerImpl.WarehouseSerImpl;
+import back.SERVICE.SerImpl.WishlistSerImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,16 +16,20 @@ public class gameDetailsFrame extends JFrame {
     // ... 其他成员变量保持不变 ...
     private final Game curGame;
     private final User curUser;
-    GameSerImpl gsi = new GameSerImpl();
-    ReviewDaoImpl rdi =new ReviewDaoImpl();
-    UserSerImpl usi = new UserSerImpl();
+    boolean flag1;
+    boolean flag2;
+    UserSerImpl us = new UserSerImpl();
+    ReviewSerImpl rs = new ReviewSerImpl();
+    WishlistSerImpl ws = new WishlistSerImpl();
+    WarehouseSerImpl whs = new WarehouseSerImpl();
     JPanel pGame = new JPanel();
     JPanel pReview = new JPanel();
-    public gameDetailsFrame(Game game, User user) {
+    public gameDetailsFrame( User user,Game game) {
         super(game.getName());
         this.curGame = game;
         this.curUser = user;
-
+        this.flag1 = ws.queryAdded(curUser,curGame);
+        this.flag2  = whs.queryBought(curUser,curGame);
         // 设置主窗口使用BorderLayout
         this.setLayout(new BorderLayout());
         this.setBounds(100, 100, 500, 700); // 稍微增大窗口尺寸
@@ -57,10 +62,8 @@ public class gameDetailsFrame extends JFrame {
         gbc.gridy++;
         pGame.add(new JLabel("价格: " + game.getPrice()), gbc);
 
-        gbc.gridy++;
-        pGame.add(new JLabel("库存: " + game.getNum()), gbc);
-
-        // 概述 - 使用JTextArea支持多行
+//        gbc.gridy++;
+//        pGame.add(new JLabel("库存: " + game.get), gbc);
         gbc.gridy++;
         gbc.gridwidth = 2; // 跨越两列
         JTextArea overview = new JTextArea("概述:\n" + game.getOverview());
@@ -75,17 +78,32 @@ public class gameDetailsFrame extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 1; // 重置列跨度
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JButton addWishlist = new JButton("加入心愿单");
+        JButton addWishlist = new JButton();
+        if (flag1) addWishlist.setText("移出心愿单");
+        else addWishlist.setText("加入心愿单");
         pGame.add(addWishlist, gbc);
 
         gbc.gridy++;
-        JButton buy = new JButton("购买");
+        JButton buy = new JButton();
+        if (flag2) buy.setText("已购买!");
+        else buy.setText("购买");
         pGame.add(buy, gbc);
 
         // 按钮事件监听保持不变
-        addWishlist.addActionListener(e->gsi.addWishlist(this.curUser,this.curGame));
+        addWishlist.addActionListener(e->{
+            if(flag1) flag1=!ws.removeWishlist(this.curUser,this.curGame);
+            else flag1=ws.addWishlist(this.curUser,this.curGame);
+            if (flag1) addWishlist.setText("移出心愿单");
+            else addWishlist.setText("加入心愿单");
 
-        buy.addActionListener(e->usi.buy(curUser,curGame));
+        });
+
+        buy.addActionListener(e-> {
+            if(flag2) JOptionPane.showMessageDialog(null, "已拥有,无法购买!");
+            else flag2=us.buy(curUser,curGame);
+            if (flag2) buy.setText("已购买!");
+            else buy.setText("购买");
+        });
     }
 
     public void pReview(Game game) {
@@ -127,7 +145,7 @@ public class gameDetailsFrame extends JFrame {
 
         // 填充数据
         tableModel.setRowCount(0);
-        List<Review> reviews = rdi.getByName(game.getName());
+        List<Review> reviews = rs.getReviews(game);
         for (Review r : reviews) {
             tableModel.addRow(new Object[]{
                     r.getContent(),
@@ -147,7 +165,10 @@ public class gameDetailsFrame extends JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+                                                       boolean isSelected,
+                                                       boolean hasFocus,
+                                                       int row,
+                                                       int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -169,9 +190,9 @@ public class gameDetailsFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        Game g = new Game("艾尔登法环", "动作角色扮演", 298, 1);
+        Game g = new Game("艾尔登法环", "动作角色扮演",298);
         g.setOverview("《艾尔登法环》是以正统黑暗奇幻世界为舞台的动作RPG游戏。走进辽阔的场景与地下迷宫探索未知，挑战困难重重的险境，享受克服困境时的成就感吧。");
         User u = new User(111, "test", "123");
-        new gameDetailsFrame(g, u);
+        new gameDetailsFrame(u,g);
     }
 }

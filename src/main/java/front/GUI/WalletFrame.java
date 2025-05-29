@@ -1,28 +1,32 @@
 package front.GUI;
 
-import back.DAO.DBUtils;
 import back.ENTITY.User;
 import back.SERVICE.SerImpl.UserSerImpl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class WalletFrame extends JFrame {
-    private User curUser;
-    UserSerImpl usi = new UserSerImpl();
+    private final User curUser;
+    UserSerImpl us = new UserSerImpl();
+    JPanel balanceBack;
+    JLabel balanceShow;
     public WalletFrame(User user) {
-        curUser = user;
-        initFrame();    // 创建界面
-        initButten();   // 创建按钮
-        initText();     // 创建文本
-        initImage();    // 创建图片
-        initBalance();  // 添加余额模块
-    }
+        this.curUser = user;
+        initFrame();      // 初始化窗口框架
+        initButtons();
+        initText();       // 添加标题
+        initBalance();    // 添加余额区块
+        initImage();
 
+    }
+    private void initFrame() {
+        this.setTitle("我的钱包");
+        this.setSize(800, 600);
+        this.setLocationRelativeTo(null);
+        this.setLayout(null);
+        this.setVisible(true);
+    }
     private void initBalance() {
         //添加次级标题
         JLabel balanceTitle = new JLabel("您的账户");
@@ -32,19 +36,19 @@ public class WalletFrame extends JFrame {
         add(balanceTitle);
 
         //创建余额显示
-        JPanel balancePanel = new JPanel();
-        balancePanel.setLayout(null);
-        balancePanel.setBackground(new Color(220, 220, 220, 200));    // 将背景颜色设置为亮灰
-        balancePanel.setBounds(560, 185, 220, 125);
-        add(balancePanel);
+        balanceBack = new JPanel();
+        balanceBack.setLayout(null);
+        balanceBack.setBackground(new Color(220, 220, 220, 200));    // 将背景颜色设置为亮灰
+        balanceBack.setBounds(560, 185, 220, 125);
+        add(balanceBack);
 
         //创建余额提示
-        JLabel balanceTitle2 = new JLabel("钱包余额: ￥"+curUser.getBalance());
+        balanceShow = new JLabel("钱包余额: ￥"+curUser.getBalance());
         Font font2 = new Font("宋体", Font.BOLD, 15);
-        balanceTitle2.setFont(font2);
-        balanceTitle2.setForeground(Color.BLUE);   //设置字体颜色为蓝色
-        balanceTitle2.setBounds(10, 10, 200, 25);
-        balancePanel.add(balanceTitle2);
+        balanceShow.setFont(font2);
+        balanceShow.setForeground(Color.BLUE);   //设置字体颜色为蓝色
+        balanceShow.setBounds(10, 10, 200, 25);
+        balanceBack.add(balanceShow);
     }
 
     private void initImage() {
@@ -80,7 +84,7 @@ public class WalletFrame extends JFrame {
         this.getContentPane().add(mainTitle);
     }
 
-    private void initButten() {
+    private void initButtons() {
         // 充值50元按钮
         JButton c50 = new JButton("充值 ￥ 50");
         c50.setBounds(420,180,120,30);
@@ -102,34 +106,31 @@ public class WalletFrame extends JFrame {
         diy.setBounds(660, 500,100, 25);
         this.getContentPane().add(diy);
         c50.addActionListener(e->{
-            usi.recharge(curUser, 50);
+            us.recharge(curUser, 50);
+            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
+            balanceBack.repaint();
         });
         c100.addActionListener(e->{
-            usi.recharge(curUser, 100);
+            us.recharge(curUser, 100);
+            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
+            balanceBack.repaint();
         });
         c200.addActionListener(e->{
-            usi.recharge(curUser, 200);
+            us.recharge(curUser, 200);
+            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
+            balanceBack.repaint();
         });
         c500.addActionListener(e->{
-            usi.recharge(curUser, 500);
+            us.recharge(curUser, 500);
+            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
+            balanceBack.repaint();
         });
         diy.addActionListener(e->{
             new PayFrame();
         });
-
-
     }
-
-    private void initFrame() {
-        this.setTitle("我的钱包");
-        this.setSize(800, 600);
-        this.setLocationRelativeTo(null);
-        this.setLayout(null);
-        this.setVisible(true);
-    }
-
     public static void main(String[] args) {
-        User u=  new User(1,"a", "a");
+        User u=  new User(1,"test", "test");
         new WalletFrame(u);
     }
 }

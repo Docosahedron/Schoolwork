@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class registerFrame extends JFrame implements ActionListener {
-    UserSerImpl usi = new UserSerImpl();
+    UserSerImpl us = new UserSerImpl();
     JLabel name = new JLabel("用户名:");
     JLabel password = new JLabel("密码:");
     JTextField nameIn = new JTextField();
@@ -27,7 +27,7 @@ public class registerFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == confirm) {
             User u = new User(1,nameIn.getText(),passwordIn.getText());
-            if(usi.register(u)) dispose();
+            if(us.register(u)) dispose();
         }
     }
 

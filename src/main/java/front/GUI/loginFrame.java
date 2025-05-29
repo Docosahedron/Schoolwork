@@ -1,14 +1,12 @@
 package front.GUI;
 import back.ENTITY.*;
-import back.DAO.DaoImpl.*;
 import back.SERVICE.SerImpl.UserSerImpl;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 public class loginFrame extends JFrame implements ActionListener {
-    UserDaoImpl udi = new UserDaoImpl();
-    UserSerImpl usi = new UserSerImpl();
+    UserSerImpl us = new UserSerImpl();
     JLabel nameLabel=new JLabel("名字");
     JTextField nameInput=new JTextField(10);
 
@@ -27,7 +25,7 @@ public class loginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==login) {
             User u = new User(0,nameInput.getText(),passwordInput.getText());
-            if (usi.login(u)) dispose();
+            if (us.login(u)) dispose();
         }else if (e.getSource()==register) {
             dispose();
             new registerFrame();

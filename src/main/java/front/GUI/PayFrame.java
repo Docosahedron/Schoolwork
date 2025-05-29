@@ -12,7 +12,6 @@ public class PayFrame extends JFrame {
             initButton();
             initText();
         }
-
     private void initText() {
         JLabel mainTitle = new JLabel("选择您的支付方式:");
         Font fontTitle = new Font("宋体", Font.PLAIN, 20);
@@ -21,7 +20,6 @@ public class PayFrame extends JFrame {
         add(mainTitle);
 
     }
-
     private void initButton() {
         JButton zfbBut = new JButton("支付宝");
         JButton wxBut = new JButton("微信");
@@ -47,8 +45,6 @@ public class PayFrame extends JFrame {
         this.setLayout(null);
         this.setVisible(true);
     }
-
-
     public static void main(String[] args) {
         new PayFrame();
     }

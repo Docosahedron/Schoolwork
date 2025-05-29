@@ -4,7 +4,5 @@ import back.ENTITY.Game;
 import back.ENTITY.User;
 
 public interface GameSer {
-    void addWishlist(User user, Game game);
-    boolean removeWishlist();
-
+    void addWarehouse(User user, Game game);
 }

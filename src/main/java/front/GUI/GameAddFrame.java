@@ -5,7 +5,7 @@ import back.SERVICE.SerImpl.GameSerImpl;
 import javax.swing.*;
 
 public class GameAddFrame extends JFrame  {
-    GameSerImpl gsi = new GameSerImpl();
+    GameSerImpl gs = new GameSerImpl();
     JLabel name = new JLabel("名称:");
     JLabel type = new JLabel("类型:");
     JLabel price = new JLabel("价格:");
@@ -45,9 +45,8 @@ public class GameAddFrame extends JFrame  {
         confirm.addActionListener(e -> {
             Game game = new Game(nameIn.getText(),
                     typeIn.getText(),
-                    Double.parseDouble(priceIn.getText()),
-                    Integer.parseInt(numIn.getText()));
-            if(gsi.addGame(game)) dispose();
+                    Double.parseDouble(priceIn.getText()));
+            if(gs.addGame(game)) dispose();
         });
 
         this.add(p);

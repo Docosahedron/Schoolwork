@@ -4,7 +4,7 @@ import back.ENTITY.Game;
 import java.util.*;
 
 public interface GameDao {
-    boolean add(Game good);
+    boolean add(Game game);
     boolean delete(int id);
     boolean update(int id);
     List<Game> query(int id);

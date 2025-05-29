@@ -1,4 +1,5 @@
 package front.GUI;
+import back.SERVICE.SerImpl.GameSerImpl;
 import front.Views.LoginView;
 import back.ENTITY.*;
 import back.DAO.DaoImpl.*;
@@ -9,12 +10,11 @@ import java.util.List;
 
 public class UserFrame extends JFrame {
     private final User curUser;//指定用户
-    GameDaoImpl gdi = new GameDaoImpl();
+    GameSerImpl gs =new GameSerImpl();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
     JPanel gameShow;//显示数据库
-
     public UserFrame(User user) {
         super(user.getName()+"的用户界面");
         this.curUser = user;
@@ -66,7 +66,9 @@ public class UserFrame extends JFrame {
         menuBar.setVisible(true);
         //设置交互
         home.addActionListener(e-> gameShow.setVisible(true));
-        features.addActionListener(e->{});
+        features.addActionListener(e->{
+            showFeatures(80);
+        });
         discovery.addActionListener(e->{});
         wishList.addActionListener(e-> new wishlistFrame(curUser));
         collection.addActionListener(e->{});
@@ -125,8 +127,8 @@ public class UserFrame extends JFrame {
         };
         tableModel.addColumn("名称");
         tableModel.addColumn("类型");
+        tableModel.addColumn("评分");
         tableModel.addColumn("价格");
-        tableModel.addColumn("库存");
         //创设滚轮和展示界面
         JTable gameTable = new JTable(tableModel);
         JScrollPane jp = new JScrollPane(gameTable);
@@ -137,8 +139,8 @@ public class UserFrame extends JFrame {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Game curGame = gdi.getByName((String) tableModel.getValueAt(row, 0));
-                        new gameDetailsFrame(curGame,curUser);
+                        Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 0));
+                        new gameDetailsFrame(curUser,curGame);
                     }
                 }
             }
@@ -157,17 +159,41 @@ public class UserFrame extends JFrame {
         //刷新数据
         refresh(type,min,max);
     }
+    public void showFeatures(int score) {
+        // 获取当前表格模型,固定搭配,先记着
+        JScrollPane scrollPane = (JScrollPane) gameShow.getComponent(0);
+        JTable gameTable = (JTable)scrollPane.getViewport().getView();
+        DefaultTableModel tableModel = (DefaultTableModel)gameTable.getModel();
+        // 清空现有数据
+        tableModel.setRowCount(0);
+        //刷新数据
+        refresh(score);
+    }
 
     // 提取刷新数据的公共方法
     private void refresh(String type,double min,double max) {
         tableModel.setRowCount(0);
-        List<Game> games = gdi.getBySearch(type,min,max);
+        List<Game> games = gs.getGameBySearch(type, min,max);
         for (Game g : games) {
             tableModel.addRow(new Object[]{
                     g.getName(),
                     g.getType(),
+                    g.getScore(),
                     g.getPrice(),
-                    g.getNum()
+            });
+        }
+        gameShow.revalidate();
+        gameShow.repaint();
+    }
+    private void refresh(int score) {
+        tableModel.setRowCount(0);
+        List<Game> games = gs.getGameByScore(score);
+        for (Game g : games) {
+            tableModel.addRow(new Object[]{
+                    g.getName(),
+                    g.getType(),
+                    g.getScore(),
+                    g.getPrice(),
             });
         }
         gameShow.revalidate();

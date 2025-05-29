@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDaoImpl implements ReviewDao {
+    //添加评论
     @Override
-    public boolean addReview(Review review) {
+    public boolean add(Review review) {
         return false;
     }
-
+    //获取某个游戏的评论
     @Override
     public List<Review> getByName(String name) {
         List<Review> reviews = new ArrayList<>();
-        String sql = "SELECT * FROM reviews WHERE gameName = ?"; // 精确查询
+        String sql = "SELECT * FROM reviews WHERE gameName = ? order by time desc"; // 精确查询
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             // 设置参数，
@@ -39,5 +40,10 @@ public class ReviewDaoImpl implements ReviewDao {
             e.printStackTrace();
         }
         return reviews;
+    }
+    //删除评论
+    @Override
+    public boolean remove(Review review) {
+        return false;
     }
 }

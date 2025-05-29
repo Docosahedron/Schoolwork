@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class AdminFrame extends JFrame implements ActionListener {
-    GameDaoImpl gs = new GameDaoImpl();
     JMenuBar menuBar =new JMenuBar();
     JMenu homePage = new JMenu("首页");
     JMenuItem home = new JMenuItem("首页");

@@ -1,10 +1,12 @@
-module org.example.demo {
+module org.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
     requires jdk.compiler;
 
-    opens org.example.demo to javafx.fxml;
-    exports org.example.demo;
+    opens front.Views to javafx.fxml;
+    exports front.Views;
+    exports front.Controller;
+    opens front.Controller to javafx.fxml;
 }

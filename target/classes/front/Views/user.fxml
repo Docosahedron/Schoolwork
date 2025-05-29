@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane minHeight="500.0" minWidth="990.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuButton fx:id="HomePage_big" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" text="首页">
+        <items>
+          <MenuItem fx:id="homePage" mnemonicParsing="false" text="首页" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="shop" layoutX="87.0" layoutY="7.0" mnemonicParsing="false" text="商店">
+        <items>
+          <MenuItem fx:id="choiceness" mnemonicParsing="false" text="精选" />
+          <MenuItem fx:id="ExplorationQueue" mnemonicParsing="false" text="探索队列" />
+            <MenuItem fx:id="wishList" mnemonicParsing="false" text="心愿单" />
+        </items>
+      </MenuButton>
+       <MenuButton fx:id="warehouse" layoutX="160.0" layoutY="7.0" mnemonicParsing="false" text="仓库">
+           <items>
+               <MenuItem fx:id="collect" mnemonicParsing="false" text="收藏" />
+               <MenuItem fx:id="download" mnemonicParsing="false" text="下载" />
+           </items>
+       </MenuButton>
+       <MenuButton fx:id="account" layoutX="233.0" layoutY="7.0" mnemonicParsing="false" text="账号操作">
+           <items>
+               <MenuItem fx:id="lock" mnemonicParsing="false" text="锁定" />
+               <MenuItem fx:id="exist" mnemonicParsing="false" text="退出" />
+           </items>
+       </MenuButton>
+      <TableView layoutY="94.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="990.0">
+        <columns>
+          <TableColumn text="名称" />
+            <TableColumn text="类型" />
+            <TableColumn prefWidth="75.0" text="价格" />
+            <TableColumn prefWidth="75.0" text="库存" />
+        </columns>
+      </TableView>
+      <Text layoutX="14.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="类型" />
+      <TextField fx:id="typefield" layoutX="47.0" layoutY="47.0" prefHeight="15.0" prefWidth="80.0" />
+      <Text layoutX="148.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="最低价" />
+      <Text layoutX="274.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="最高价" />
+      <TextField fx:id="misfield" layoutX="184.0" layoutY="47.0" prefHeight="23.0" prefWidth="82.0" />
+      <TextField fx:id="maxfield" layoutX="315.0" layoutY="47.0" prefHeight="23.0" prefWidth="82.0" />
+      <Button fx:id="findButton" layoutX="461.0" layoutY="47.0" mnemonicParsing="false" text="检索" />
+      <Button fx:id="resetButton" layoutX="545.0" layoutY="46.0" mnemonicParsing="false" text="重置" />
+   </children>
+</Pane>

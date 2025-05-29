@@ -16,6 +16,7 @@ import work_demo.SERVICE.*;
 import javax.swing.*;
 
 public class  LoginController {
+
     UserSer us = new UserSer();
     // 注入 FXML 组件
     @FXML
@@ -28,6 +29,8 @@ public class  LoginController {
     @FXML
     private Button loginButton;
 
+    @FXML
+    private Button exitButton;
     // 初始化方法（可选）
     @FXML
     public void initialize() {

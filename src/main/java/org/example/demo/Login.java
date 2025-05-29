@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -22,7 +23,7 @@ public class Login extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 700, 420);
         scene.getStylesheets().add(Login.class.getResource("/org/example/demo/Login.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);

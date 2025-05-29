@@ -17,8 +17,7 @@ public class user extends Application{
     public void start(Stage stage) throws Exception {
         userStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(user.class.getResource("user.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 700, 420);
-        stage.initStyle(StageStyle.UNDECORATED);
+        Scene scene = new Scene(fxmlLoader.load(), 990, 500);
         stage.setScene(scene);
         stage.show();
     }

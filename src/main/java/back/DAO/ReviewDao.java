@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ReviewDao {
     boolean addReview(Review review);
-    List<Review> getReviews(String name);
+    List<Review> getByName(String name);
 }

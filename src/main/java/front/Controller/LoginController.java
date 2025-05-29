@@ -1,5 +1,7 @@
 package front.Controller;
 
+import back.SERVICE.SerImpl.UserSerImpl;
+import front.GUI.UserFrame;
 import front.Views.LoginView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,12 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import back.ENTITY.*;
-import back.GUI.*;
-import back.DaoImpl.*;
 
 public class  LoginController {
-
-    UserDaoImpl us = new UserDaoImpl();
+    UserSerImpl usi = new UserSerImpl();
     // 注入 FXML 组件
     @FXML
     private TextField usernameField;
@@ -39,19 +38,11 @@ public class  LoginController {
         String nameInput = usernameField.getText();
         String passwordInput = passwordField.getText();
         User u = new User(0,nameInput,passwordInput);
-        if(u.getName().equals("ad")&&u.getPassword().equals("ad")){
-            new AdminFrame();
-            LoginView.close();
-        } else if (us.query(u)) {
-            new UserFrame(u);
-            LoginView.close();
-        }else {
-            showAlert("登录失败", "用户名或密码错误！");
-        }
+        if (usi.login(u)) LoginView.close();
     }
 
     // 弹出提示框方法
-    private void showAlert(String title, String message) {
+    public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -65,7 +56,8 @@ public class  LoginController {
     }
     @FXML
     private void handleRegister() {
-        LoginView.changeView("register.fxml");
+        showAlert("立入禁止!", "前方的区域以后再来探索吧!");
+        //LoginView.changeView("register.fxml");
     }
 }
 

@@ -15,6 +15,7 @@ public class GameAddFrame extends JFrame  {
     JTextField numIn = new JTextField();
     JButton confirm = new JButton("确认");
     JPanel p  =new JPanel();
+
     public GameAddFrame() {
         super("添加商品");
         init();
@@ -59,6 +60,8 @@ public class GameAddFrame extends JFrame  {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+
     public static void main(String[] args) {
         new GameAddFrame();
     }

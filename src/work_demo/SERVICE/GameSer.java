@@ -8,7 +8,7 @@ import java.util.*;
 
 public class GameSer implements GameDao {
     public boolean add(Game game){
-        String sql = "INSERT INTO games (name,type,sorce,price,num) VALUES (?,?, ?, ?,?)";
+        String sql = "INSERT INTO games (name,type,score,price,num) VALUES (?,?, ?, ?,?)";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, game.getName());

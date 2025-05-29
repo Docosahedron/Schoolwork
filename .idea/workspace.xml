@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae74c9ac-576b-45b0-8d6c-ffe54ca95155" name="更改" comment="222">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/demo/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/demo/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/work_demo/GUI/UserFrame$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysql-connector-java-8.0.24.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/work_demo/DAO/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/work_demo/DAO/DBUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,16 +64,18 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "zx",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/working/Java/idea/IdeaProjects/ProductManagement/src",
+    "last_opened_file_path": "D:/working/Github/Master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "D:/working/Java/idea/IdeaProjects/workDemo/src/Main.java",
-    "project.structure.last.edited": "项目",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
@@ -103,6 +104,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\working\Github\Master" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="workDemo" />

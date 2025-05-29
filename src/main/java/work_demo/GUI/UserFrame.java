@@ -44,7 +44,8 @@ public class UserFrame extends JFrame {
         JMenu warehouse = new JMenu("仓 库");//
         JMenuItem collection = new JMenuItem("收藏");
         JMenuItem download = new JMenuItem("下载");
-        JMenu accountOp = new JMenu("账 号 操 作");//
+        JMenu accountOp = new JMenu("账 户");//
+        JMenuItem wallet = new JMenuItem("查看我的钱包");
         JMenuItem lock = new JMenuItem("锁定");
         JMenuItem exit = new JMenuItem("退出");
         //添加组件
@@ -58,7 +59,9 @@ public class UserFrame extends JFrame {
         store.add(wishList);
         warehouse.add(collection);//
         warehouse.add(download);
-        accountOp.add(lock);//
+        accountOp.add(wallet);//
+        accountOp.addSeparator(); // 添加分割线
+        accountOp.add(lock);
         accountOp.add(exit);
         setJMenuBar(menuBar);
         this.add(menuBar);
@@ -70,6 +73,15 @@ public class UserFrame extends JFrame {
         wishList.addActionListener(e-> new wishlistFrame(curUser));
         collection.addActionListener(e->{});
         download.addActionListener(e->{});
+
+
+        wallet.addActionListener(e->{
+            new WalletFrame();
+        });
+
+
+
+
         lock.addActionListener(e->{
             dispose();
             Login.open();

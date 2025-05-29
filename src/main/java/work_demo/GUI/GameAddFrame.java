@@ -1,10 +1,10 @@
 package work_demo.GUI;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 
 public class GameAddFrame extends JFrame  {
-    GameSer gs = new GameSer();
+    GameDaoImpl gdi = new GameDaoImpl();
     JLabel name = new JLabel("名称:");
     JLabel type = new JLabel("类型:");
     JLabel price = new JLabel("价格:");
@@ -46,7 +46,7 @@ public class GameAddFrame extends JFrame  {
                     typeIn.getText(),
                     Double.parseDouble(priceIn.getText()),
                     Integer.parseInt(numIn.getText()));
-            if (gs.add(game)) {
+            if (gdi.add(game)) {
                 JOptionPane.showMessageDialog(null, "添加成功!");
                 dispose();
             }else

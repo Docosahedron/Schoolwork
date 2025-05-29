@@ -1,6 +1,6 @@
 package work_demo.GUI;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,8 +9,8 @@ import java.util.List;
 public class gdf extends JFrame{
     private final Game curGame;
     private final User curUser;
-    GameSer gs =new GameSer();
-    ReviewSer rs =new ReviewSer();
+    GameDaoImpl gdi =new GameDaoImpl();
+    ReviewDaoImpl rdi =new ReviewDaoImpl();
     JPanel pGame = new JPanel();
     JPanel pReview = new JPanel();
 
@@ -51,7 +51,7 @@ public class gdf extends JFrame{
         pGame.add(addWishlist);
         pGame.add(buy);
         addWishlist.addActionListener(e->{
-            boolean flag=gs.addWishlist(this.curGame,this.curUser);
+            boolean flag= gdi.addWishlist(this.curGame,this.curUser);
             if(flag)JOptionPane.showMessageDialog(null,"添加成功!");
             else JOptionPane.showMessageDialog(null,"添加失败!");
         });
@@ -77,7 +77,7 @@ public class gdf extends JFrame{
         JScrollPane jp = new JScrollPane(gameTable);
         pReview.add(jp,BorderLayout.CENTER);
         tableModel.setRowCount(0);
-        List<Review> reviews = rs.getReviews(game.getName());
+        List<Review> reviews = rdi.getReviews(game.getName());
         for (Review r:reviews){
             tableModel.addRow(new Object[]{
                     r.getContent(),

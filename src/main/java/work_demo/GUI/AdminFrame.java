@@ -1,13 +1,12 @@
 package work_demo.GUI;
 import javafx.fxml.FXMLLoader;
-import org.example.demo.Login;
-import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import org.example.demo.LoginView;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 public class AdminFrame extends JFrame implements ActionListener {
-    GameSer gs = new GameSer();
+    GameDaoImpl gs = new GameDaoImpl();
     JMenuBar menuBar =new JMenuBar();
     JMenu homePage = new JMenu("首页");
     JMenuItem home = new JMenuItem("首页");
@@ -45,7 +44,7 @@ public class AdminFrame extends JFrame implements ActionListener {
 
         }else if (e.getSource()==lock) {
             dispose();
-            new FXMLLoader(Login.class.getResource("login.fxml"));
+            new FXMLLoader(LoginView.class.getResource("login.fxml"));
         }
         else if (e.getSource()==exit) {
             dispose();

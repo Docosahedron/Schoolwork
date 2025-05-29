@@ -1,9 +1,7 @@
 package work_demo.GUI;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import org.example.demo.Login;
+import org.example.demo.LoginView;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,7 +9,7 @@ import java.util.List;
 
 public class UserFrame extends JFrame {
     private final User curUser;//指定用户
-    GameSer gs = new GameSer();
+    GameDaoImpl gdi = new GameDaoImpl();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
@@ -84,7 +82,7 @@ public class UserFrame extends JFrame {
 
         lock.addActionListener(e->{
             dispose();
-            Login.open();
+            LoginView.open();
         });
         exit.addActionListener(e->System.exit(0));
         setJMenuBar(menuBar); // 注意这里使用setJMenuBar而不是add
@@ -144,7 +142,7 @@ public class UserFrame extends JFrame {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Game curGame = gs.getByName((String) tableModel.getValueAt(row, 0));
+                        Game curGame = gdi.getByName((String) tableModel.getValueAt(row, 0));
                         new gameDetailsFrame(curGame,curUser);
                     }
                 }
@@ -168,7 +166,7 @@ public class UserFrame extends JFrame {
     // 提取刷新数据的公共方法
     private void refresh(String type,double min,double max) {
         tableModel.setRowCount(0);
-        List<Game> games = gs.getBySearch(type,min,max);
+        List<Game> games = gdi.getBySearch(type,min,max);
         for (Game g : games) {
             tableModel.addRow(new Object[]{
                     g.getName(),

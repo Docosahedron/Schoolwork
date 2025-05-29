@@ -1,8 +1,6 @@
 package org.example.demo;
 
-import com.sun.tools.javac.Main;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,14 +8,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import work_demo.ENTITY.*;
 import work_demo.GUI.*;
-import work_demo.DAO.*;
-import work_demo.SERVICE.*;
-
-import javax.swing.*;
+import work_demo.DaoImpl.*;
 
 public class  LoginController {
 
-    UserSer us = new UserSer();
+    UserDaoImpl us = new UserDaoImpl();
     // 注入 FXML 组件
     @FXML
     private TextField usernameField;
@@ -45,10 +40,10 @@ public class  LoginController {
         User u = new User(0,nameInput,passwordInput);
         if(u.getName().equals("ad")&&u.getPassword().equals("ad")){
             new AdminFrame();
-            Login.close();
+            LoginView.close();
         } else if (us.query(u)) {
             new UserFrame(u);
-            Login.close();
+            LoginView.close();
         }else {
             showAlert("登录失败", "用户名或密码错误！");
         }
@@ -69,7 +64,7 @@ public class  LoginController {
     }
     @FXML
     private void handleRegister() {
-        Login.changeView("register.fxml");
+        LoginView.changeView("register.fxml");
     }
 }
 

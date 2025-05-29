@@ -1,15 +1,7 @@
 package org.example.demo;
 
 import javafx.scene.control.*;
-import work_demo.ENTITY.*;
-import work_demo.GUI.AdminFrame;
-import work_demo.GUI.UserFrame;
-import work_demo.SERVICE.*;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javax.swing.*;
 
 public class userController {
     @FXML

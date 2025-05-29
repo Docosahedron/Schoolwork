@@ -1,11 +1,11 @@
 package work_demo.GUI;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 public class loginFrame extends JFrame implements ActionListener {
-    UserSer us = new UserSer();
+    UserDaoImpl udi = new UserDaoImpl();
     JLabel nameLabel=new JLabel("名字");
     JTextField nameInput=new JTextField(10);
 
@@ -27,7 +27,7 @@ public class loginFrame extends JFrame implements ActionListener {
             if(u.getName().equals("ad")&&u.getPassword().equals("ad")){
                 dispose();
                 new AdminFrame();
-            } else if (us.query(u)) {
+            } else if (udi.query(u)) {
                 dispose();
                 new UserFrame(u);
             }else {

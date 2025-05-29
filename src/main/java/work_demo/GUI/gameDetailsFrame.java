@@ -1,7 +1,7 @@
 package work_demo.GUI;
 
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,8 +13,8 @@ public class gameDetailsFrame extends JFrame {
     // ... 其他成员变量保持不变 ...
     private final Game curGame;
     private final User curUser;
-    GameSer gs =new GameSer();
-    ReviewSer rs =new ReviewSer();
+    GameDaoImpl gdi =new GameDaoImpl();
+    ReviewDaoImpl rdi =new ReviewDaoImpl();
     JPanel pGame = new JPanel();
     JPanel pReview = new JPanel();
     public gameDetailsFrame(Game game, User user) {
@@ -81,7 +81,7 @@ public class gameDetailsFrame extends JFrame {
 
         // 按钮事件监听保持不变
         addWishlist.addActionListener(e->{
-            boolean flag=gs.addWishlist(this.curGame,this.curUser);
+            boolean flag= gdi.addWishlist(this.curGame,this.curUser);
             if(flag)JOptionPane.showMessageDialog(null,"添加成功!");
             else JOptionPane.showMessageDialog(null,"添加失败!");
         });
@@ -133,7 +133,7 @@ public class gameDetailsFrame extends JFrame {
 
         // 填充数据
         tableModel.setRowCount(0);
-        List<Review> reviews = rs.getReviews(game.getName());
+        List<Review> reviews = rdi.getReviews(game.getName());
         for (Review r : reviews) {
             tableModel.addRow(new Object[]{
                     r.getContent(),

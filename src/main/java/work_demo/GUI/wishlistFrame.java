@@ -1,6 +1,6 @@
 package work_demo.GUI;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class wishlistFrame extends JFrame {
     private final User curUser;
-    GameSer gs=  new GameSer();
+    GameDaoImpl gdi =  new GameDaoImpl();
     JPanel gameShow;
     DefaultTableModel tableModel;
     public wishlistFrame(User user) {
@@ -58,7 +58,7 @@ public class wishlistFrame extends JFrame {
     }
     private void refresh(String userName) {
         tableModel.setRowCount(0);
-        List<Game> games = gs.getByUser(userName);
+        List<Game> games = gdi.getByUser(userName);
         for (Game g : games) {
             tableModel.addRow(new Object[]{
                     g.getName(),

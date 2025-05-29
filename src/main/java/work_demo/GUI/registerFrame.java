@@ -1,12 +1,12 @@
 package work_demo.GUI;
 import work_demo.ENTITY.*;
-import work_demo.SERVICE.*;
+import work_demo.DaoImpl.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class registerFrame extends JFrame implements ActionListener {
-    UserSer us = new UserSer();
+    UserDaoImpl udi = new UserDaoImpl();
     JLabel name = new JLabel("用户名:");
     JLabel password = new JLabel("密码:");
     JTextField nameIn = new JTextField();
@@ -27,7 +27,7 @@ public class registerFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == confirm) {
             User user = new User(1,nameIn.getText(),passwordIn.getText());
-            if (us.add(user)){
+            if (udi.add(user)){
                 JOptionPane.showMessageDialog(null, "注册成功!");
                 dispose();
                 new loginFrame();

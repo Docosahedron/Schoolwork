@@ -6,6 +6,8 @@ import back.DAO.DaoImpl.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class UserFrame extends JFrame {
@@ -116,6 +118,8 @@ public class UserFrame extends JFrame {
         mainPanel.add(searchArea, BorderLayout.NORTH);
     }
 
+
+    // 商品表格初始化
     public void showAll() {
         gameShow = new JPanel(new BorderLayout());
         // 创建表格模型,重写表格类型,使其只读
@@ -133,9 +137,9 @@ public class UserFrame extends JFrame {
         JTable gameTable = new JTable(tableModel);
         JScrollPane jp = new JScrollPane(gameTable);
         gameShow.add(jp, BorderLayout.CENTER);
-        gameTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        gameTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {

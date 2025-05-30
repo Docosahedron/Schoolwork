@@ -4,7 +4,7 @@ module front.demo {
     requires java.sql;
     requires java.desktop;
     requires jdk.compiler;// Java 标准 SQL 模块
-    requires mysql.connector.java;
+    requires mysql.connector.j;
 
     opens front.Views to javafx.fxml;
     exports front.Views;

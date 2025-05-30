@@ -1,5 +1,6 @@
 package back.ENTITY;
 
+
 public class Game {
     private String name;
     private String type;
@@ -28,7 +29,7 @@ public class Game {
     }
     public String getType(){return type;}
     public void setType(String type){this.type = type;}
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
     public void setPrice(double price) {

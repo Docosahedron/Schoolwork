@@ -1,7 +1,6 @@
 package front.Controller;
 
 import back.SERVICE.SerImpl.UserSerImpl;
-import front.GUI.UserFrame;
 import front.Views.LoginView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

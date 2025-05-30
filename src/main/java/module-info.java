@@ -4,6 +4,7 @@ module org.demo {
     requires java.sql;
     requires java.desktop;
     requires jdk.compiler;
+    requires mysql.connector.j;
 
     opens front.Views to javafx.fxml;
     exports front.Views;

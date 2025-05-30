@@ -30,7 +30,7 @@ public class AdminFrame extends JFrame implements ActionListener {
     private String primaryKeyColumn = "name";
     private String[] columnNames;
     private JTable table;
-    private static DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
 
     private JPopupMenu popupMenu;
     private int row2;
@@ -360,8 +360,7 @@ public class AdminFrame extends JFrame implements ActionListener {
         if (e.getSource() == home) {
 
         } else if (e.getSource() == add) {
-            new GameAddFrame();
-            loadData();
+            new GameAddFrame(this); // 传递当前 AdminFrame 实例
         } else if (e.getSource() == del) {
 
         } else if (e.getSource() == update) {

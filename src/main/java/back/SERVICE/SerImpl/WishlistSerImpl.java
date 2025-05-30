@@ -4,6 +4,7 @@ import back.ENTITY.*;
 import front.GUI.wishlistFrame;
 
 import javax.swing.*;
+import java.util.List;
 
 public class WishlistSerImpl {
     WishlistDaoImpl wd = new WishlistDaoImpl();
@@ -19,6 +20,9 @@ public class WishlistSerImpl {
         else JOptionPane.showMessageDialog(null,"添加失败!");
         return flag;
     }
+    public List<Game> getAllWishlistGame(User u) {
+        return wd.getAllGames(u.getName());
+    }
 
     //删除心愿单选中游戏
     public boolean removeWishlist(User u, Game g) {
@@ -29,14 +33,12 @@ public class WishlistSerImpl {
     }
 
     //删除心愿单所有游戏
-    public boolean removeWishlistAll(User u) {
+    public void removeWishlistAll(User u) {
         boolean flag = wd.removeAll(u.getName());
         if (flag) {
             JOptionPane.showMessageDialog(null, "已成功清空心愿单!！");
-            return true;
         } else {
             JOptionPane.showMessageDialog(null, "移除失败！");
-            return false;
         }
     }
 }

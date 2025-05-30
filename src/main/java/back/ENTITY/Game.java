@@ -1,18 +1,14 @@
 package back.ENTITY;
-
-
 public class Game {
     private String name;
     private String type;
-    private int score;
+    private int score=0;
     private double price;
-    private String overview;
+    private String overview="null";
     public Game(String name, String type, double price) {
         this.name = name;
         this.type = type;
-        this.score = -1;
         this.price = price;
-        this.overview = "null";
     }
     public Game(String name, String type, int score,double price, String overview) {
         this.name = name;
@@ -41,6 +37,7 @@ public class Game {
     public void setOverview(String overview){this.overview = overview;}
     @Override
     public String toString(){
-        return "Game [name=" + name + ", type=" + type + ", price=" + price + ", score=]";
+        return "Game [name=" + name + ", type=" + type +", score="+score+
+                ", price=" + price+ ", overview=" + overview + "]";
     }
 }

@@ -2,7 +2,7 @@ package front.GUI;
 import back.SERVICE.SerImpl.GameSerImpl;
 import front.Views.LoginView;
 import back.ENTITY.*;
-import back.DAO.DaoImpl.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -41,11 +41,12 @@ public class UserFrame extends JFrame {
         JMenuItem features = new JMenuItem("精选");
         JMenuItem discovery = new JMenuItem("探索队列");
         JMenuItem wishList = new JMenuItem("心愿单");
-        JMenu warehouse = new JMenu("仓 库");//
-        JMenuItem collection = new JMenuItem("收藏");
+        JMenu warehouse = new JMenu("社 区");//
+        JMenuItem collection = new JMenuItem("市场");
         JMenuItem download = new JMenuItem("下载");
         JMenu accountOp = new JMenu("账 户");//
-        JMenuItem wallet = new JMenuItem("查看我的钱包");
+        JMenuItem wallet = new JMenuItem("钱包");
+        JMenuItem banana = new JMenuItem("库存");
         JMenuItem lock = new JMenuItem("锁定");
         JMenuItem exit = new JMenuItem("退出");
         //添加组件
@@ -60,6 +61,7 @@ public class UserFrame extends JFrame {
         warehouse.add(collection);//
         warehouse.add(download);
         accountOp.add(wallet);//
+        accountOp.add(banana);
         accountOp.addSeparator(); // 添加分割线
         accountOp.add(lock);
         accountOp.add(exit);
@@ -78,7 +80,9 @@ public class UserFrame extends JFrame {
         wallet.addActionListener(e->{
             new WalletFrame(curUser);
         });
-
+        banana.addActionListener(e->{
+            new BananaFrame(curUser);
+        });
         lock.addActionListener(e->{
             dispose();
             new LoginView();
@@ -144,7 +148,7 @@ public class UserFrame extends JFrame {
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
                         Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 0));
-                        new gameDetailsFrame(curUser,curGame);
+                        new GameDetailsFrame(curUser,curGame);
                     }
                 }
             }

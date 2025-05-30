@@ -4,7 +4,7 @@ import back.ENTITY.Game;
 import back.ENTITY.User;
 import back.SERVICE.SerImpl.GameSerImpl;
 import front.GUI.WalletFrame;
-import front.GUI.gameDetailsFrame;
+import front.GUI.GameDetailsFrame;
 import front.GUI.wishlistFrame;
 import front.Views.UserFrameApp;
 import javafx.collections.FXCollections;
@@ -61,7 +61,7 @@ public class UserFrameController {
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     Game game = row.getItem();
-                    new gameDetailsFrame(curUser, gs.getWholeInfo(game.getName().toString()));
+                    new GameDetailsFrame(curUser, gs.getWholeInfo(game.getName().toString()));
                 }
             });
             return row;

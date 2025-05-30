@@ -10,18 +10,15 @@ public class UserDaoImpl implements UserDao {
     public boolean add(User user) {
         String sql = "INSERT INTO users (id,name, password,balance) VALUES (?,?, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setInt(1, user.getId());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getPassword());
-            pstmt.setDouble(4, 0);
-
-            // 执行插入，返回受影响的行数
-            int affectedRows = pstmt.executeUpdate();
-            // 如果只需要知道是否成功
-            return affectedRows > 0;
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, user.getId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getPassword());
+            ps.setDouble(4, 0);
+            // 执行插入，返回受影响的行数,如果只需要知道是否成功
+            return ps.executeUpdate() > 0;
         /* 如果需要获取生成的ID
-        try (ResultSet rs = pstmt.getGeneratedKeys()) {
+        try (ResultSet rs = ps.getGeneratedKeys()) {
             if (rs.next()) {
                 int id = rs.getInt(1); // 获取自增ID
                 return id > 0;
@@ -71,7 +68,8 @@ public class UserDaoImpl implements UserDao {
                     return new User(rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("password"),
-                            rs.getDouble("balance"));
+                            rs.getDouble("balance"),
+                            rs.getInt("package"));
                 }
             }
         } catch (SQLException e) {
@@ -105,6 +103,20 @@ public class UserDaoImpl implements UserDao {
             ps.setDouble(1, price);
             ps.setString(2, user.getName());
             ps.setDouble(3, price);
+            return ps.executeUpdate()> 0;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    //更新香蕉袋数量
+    public boolean updatePackage(String name, int num) {
+        String sql = "update ignore users set package = package + ? where name = ? and package + ? >= 0";
+        try {Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, num);
+            ps.setString(2, name);
+            ps.setDouble(3, num);
             return ps.executeUpdate() > 0;
         }catch (SQLException e) {
             e.printStackTrace();

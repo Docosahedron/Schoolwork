@@ -1,5 +1,6 @@
 package front.GUI;
 
+import back.DAO.DBUtils;
 import back.ENTITY.User;
 import back.SERVICE.SerImpl.UserSerImpl;
 
@@ -11,21 +12,26 @@ import java.sql.*;
 
 
 public class WalletFrame extends JFrame {
+    private final User curUser;
+    UserSerImpl us =new UserSerImpl();
+    JLabel balanceNum;
     public WalletFrame(User user) {
+        super(user.getName()+"的钱包");
+        this.curUser = user;
         initFrame();    // 创建界面
-        initButten(user.getName());   // 创建按钮
+        initButten();   // 创建按钮
         initText();     // 创建文本
         initImage();    // 创建图片
-        initBalance(user.getName());  // 添加余额模块
+        initBalance();  // 添加余额模块
     }
-
-
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement ps = null;
-
+    private void initFrame() {
+        this.setSize(800, 600);
+        this.setLocationRelativeTo(null);
+        this.setLayout(null);
+        this.setVisible(true);
+    }
     JPanel balancePanel = new JPanel();
-    private void initBalance(String name) {
+    private void initBalance() {
         // 添加次级标题
         JLabel balanceTitle = new JLabel("您的账户");
         Font font = new Font("宋体", Font.BOLD, 20);
@@ -47,48 +53,12 @@ public class WalletFrame extends JFrame {
         balanceTitle2.setBounds(10, 10, 100, 25);
         balancePanel.add(balanceTitle2);
 
-        showBalance(name);
+        balanceNum = new JLabel("¥ " +curUser.getBalance());
+        Font font3 = new Font("宋体", Font.BOLD, 24);
+        balanceNum.setFont(font3);
+        balanceNum.setBounds(10, 40, 200, 30);
+        balancePanel.add(balanceNum);
 
-    }
-
-    JLabel balanceNum;
-    private void showBalance(String name) {
-        // 显示余额数量
-        try {
-            conn = DBUtils.getConnection();
-            String sql = "select balance from users where name = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                double balance = rs.getDouble("balance");
-                balanceNum = new JLabel("¥ " + balance);
-                Font font3 = new Font("宋体", Font.BOLD, 24);
-                balanceNum.setFont(font3);
-                balanceNum.setBounds(10, 40, 200, 30);
-                balancePanel.add(balanceNum);
-            } else {
-                balanceNum = new JLabel("未找到余额信息");
-                balanceNum.setBounds(10, 40, 200, 30);
-                balancePanel.add(balanceNum);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JLabel errorLabel = new JLabel("加载余额失败");
-            errorLabel.setForeground(Color.RED);
-            errorLabel.setBounds(10, 40, 200, 30);
-            balancePanel.add(errorLabel);
-        } finally {
-            // 确保资源被关闭
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void initImage() {
@@ -113,7 +83,6 @@ public class WalletFrame extends JFrame {
         imageLabel4.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
         add(imageLabel4);
         imageLabel4.setBounds(50, 460, 500, 70);
-//        this.getContentPane().add(imageLabel);
     }
 
     private void initText() {
@@ -124,7 +93,7 @@ public class WalletFrame extends JFrame {
         this.getContentPane().add(mainTitle);
     }
 
-    private void initButten(String name) {
+    private void initButten() {
         // 充值50元按钮
         JButton c50 = new JButton("充值 ￥ 50");
         c50.setBounds(420,180,120,30);
@@ -146,41 +115,24 @@ public class WalletFrame extends JFrame {
         diy.setBounds(660, 500,100, 25);
         this.getContentPane().add(diy);
         c50.addActionListener(e->{
-            us.recharge(curUser, 50);
-            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
-            balanceBack.repaint();
+            if (us.recharge(curUser,50)) dispose();
         });
         c100.addActionListener(e->{
-            us.recharge(curUser, 100);
-            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
-            balanceBack.repaint();
+            if (us.recharge(curUser,100)) dispose();
         });
         c200.addActionListener(e->{
-            us.recharge(curUser, 200);
-            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
-            balanceBack.repaint();
+            if (us.recharge(curUser,200)) dispose();
         });
         c500.addActionListener(e->{
-            us.recharge(curUser, 500);
-            balanceShow.setText("钱包余额: ￥"+curUser.getBalance());
-            balanceBack.repaint();
+            if (us.recharge(curUser,500)) dispose();
         });
         diy.addActionListener(e->{
             new PayFrame();
         });
     }
 
-    private void initFrame() {
-        this.setTitle("我的钱包");
-        this.setSize(800, 600);
-        this.setDefaultCloseOperation(2);
-        this.setLocationRelativeTo(null);
-        this.setLayout(null);
-        this.setVisible(true);
+    public static void main(String[] args) {
+        User user = new User(4, "a", "a");
+        new WalletFrame(user);
     }
-
-//    public static void main(String[] args) {
-//        User user = new User(2, "lyx", "lyx");
-//        new WalletFrame(user);
-//    }
 }

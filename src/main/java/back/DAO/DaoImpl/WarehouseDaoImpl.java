@@ -48,7 +48,7 @@ public class WarehouseDaoImpl implements WDao {
     @Override
     public List<Game> getAllGames(String name) {
         List<Game> games = new ArrayList<>();
-        String sql = "SELECT name,type,score,price,overview FROM warehouse" +
+        String sql = "SELECT name,type,score,price,overview FROM warehouse " +
                 "join games on warehouse.gameName=games.name " +
                 "WHERE username = ? order by warehouse.time desc" ;
         try (Connection conn = DBUtils.getConnection();

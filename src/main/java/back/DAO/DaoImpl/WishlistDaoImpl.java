@@ -47,7 +47,7 @@ public class WishlistDaoImpl implements WDao {
     }
     //移除心愿单一个游戏
     public boolean removeOne(String username, String gameName) {
-            String sql = "delete from wishlist  where username = ? and gameName = ?";
+            String sql = " delete from wishlist  where username = ? and gameName = ? ";
             try (Connection conn = DBUtils.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, username);
@@ -62,7 +62,7 @@ public class WishlistDaoImpl implements WDao {
     //删除心愿单所有游戏
     public boolean removeAll(String username) {
         // 使用ON DUPLICATE KEY UPDATE实现原子操作
-        String sql = "delete from wishlist where username = ?";
+        String sql = " delete from wishlist where username = ? ";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);

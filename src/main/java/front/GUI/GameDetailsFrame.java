@@ -12,19 +12,18 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.util.List;
 
-public class gameDetailsFrame extends JFrame {
+public class GameDetailsFrame extends JFrame {
     // ... 其他成员变量保持不变 ...
     private final Game curGame;
     private final User curUser;
-    boolean flag1;
-    boolean flag2;
+    boolean flag1;boolean flag2;
     UserSerImpl us = new UserSerImpl();
     ReviewSerImpl rs = new ReviewSerImpl();
     WishlistSerImpl ws = new WishlistSerImpl();
     WarehouseSerImpl whs = new WarehouseSerImpl();
     JPanel pGame = new JPanel();
     JPanel pReview = new JPanel();
-    public gameDetailsFrame( User user,Game game) {
+    public GameDetailsFrame(User user, Game game) {
         super(game.getName());
         this.curGame = game;
         this.curUser = user;
@@ -193,6 +192,6 @@ public class gameDetailsFrame extends JFrame {
         Game g = new Game("艾尔登法环", "动作角色扮演",298);
         g.setOverview("《艾尔登法环》是以正统黑暗奇幻世界为舞台的动作RPG游戏。走进辽阔的场景与地下迷宫探索未知，挑战困难重重的险境，享受克服困境时的成就感吧。");
         User u = new User(111, "test", "123");
-        new gameDetailsFrame(u,g);
+        new GameDetailsFrame(u,g);
     }
 }

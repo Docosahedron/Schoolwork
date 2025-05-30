@@ -5,18 +5,18 @@ import back.SERVICE.SerImpl.GameSerImpl;
 import javax.swing.*;
 
 public class GameAddFrame extends JFrame {
-    private final GameSer gs = new GameSer();
-    private final AdminFrame parent; // 添加对 AdminFrame 的引用
-    private final JLabel name = new JLabel("名称:");
-    private final JLabel type = new JLabel("类型:");
-    private final JLabel price = new JLabel("价格:");
-    private final JLabel num = new JLabel("数量:");
-    private final JTextField nameIn = new JTextField();
-    private final JTextField priceIn = new JTextField();
-    private final JTextField typeIn = new JTextField();
-    private final JTextField numIn = new JTextField();
-    private final JButton confirm = new JButton("确认");
-    private final JPanel p = new JPanel();
+    GameSerImpl gs = new GameSerImpl();
+    AdminFrame parent; // 添加对 AdminFrame 的引用
+    JLabel name = new JLabel("名称:");
+    JLabel type = new JLabel("类型:");
+    JLabel price = new JLabel("价格:");
+    JLabel num = new JLabel("数量:");
+    JTextField nameIn = new JTextField();
+    JTextField priceIn = new JTextField();
+    JTextField typeIn = new JTextField();
+    JTextField numIn = new JTextField();
+    JButton confirm = new JButton("确认");
+    JPanel p = new JPanel();
 
     public GameAddFrame(AdminFrame parent) {
         super("添加商品");
@@ -74,8 +74,8 @@ public class GameAddFrame extends JFrame {
             int num = Integer.parseInt(numStr);
 
             // 创建 Game 对象
-            Game game = new Game(name, type, price, num);
-            if (gs.add(game)) {
+            Game game = new Game(name, type, price);
+            if (gs.addGame(game)) {
                 JOptionPane.showMessageDialog(this, "添加成功！");
                 parent.loadData(); // 刷新父窗口表格
                 dispose(); // 关闭窗口

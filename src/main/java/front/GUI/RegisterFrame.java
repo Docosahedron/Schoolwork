@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class registerFrame extends JFrame implements ActionListener {
+public class RegisterFrame extends JFrame implements ActionListener {
     UserSerImpl us = new UserSerImpl();
     JLabel name = new JLabel("用户名:");
     JLabel password = new JLabel("密码:");
@@ -14,7 +14,7 @@ public class registerFrame extends JFrame implements ActionListener {
     JPasswordField passwordIn = new JPasswordField();
     JButton confirm = new JButton("确认");
     JPanel p =new JPanel();
-    public registerFrame() {
+    public RegisterFrame() {
         super("用户注册");
         init();
         this.add(p);
@@ -47,6 +47,6 @@ public class registerFrame extends JFrame implements ActionListener {
         confirm.addActionListener(this);
     }
     public static void main(String[] args) {
-        new registerFrame();
+        new RegisterFrame();
     }
 }

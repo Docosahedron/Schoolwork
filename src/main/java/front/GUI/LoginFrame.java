@@ -5,7 +5,7 @@ import back.SERVICE.SerImpl.UserSerImpl;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class loginFrame extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame implements ActionListener {
     UserSerImpl us = new UserSerImpl();
     JLabel nameLabel=new JLabel("名字");
     JTextField nameInput=new JTextField(10);
@@ -17,7 +17,7 @@ public class loginFrame extends JFrame implements ActionListener {
     JButton register =new JButton("注册");
     JButton exit =new JButton("退出");
     JPanel  p=new JPanel();
-    public loginFrame() {
+    public LoginFrame() {
         super("登录界面");
         init();
     }
@@ -28,7 +28,7 @@ public class loginFrame extends JFrame implements ActionListener {
             if (us.login(u)) dispose();
         }else if (e.getSource()==register) {
             dispose();
-            new registerFrame();
+            new RegisterFrame();
         }else if (e.getSource()==exit) {
             System.exit(0);
         }
@@ -64,6 +64,6 @@ public class loginFrame extends JFrame implements ActionListener {
         this.setVisible(true);
     }
     public static void main(String[] args) {
-        new loginFrame();
+        new LoginFrame();
     }
 }

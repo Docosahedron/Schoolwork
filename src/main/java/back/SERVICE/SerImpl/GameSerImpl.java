@@ -9,11 +9,6 @@ import java.util.List;
 
 public class GameSerImpl implements GameSer {
     GameDaoImpl gdi = new GameDaoImpl();
-    //添加进心愿单
-    @Override
-    public void addWarehouse(User u, Game g) {
-
-    }
 
     //添加游戏到系统
     public boolean addGame(Game g) {

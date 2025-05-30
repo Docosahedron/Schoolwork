@@ -15,7 +15,6 @@ public class wishlistFrame extends JFrame {
     private final User curUser;
     GameSerImpl gs = new GameSerImpl();
     WishlistSerImpl ws = new WishlistSerImpl();
-    WishlistDaoImpl wdi  =new WishlistDaoImpl();
     JPanel gameShow;
     DefaultTableModel tableModel;
     public wishlistFrame(User user) {
@@ -64,7 +63,7 @@ public class wishlistFrame extends JFrame {
                     int row = gameTable.rowAtPoint(e.getPoint());
                     if (row >= 0) {
                         Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 0));
-                        new gameDetailsFrame(curUser,curGame);
+                        new GameDetailsFrame(curUser,curGame);
                     }
                 }
             }
@@ -103,6 +102,7 @@ public class wishlistFrame extends JFrame {
 
                 if (confirm == JOptionPane.YES_OPTION) {
                     ws.removeWishlist(curUser, curGame);
+                    refresh();
                 }
             }
         });
@@ -114,15 +114,16 @@ public class wishlistFrame extends JFrame {
                     JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 ws.removeWishlistAll(curUser);
+                refresh();
             }
         });
 
         // 加载初始数据
-        refresh(curUser.getName());
+        refresh();
     }
-    private void refresh(String userName) {
+    public void refresh() {
         tableModel.setRowCount(0);
-        List<Game> games = wdi.getAllGames(userName);
+        List<Game> games = ws.getAllWishlistGame(curUser);
         for (Game g : games) {
             tableModel.addRow(new Object[]{
                     g.getName(),

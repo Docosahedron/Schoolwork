@@ -1,7 +1,7 @@
 package front.GUI;
-import javafx.fxml.FXMLLoader;
-import front.Views.LoginView;
-import back.DAO.DaoImpl.*;
+import back.DAO.DBUtils;
+import back.SERVICE.SerImpl.GameSerImpl;
+
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Vector;
 
 public class AdminFrame extends JFrame implements ActionListener {
-    GameSer gs = new GameSer();
     JMenuBar menuBar = new JMenuBar();
     JMenu homePage = new JMenu("首页");
     JMenuItem home = new JMenuItem("首页");
@@ -370,7 +369,7 @@ public class AdminFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == lock) {
             dispose();
-            new loginFrame();
+            new LoginFrame();
         }
         else if (e.getSource()==exit) {
             dispose();

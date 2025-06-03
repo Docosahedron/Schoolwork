@@ -1,18 +1,17 @@
 package back.SERVICE.SerImpl;
 
-import back.DAO.DaoImpl.GameDaoImpl;
-import back.ENTITY.Game;
-import back.ENTITY.User;
-import back.SERVICE.GameSer;
+import back.DAO.DaoImpl.*;
+import back.ENTITY.*;
+import back.SERVICE.*;
 import javax.swing.*;
-import java.util.List;
+import java.util.*;
 
 public class GameSerImpl implements GameSer {
-    GameDaoImpl gdi = new GameDaoImpl();
+    GameDaoImpl gd = new GameDaoImpl();
 
     //添加游戏到系统
     public boolean addGame(Game g) {
-        if (gdi.add(g)) {
+        if (gd.add(g)) {
             JOptionPane.showMessageDialog(null, "添加成功!");
             return true;
         }else {JOptionPane.showMessageDialog(null, "添加失败!");
@@ -22,16 +21,16 @@ public class GameSerImpl implements GameSer {
 
     //通过游戏名查询游戏所有信息
     public Game getWholeInfo(String name) {
-        return gdi.getByName(name);
+        return gd.getByName(name);
     }
     //获取检索后所有游戏
     public List<Game> getGameBySearch(String type, double min, double max) {
-        return gdi.getBySearch(type, min, max);
+        return gd.getBySearch(type, min, max);
     }
 
     //获取精选游戏
     public List<Game> getGameByScore(int score){
-        return gdi.getByScore(score);
+        return gd.getByScore(score);
     }
 
 }

@@ -1,15 +1,10 @@
 package back.DAO.DaoImpl;
 
-import back.DAO.DBUtils;
-import back.DAO.WDao;
-import back.ENTITY.Game;
+import back.DAO.*;
+import back.ENTITY.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class WishlistDaoImpl implements WDao {
     //添加心愿单
@@ -25,6 +20,7 @@ public class WishlistDaoImpl implements WDao {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,添加心愿单失败");
             return false;
         }
     }
@@ -42,6 +38,7 @@ public class WishlistDaoImpl implements WDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,查询心愿单失败");
             return false;
         }
     }
@@ -55,6 +52,7 @@ public class WishlistDaoImpl implements WDao {
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
                 e.printStackTrace();
+                System.out.println("数据库异常,移除心愿单失败");
                 return false;
             }
         // 使用ON DUPLICATE KEY UPDATE实现原子操作
@@ -69,6 +67,7 @@ public class WishlistDaoImpl implements WDao {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,删除心愿单失败");
             return false;
         }
     }
@@ -95,6 +94,7 @@ public class WishlistDaoImpl implements WDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,获取心愿单所有游戏失败");
         }
         return games;
     }

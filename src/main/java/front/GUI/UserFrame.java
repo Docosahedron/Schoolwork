@@ -1,18 +1,22 @@
 package front.GUI;
-import back.SERVICE.SerImpl.GameSerImpl;
+import back.SERVICE.SerImpl.*;
 import front.Views.LoginView;
 import back.ENTITY.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class UserFrame extends JFrame {
     private final User curUser;//指定用户
+    private final Banana curBanana;
     GameSerImpl gs =new GameSerImpl();
+    UserSerImpl us = new UserSerImpl();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
@@ -20,6 +24,7 @@ public class UserFrame extends JFrame {
     public UserFrame(User user) {
         super(user.getName()+"的用户界面");
         this.curUser = user;
+        this.curBanana = us.getBanana(curUser);
         // 设置主面板布局
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -41,27 +46,27 @@ public class UserFrame extends JFrame {
         JMenuItem features = new JMenuItem("精选");
         JMenuItem discovery = new JMenuItem("探索队列");
         JMenuItem wishList = new JMenuItem("心愿单");
-        JMenu warehouse = new JMenu("社 区");//
-        JMenuItem collection = new JMenuItem("市场");
+        JMenu community = new JMenu("社 区");//
+        JMenuItem market = new JMenuItem("市场");
         JMenuItem download = new JMenuItem("下载");
         JMenu accountOp = new JMenu("账 户");//
         JMenuItem wallet = new JMenuItem("钱包");
-        JMenuItem banana = new JMenuItem("库存");
+        JMenuItem ware = new JMenuItem("库存");
         JMenuItem lock = new JMenuItem("锁定");
         JMenuItem exit = new JMenuItem("退出");
         //添加组件
         menuBar.add(homePage);//
         menuBar.add(store);
-        menuBar.add(warehouse);
+        menuBar.add(community);
         menuBar.add(accountOp);
         homePage.add(home);//
         store.add(features);//
         store.add(discovery);
         store.add(wishList);
-        warehouse.add(collection);//
-        warehouse.add(download);
+        community.add(market);//
+        community.add(download);
         accountOp.add(wallet);//
-        accountOp.add(banana);
+        accountOp.add(ware);
         accountOp.addSeparator(); // 添加分割线
         accountOp.add(lock);
         accountOp.add(exit);
@@ -75,17 +80,17 @@ public class UserFrame extends JFrame {
         });
         discovery.addActionListener(e->{});
         wishList.addActionListener(e-> new wishlistFrame(curUser));
-        collection.addActionListener(e->{});
+        market.addActionListener(e-> new MarketFrame(curUser));
         download.addActionListener(e->{});
         wallet.addActionListener(e->{
             new WalletFrame(curUser);
         });
-        banana.addActionListener(e->{
-            new BananaFrame(curUser);
+        ware.addActionListener(e->{
+            new WareFrame(curUser,curBanana);
         });
         lock.addActionListener(e->{
             dispose();
-            new LoginView();
+            new LoginFrame();
         });
         exit.addActionListener(e->System.exit(0));
         setJMenuBar(menuBar); // 注意这里使用setJMenuBar而不是add
@@ -132,13 +137,30 @@ public class UserFrame extends JFrame {
             public boolean isCellEditable(int row, int column) {
                 return false; // 所有单元格都不可编辑
             }
+            @Override
+            public Class<?> getColumnClass(int column) {
+                // 第一列是图片列
+                return column == 0 ? ImageIcon.class : Object.class;
+            }
         };
+        
+        tableModel.addColumn("图片");
         tableModel.addColumn("名称");
         tableModel.addColumn("类型");
         tableModel.addColumn("评分");
         tableModel.addColumn("价格");
+        
         //创设滚轮和展示界面
         JTable gameTable = new JTable(tableModel);
+        
+        // 设置行高以适应图片
+        gameTable.setRowHeight(60);
+        
+        // 设置图片列宽
+        TableColumn imageColumn = gameTable.getColumnModel().getColumn(0);
+        imageColumn.setPreferredWidth(80);
+        imageColumn.setMaxWidth(80);
+        
         JScrollPane jp = new JScrollPane(gameTable);
         gameShow.add(jp, BorderLayout.CENTER);
         gameTable.addMouseListener(new MouseAdapter() {
@@ -147,7 +169,7 @@ public class UserFrame extends JFrame {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 0));
+                        Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 1));
                         new GameDetailsFrame(curUser,curGame);
                     }
                 }
@@ -183,7 +205,11 @@ public class UserFrame extends JFrame {
         tableModel.setRowCount(0);
         List<Game> games = gs.getGameBySearch(type, min,max);
         for (Game g : games) {
+            // 加载游戏图片
+            ImageIcon gameIcon = loadImage(g.getName());
+            
             tableModel.addRow(new Object[]{
+                    gameIcon,
                     g.getName(),
                     g.getType(),
                     g.getScore(),
@@ -197,7 +223,11 @@ public class UserFrame extends JFrame {
         tableModel.setRowCount(0);
         List<Game> games = gs.getGameByScore(score);
         for (Game g : games) {
+            // 加载游戏图片
+            ImageIcon gameIcon = loadImage(g.getName());
+            
             tableModel.addRow(new Object[]{
+                    gameIcon,
                     g.getName(),
                     g.getType(),
                     g.getScore(),
@@ -207,7 +237,58 @@ public class UserFrame extends JFrame {
         gameShow.revalidate();
         gameShow.repaint();
     }
+    
+    // 加载游戏图片
+    private ImageIcon loadImage(String gameName) {
+        try {
+            // 尝试从游戏图片目录加载图片
+            String imagePath = "src/main/resources/images/games/" + gameName + ".jpg";
+            ImageIcon originalIcon = new ImageIcon(imagePath);
+            
+            // 检查图片是否成功加载
+            if (originalIcon.getIconWidth() <= 0) {
+                // 如果加载失败，创建一个默认的图片图标
+                return createDefaultGameIcon(gameName);
+            }
+            
+            // 调整图片大小
+            Image image = originalIcon.getImage();
+            Image scaledImage = image.getScaledInstance(60, 50, Image.SCALE_SMOOTH);
+            return new ImageIcon(scaledImage);
+            
+        } catch (Exception e) {
+            System.out.println("加载游戏图片失败: " + gameName + ", 错误: " + e.getMessage());
+            // 创建默认图片
+            return createDefaultGameIcon(gameName);
+        }
+    }
+    
+    // 创建默认游戏图标
+    private ImageIcon createDefaultGameIcon(String gameName) {
+        // 创建一个空白图片
+        BufferedImage image = new BufferedImage(60, 50, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        
+        // 设置图片背景
+        g.setColor(new Color(70, 70, 70));
+        g.fillRect(0, 0, 60, 50);
+        
+        // 添加游戏名称的首字母
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("宋体", Font.BOLD, 24));
+        
+        String initial = gameName.length() > 0 ? gameName.substring(0, 1).toUpperCase() : "G";
+        FontMetrics metrics = g.getFontMetrics();
+        int x = (60 - metrics.stringWidth(initial)) / 2;
+        int y = ((50 - metrics.getHeight()) / 2) + metrics.getAscent();
+        
+        g.drawString(initial, x, y);
+        g.dispose();
+        
+        return new ImageIcon(image);
+    }
+    
     public static void main(String[] args) {
-        new UserFrame(new User(0, "test", "123"));
+        new UserFrame(new User(4, "a", "a"));
     }
 }

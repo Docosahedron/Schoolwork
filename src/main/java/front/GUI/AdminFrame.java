@@ -271,7 +271,7 @@ public class AdminFrame extends JFrame implements ActionListener {
             conn = DBUtils.getConnection();
         } catch (SQLException e) {
             System.out.println("连接数据库失败");
-            throw new RuntimeException(e);
+            throw new RuntimeException("无法连接到数据库");
         }
         String sql = "select * from games";
         Statement stat = null;

@@ -27,6 +27,7 @@ public class GameDaoImpl implements GameDao {
         }*/
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,添加游戏失败");
             return false;
         }
     }
@@ -67,6 +68,7 @@ public class GameDaoImpl implements GameDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,检索游戏失败");
         }
         return games;
     }
@@ -90,6 +92,7 @@ public class GameDaoImpl implements GameDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,检索游戏失败");
         }
         return game;
     }
@@ -114,6 +117,32 @@ public class GameDaoImpl implements GameDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,检索游戏失败");
+        }
+        return games;
+    }
+    //获取未购买过的游戏
+    public List<Game> getUnbought(String name) {
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM games WHERE name NOT IN (SELECT gameName FROM warehouse WHERE username = ?)";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Game game = new Game(
+                            rs.getString("name"),
+                            rs.getString("type"),
+                            rs.getInt("score"),
+                            rs.getDouble("price"),
+                            rs.getString("overview")
+                    );
+                    games.add(game);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("数据库异常,检索游戏失败");
         }
         return games;
     }
@@ -138,6 +167,7 @@ public class GameDaoImpl implements GameDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,检索游戏失败");
         }
         return games;
     }

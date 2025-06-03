@@ -1,7 +1,6 @@
 package back.SERVICE.SerImpl;
 import back.DAO.DaoImpl.*;
 import back.ENTITY.*;
-import front.GUI.wishlistFrame;
 
 import javax.swing.*;
 import java.util.List;
@@ -20,6 +19,7 @@ public class WishlistSerImpl {
         else JOptionPane.showMessageDialog(null,"添加失败!");
         return flag;
     }
+    //查询心愿单所有游戏
     public List<Game> getAllWishlistGame(User u) {
         return wd.getAllGames(u.getName());
     }
@@ -35,10 +35,7 @@ public class WishlistSerImpl {
     //删除心愿单所有游戏
     public void removeWishlistAll(User u) {
         boolean flag = wd.removeAll(u.getName());
-        if (flag) {
-            JOptionPane.showMessageDialog(null, "已成功清空心愿单!！");
-        } else {
-            JOptionPane.showMessageDialog(null, "移除失败！");
-        }
+        if (flag) JOptionPane.showMessageDialog(null, "已成功清空心愿单!！");
+        else JOptionPane.showMessageDialog(null, "移除失败！");
     }
 }

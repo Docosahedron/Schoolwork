@@ -38,6 +38,7 @@ public class ReviewDaoImpl implements ReviewDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,获取游戏评论失败");
         }
         return reviews;
     }

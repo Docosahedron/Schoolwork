@@ -1,15 +1,10 @@
 package back.DAO.DaoImpl;
 
-import back.DAO.DBUtils;
-import back.DAO.WDao;
-import back.ENTITY.Game;
+import back.DAO.*;
+import back.ENTITY.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class WarehouseDaoImpl implements WDao {
     //添加到库存
@@ -24,6 +19,7 @@ public class WarehouseDaoImpl implements WDao {
             pstmt.setString(2, gameName);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
+            System.out.println("数据库异常,添加到库存失败");
             e.printStackTrace();
             return false;
         }
@@ -40,6 +36,7 @@ public class WarehouseDaoImpl implements WDao {
                 return count >0;
             }else return false;
         } catch (SQLException e) {
+            System.out.println("数据库异常,查询游戏失败");
             e.printStackTrace();
             return false;
         }
@@ -68,6 +65,7 @@ public class WarehouseDaoImpl implements WDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,获取库存中所有游戏失败");
         }
         return games;
     }

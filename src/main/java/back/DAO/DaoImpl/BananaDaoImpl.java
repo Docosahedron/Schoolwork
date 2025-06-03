@@ -1,22 +1,21 @@
 package back.DAO.DaoImpl;
 
-import back.DAO.DBUtils;
+import back.DAO.*;
+import back.ENTITY.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 public class BananaDaoImpl {
     public boolean init(String name){
-        String sql = "INSERT INTO bananas (username,N,R,SR,SSR,UR)  values (?,0,0,0,0,0)";
+        String sql = "INSERT INTO bananas (username,N,R,SR,SSR,UR)  values (?,0,0,0,0,0) ";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,初始化香蕉失败");
             return false;
         }
     }
@@ -46,6 +45,7 @@ public class BananaDaoImpl {
             conn.commit();
             return true;
         } catch (SQLException e) {
+            System.err.println("数据库异常,添加香蕉失败: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -53,15 +53,43 @@ public class BananaDaoImpl {
 
     //减少香蕉数量
     public boolean removeNum(String name, String type, int num) {
-        String sql = "update ignore bananas set "+ type+" = "+type+" - "+num+
-                " where username = ? and "+type+" - "+num+" >= 0";
+        String sql = " update ignore bananas set "+ type+" = "+type+" - "+num+
+                " where username = ? and "+type+" - "+num+" >= 0 ";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, name);
             return ps.executeUpdate() > 0;
         }catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("数据库异常,减少香蕉失败");
             return false;
         }
+    }
+    
+    // 获取用户的香蕉数量
+    public Banana getOne(String username) {
+        Banana b = null;
+        String sql = " SELECT * FROM bananas WHERE username = ? ";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    b = new Banana(
+                            rs.getString("username"),
+                            rs.getInt("N"),
+                            rs.getInt("R"),
+                            rs.getInt("SR"),
+                            rs.getInt("SSR"),
+                            rs.getInt("UR")
+                    );
+                }
+                return b;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("数据库异常,获取用户香蕉失败");
+        }
+        return b;
     }
 }

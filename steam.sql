@@ -266,3 +266,20 @@ INSERT INTO `wishlist` VALUES ('zx', '幽灵行者', '2025-05-30 00:01:37');
 INSERT INTO `wishlist` VALUES ('zx', '暖雪', '2025-06-03 09:47:37');
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+-- song list
+-- ----------------------------
+DROP TABLE IF EXISTS `songs`;
+CREATE TABLE `songs` (
+    `song_id` int(11) NOT NULL AUTO_INCREMENT,
+    `song_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+    `song_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+    UNIQUE INDEX `song_id`(`song_id`) USING BTREE
+)ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- songs
+-- ----------------------------
+INSERT INTO songs (song_name, song_path)
+VALUES ('両翼のBrilliance', '/front/images/music/両翼のBrilliance.mp3');

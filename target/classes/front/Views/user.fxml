@@ -1,55 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane minHeight="500.0" minWidth="990.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuButton fx:id="HomePage_big" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" text="首页">
-        <items>
-          <MenuItem fx:id="homePage" mnemonicParsing="false" text="首页" />
-        </items>
-      </MenuButton>
-      <MenuButton fx:id="shop" layoutX="87.0" layoutY="7.0" mnemonicParsing="false" text="商店">
-        <items>
-          <MenuItem fx:id="choiceness" mnemonicParsing="false" text="精选" />
-          <MenuItem fx:id="ExplorationQueue" mnemonicParsing="false" text="探索队列" />
-            <MenuItem fx:id="wishList" mnemonicParsing="false" text="心愿单" />
-        </items>
-      </MenuButton>
-       <MenuButton fx:id="warehouse" layoutX="160.0" layoutY="7.0" mnemonicParsing="false" text="仓库">
-           <items>
-               <MenuItem fx:id="collect" mnemonicParsing="false" text="收藏" />
-               <MenuItem fx:id="download" mnemonicParsing="false" text="下载" />
-           </items>
-       </MenuButton>
-       <MenuButton fx:id="account" layoutX="233.0" layoutY="7.0" mnemonicParsing="false" text="账号操作">
-           <items>
-               <MenuItem fx:id="lock" mnemonicParsing="false" text="锁定" />
-               <MenuItem fx:id="exist" mnemonicParsing="false" text="退出" />
-           </items>
-       </MenuButton>
-      <TableView layoutY="94.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="990.0">
-        <columns>
-          <TableColumn text="名称" />
-            <TableColumn text="类型" />
-            <TableColumn prefWidth="75.0" text="价格" />
-            <TableColumn prefWidth="75.0" text="库存" />
-        </columns>
-      </TableView>
-      <Text layoutX="14.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="类型" />
-      <TextField fx:id="typefield" layoutX="47.0" layoutY="47.0" prefHeight="15.0" prefWidth="80.0" />
-      <Text layoutX="148.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="最低价" />
-      <Text layoutX="274.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="最高价" />
-      <TextField fx:id="misfield" layoutX="184.0" layoutY="47.0" prefHeight="23.0" prefWidth="82.0" />
-      <TextField fx:id="maxfield" layoutX="315.0" layoutY="47.0" prefHeight="23.0" prefWidth="82.0" />
-      <Button fx:id="findButton" layoutX="461.0" layoutY="47.0" mnemonicParsing="false" text="检索" />
-      <Button fx:id="resetButton" layoutX="545.0" layoutY="46.0" mnemonicParsing="false" text="重置" />
-   </children>
-</Pane>
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <VBox prefHeight="79.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar mouseTransparent="true">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <HBox prefHeight="56.0" prefWidth="600.0" />
+            </children>
+        </VBox>
+    </top>
+    <bottom>
+        <ToolBar prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button mnemonicParsing="false" text="下载" />
+            </items>
+        </ToolBar>
+    </bottom>
+    <center>
+        <TableView prefHeight="459.0" prefWidth="733.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn prefWidth="245.99996948242188" text="图片" />
+                <TableColumn prefWidth="203.3333740234375" text="名称" />
+                <TableColumn minWidth="0.0" prefWidth="120.6666259765625" text="评分" />
+                <TableColumn prefWidth="152.0" text="价格" />
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <VBox prefHeight="273.0" prefWidth="298.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label prefHeight="24.0" prefWidth="298.0" text="依价格缩小范围" textFill="#176d79">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <Slider prefHeight="23.0" prefWidth="298.0" />
+                <Label prefHeight="24.0" prefWidth="85.0" text="选择标签" textFill="#176d79">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <TitledPane animated="false" text="展开标签选择">
+                    <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </TitledPane>
+                <ToggleButton mnemonicParsing="false" text="交集&amp;并集" />
+                <HBox prefHeight="369.0" prefWidth="298.0" />
+                <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="305.0" text="检索" />
+                <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="303.0" text="重置" />
+            </children>
+        </VBox>
+    </right>
+</BorderPane>

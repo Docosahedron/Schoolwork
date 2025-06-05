@@ -18,6 +18,7 @@ import java.util.Objects;
 public class MainApp extends Application {
     private Stage loginStage;
     private Stage userStage;
+    private Stage registerStage;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -51,9 +52,15 @@ public class MainApp extends Application {
             loginStage.setX(event.getScreenX() - xOffset);
             loginStage.setY(event.getScreenY() - yOffset);
         });
-
     }
-
+    public void exStage() throws IOException {
+        if (userStage != null){
+            userStage.close();
+        }
+        if (registerStage != null){
+            registerStage.close();
+        }
+    }
     public void goToUserStage() throws IOException {
         FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/front/Views/user.fxml"));
         Parent root = userLoader.load();
@@ -62,6 +69,7 @@ public class MainApp extends Application {
         controller.setMainApp(this);
 
         Scene scene = new Scene(root, 990, 500);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/front/Views/user.css")).toExternalForm());
 
         userStage = new Stage();
         userStage.setTitle("用户界面");
@@ -77,11 +85,13 @@ public class MainApp extends Application {
         registerController controller = registerLoader.getController();
         controller.setMainApp(this);
 
-        Scene scene = new Scene(root, 832, 772);
+        Scene scene = new Scene(root, 600, 505);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/front/Views/register.css")).toExternalForm());
 
-        userStage = new Stage();
-        userStage.setScene(scene);
-        userStage.show();
+        registerStage = new Stage();
+        registerStage.setResizable(false);
+        registerStage.setScene(scene);
+        registerStage.show();
 
         loginStage.close();
     }

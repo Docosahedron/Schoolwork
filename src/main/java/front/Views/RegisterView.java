@@ -14,6 +14,11 @@ public class RegisterView extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static void showAlert(String 注册失败, String 密码不一致) {
+
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         Registerstage = stage;

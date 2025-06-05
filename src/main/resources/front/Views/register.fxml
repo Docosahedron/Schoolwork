@@ -11,69 +11,64 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.Controller.registerController">
+<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.Controller.registerController">
    <children>
-      <BorderPane prefHeight="720.0" prefWidth="830.0">
+      <BorderPane prefHeight="480.0" prefWidth="600.0">
          <center>
-            <Pane prefHeight="650.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="440.0" prefWidth="550.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="101.0" prefWidth="473.0">
+                  <Text layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="创建您的账户">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="20.0" layoutY="60.0" prefHeight="300.0" prefWidth="510.0">
                      <children>
-                        <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="创建您的账户" wrappingWidth="395.5735778808594">
+                        <Text layoutY="12.0" text="请输入您的账号">
                            <font>
-                              <Font size="47.0" />
+                              <Font size="14.0" />
                            </font>
                         </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="62.0" layoutY="94.0" prefHeight="401.0" prefWidth="650.0">
-                     <children>
-                        <TextField fx:id="usernameField" layoutY="59.0" prefHeight="42.0" prefWidth="651.0" />
-                        <PasswordField fx:id="passwordField" layoutY="147.0" prefHeight="42.0" prefWidth="651.0" />
-                        <PasswordField fx:id="passwordField_ag" layoutX="-1.0" layoutY="236.0" prefHeight="42.0" prefWidth="651.0" />
-                        <Text layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="请输入您的账号" wrappingWidth="146.00000762939453">
+                        <TextField fx:id="usernameField" layoutY="30.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <Text layoutY="80.0" text="请设置您的密码">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="passwordField" layoutY="98.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <Text layoutY="148.0" text="请确定您的密码">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="passwordField_ag" layoutY="166.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <CheckBox layoutY="220.0" mnemonicParsing="false" text="我是人" fx:id="checkbox">
                            <font>
                               <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="请设置您的密码" wrappingWidth="146.00000762939453">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <Text layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="请确定您的密码" wrappingWidth="146.00000762939453">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Text>
-                        <CheckBox layoutX="37.0" layoutY="311.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="296.0" text="我是人">
-                           <font>
-                              <Font size="21.0" />
                            </font>
                         </CheckBox>
                      </children>
                   </Pane>
-                  <Button fx:id="registerButton" onAction="#handleRegister" layoutX="273.0" layoutY="555.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="228.0" text="注册" textFill="#451111">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="exitButton" onAction="#handleBack" layoutX="622.0" layoutY="38.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="我已有账号" textFill="RED" />
+
+                  <Button fx:id="registerButton" onAction="#handleRegister" layoutX="180.0" layoutY="370.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="180.0" text="注册" textFill="WHITE" styleClass="register-button" />
+                  <Button fx:id="exitButton" onAction="#handleBack" layoutX="440.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="120.0" text="我已有账号" textFill="RED" />
                </children>
             </Pane>
          </center>
-         <right>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#315980" height="720.0" stroke="BLACK" strokeType="INSIDE" width="28.0" BorderPane.alignment="CENTER" />
-         </right>
          <left>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#315980" height="720.0" stroke="BLACK" strokeType="INSIDE" width="29.0" BorderPane.alignment="CENTER" />
+            <Rectangle width="10" height="480" fill="#315980" stroke="BLACK" />
          </left>
+         <right>
+            <Rectangle width="10" height="480" fill="#315980" stroke="BLACK" />
+         </right>
          <top>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#315980" height="26.0" stroke="BLACK" strokeType="INSIDE" width="832.0" BorderPane.alignment="CENTER" />
+            <Rectangle width="600" height="10" fill="#315980" stroke="BLACK" />
          </top>
          <bottom>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#315980" height="26.0" stroke="BLACK" strokeType="INSIDE" width="832.0" BorderPane.alignment="CENTER" />
+            <Rectangle width="600" height="10" fill="#315980" stroke="BLACK" />
          </bottom>
       </BorderPane>
    </children>

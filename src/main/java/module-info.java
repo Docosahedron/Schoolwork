@@ -8,6 +8,7 @@ module org.demo {
     requires javafx.media;
 
     opens front.Views to javafx.fxml;
+    opens back.ENTITY to javafx.base, javafx.fxml;
     exports front.Views;
     exports front.Controller;
     opens front.Controller to javafx.fxml;

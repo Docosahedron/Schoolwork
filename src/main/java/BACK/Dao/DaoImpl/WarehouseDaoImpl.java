@@ -56,7 +56,7 @@ public class WarehouseDaoImpl implements WDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getDouble("price"),
+                            rs.getBigDecimal("price"),
                             rs.getString("overview")
                     );
                     games.add(game);

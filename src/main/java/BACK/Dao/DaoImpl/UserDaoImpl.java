@@ -1,6 +1,8 @@
 package BACK.Dao.DaoImpl;
 import BACK.Dao.*;
 import BACK.Entity.*;
+
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.*;
 
@@ -70,7 +72,7 @@ public class UserDaoImpl implements UserDao {
                     return new User(rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("password"),
-                            rs.getDouble("balance"),
+                            rs.getBigDecimal("balance"),
                             rs.getInt("package"));
                 }
             }
@@ -101,13 +103,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     //更新余额
-    public boolean updateBalance(String name, double price) {
+    public boolean updateBalance(String name, BigDecimal price) {
         String sql = "update ignore users set balance = balance + ? where name = ? and balance + ? >= 0";
         try {Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDouble(1, price);
+            ps.setBigDecimal(1, price);
             ps.setString(2, name);
-            ps.setDouble(3, price);
+            ps.setBigDecimal(3, price);
             return ps.executeUpdate()> 0;
         }catch (SQLException e) {
             e.printStackTrace();

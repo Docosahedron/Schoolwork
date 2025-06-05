@@ -1,16 +1,19 @@
 package BACK.Entity;
+
+import java.math.BigDecimal;
+
 public class Game {
     private String name;
     private String type;
     private int score=0;
-    private double price;
+    private BigDecimal price;
     private String overview="null";
-    public Game(String name, String type, double price) {
+    public Game(String name, String type, BigDecimal price) {
         this.name = name;
         this.type = type;
         this.price = price;
     }
-    public Game(String name, String type, int score,double price, String overview) {
+    public Game(String name, String type, int score, BigDecimal price, String overview) {
         this.name = name;
         this.type = type;
         this.score = score;
@@ -25,10 +28,10 @@ public class Game {
     }
     public String getType(){return type;}
     public void setType(String type){this.type = type;}
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     public int getScore(){return score;}

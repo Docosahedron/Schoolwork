@@ -7,6 +7,8 @@ import BACK.Service.SerImpl.UserSerImpl;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MarketFrame extends JFrame{
     private final User curUser;
@@ -70,7 +72,7 @@ public class MarketFrame extends JFrame{
         JPanel userInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
         userInfoPanel.setBorder(new TitledBorder("用户信息"));
         
-        balanceLabel = new JLabel("余额: ¥" + curUser.getBalance());
+        balanceLabel = new JLabel("余额: ¥" + curUser.getBalance().setScale(2,RoundingMode.FLOOR));
         balanceLabel.setFont(new Font("宋体", Font.BOLD, 14));
         
         packageCountLabel = new JLabel("香蕉包: " + curUser.getPackages() + "个");
@@ -254,15 +256,15 @@ public class MarketFrame extends JFrame{
         typeComboBox.addActionListener(e -> {
             String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
             int num = (int) numSpinner.getValue();
-            double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * num));
+            BigDecimal price = us.getBananaPrice(selectedType);
+            totalValueLabel.setText("¥" + price.multiply(BigDecimal.valueOf(num)).setScale(2, RoundingMode.FLOOR));
         });
         
         numSpinner.addChangeListener(e -> {
             String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
             int num = (int) numSpinner.getValue();
-            double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * num));
+            BigDecimal price = us.getBananaPrice(selectedType);
+            totalValueLabel.setText("¥" + price.multiply(BigDecimal.valueOf(num)).setScale(2, RoundingMode.FLOOR));
         });
         
         // 出售按钮
@@ -309,7 +311,7 @@ public class MarketFrame extends JFrame{
             }
             
             // 更新界面显示
-            balanceLabel.setText("余额: ¥" + curUser.getBalance());
+            balanceLabel.setText("余额: ¥" + curUser.getBalance().setScale(2,RoundingMode.FLOOR));
             packageCountLabel.setText("香蕉包: " + curUser.getPackages() + "个");
             
             // 获取香蕉数据
@@ -374,7 +376,7 @@ public class MarketFrame extends JFrame{
     
     public static void main(String[] args) {
         // 测试用
-        User test = new User(1, "测试用户", "password", 1000, 10);
+        User test = new User(1, "测试用户", "password", BigDecimal.ZERO, 10);
         new MarketFrame(test);
     }
 } 

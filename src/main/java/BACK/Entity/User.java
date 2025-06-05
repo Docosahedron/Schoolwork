@@ -1,13 +1,15 @@
 package BACK.Entity;
 
+import java.math.BigDecimal;
+
 public class User {
     private int id;
     private String name;
     private String password;
-    private double balance=0.0;
+    private BigDecimal balance = BigDecimal.ZERO;
     private int packages=0;
     //全参构造方法,一般只用来获取全部信息
-    public User(int id, String name, String password, double balance, int packages) {
+    public User(int id, String name, String password, BigDecimal balance, int packages) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -38,10 +40,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
     public int getPackages(){

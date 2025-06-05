@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class GameDetailsFrame extends JFrame {
@@ -189,7 +190,7 @@ public class GameDetailsFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        Game g = new Game("艾尔登法环", "动作角色扮演",298);
+        Game g = new Game("艾尔登法环", "动作角色扮演", BigDecimal.valueOf(298));
         g.setOverview("《艾尔登法环》是以正统黑暗奇幻世界为舞台的动作RPG游戏。走进辽阔的场景与地下迷宫探索未知，挑战困难重重的险境，享受克服困境时的成就感吧。");
         User u = new User(111, "test", "123");
         new GameDetailsFrame(u,g);

@@ -3,6 +3,7 @@ import BACK.Entity.*;
 import BACK.Service.SerImpl.GameSerImpl;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 
 public class GameAddFrame extends JFrame {
     GameSerImpl gs = new GameSerImpl();
@@ -70,7 +71,7 @@ public class GameAddFrame extends JFrame {
         }
 
         try {
-            double price = Double.parseDouble(priceStr);
+            BigDecimal price = BigDecimal.valueOf(Double.parseDouble(priceStr));
             int num = Integer.parseInt(numStr);
 
             // 创建 Game 对象

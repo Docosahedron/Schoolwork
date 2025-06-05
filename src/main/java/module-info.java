@@ -7,12 +7,12 @@ module org.demo {
     requires mysql.connector.j;
     requires javafx.media;
 
-    opens front.Views to javafx.fxml;
-    opens back.ENTITY to javafx.base, javafx.fxml;
-    exports front.Views;
-    exports front.Controller;
-    opens front.Controller to javafx.fxml;
+    opens FRONT.View to javafx.fxml;
+    opens BACK.Entity to javafx.base, javafx.fxml;
+    exports FRONT.View;
+    exports FRONT.Controller;
+    opens FRONT.Controller to javafx.fxml;
 
-    opens front to javafx.fxml, javafx.graphics;
-    exports front;
+    opens FRONT to javafx.fxml, javafx.graphics;
+    exports FRONT;
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="mainPane" xmlns:fx="http://javafx.com/fxml" fx:controller="FRONT.Controller.UserFrameController">
+    <top>
+        <VBox spacing="5">
+            <MenuBar fx:id="menuBar">
+                <menus>
+                    <Menu text="首页">
+                        <MenuItem fx:id="homeMenuItem" text="首页"/>
+                    </Menu>
+                    <Menu text="商 店">
+                        <MenuItem fx:id="featuresMenuItem" text="精选"/>
+                        <MenuItem fx:id="discoveryMenuItem" text="探索队列"/>
+                        <MenuItem fx:id="wishListMenuItem" text="心愿单"/>
+                    </Menu>
+                    <Menu text="仓 库">
+                        <MenuItem fx:id="collectionMenuItem" text="收藏"/>
+                        <MenuItem fx:id="downloadMenuItem" text="下载"/>
+                    </Menu>
+                    <Menu text="账 户">
+                        <MenuItem fx:id="walletMenuItem" text="查看我的钱包"/>
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="lockMenuItem" text="锁定"/>
+                        <MenuItem fx:id="exitMenuItem" text="退出"/>
+                    </Menu>
+                </menus>
+            </MenuBar>
+            <HBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+
+                <Label text="类型:"/>
+                <TextField fx:id="typeField" prefWidth="80"/>
+                <Label text="最低价:"/>
+                <TextField fx:id="minPriceField" prefWidth="80"/>
+                <Label text="最高价:"/>
+                <TextField fx:id="maxPriceField" prefWidth="80"/>
+                <Button fx:id="searchButton" text="检索"/>
+                <Button fx:id="refreshButton" text="重置"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="gameTableView">
+            <columns>
+                <TableColumn fx:id="nameColumn" text="名称" prefWidth="150"/>
+                <TableColumn fx:id="typeColumn" text="类型" prefWidth="100"/>
+                <TableColumn fx:id="scoreColumn" text="评分" prefWidth="80"/>
+                <TableColumn fx:id="priceColumn" text="价格" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

@@ -1,0 +1,32 @@
+/* 设置整体背景色 */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* 美化按钮 */
+.register-button {
+    -fx-background-color: linear-gradient(to right, #4CAF50, #45a049);
+    -fx-background-radius: 8;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* 输入框样式 */
+.text-field, .password-field {
+    -fx-background-radius: 6;
+    -fx-padding: 6px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+    -fx-font-size: 14px;
+}
+
+/* 复选框样式 */
+.check-box {
+    -fx-font-size: 16px;
+}
+
+/* 标签字体样式 */
+.text {
+    -fx-font-smoothing-type: lcd;
+}

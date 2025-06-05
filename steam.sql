@@ -282,4 +282,4 @@ CREATE TABLE `songs` (
 -- songs
 -- ----------------------------
 INSERT INTO songs (song_name, song_path)
-VALUES ('両翼のBrilliance', '/front/images/music/両翼のBrilliance.mp3');
+VALUES ('両翼のBrilliance', '/FRONT/images/music/両翼のBrilliance.mp3');

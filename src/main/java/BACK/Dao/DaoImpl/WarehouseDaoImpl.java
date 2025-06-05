@@ -11,13 +11,12 @@ public class WarehouseDaoImpl implements WDao {
     @Override
     public boolean add(String username, String gameName) {
         // 使用ON DUPLICATE KEY UPDATE实现原子操作
-        String sql = "INSERT ignore INTO warehouse (username, gameName,time) " +
-                "VALUES (?, ?, NOW())";
+        String sql = "INSERT ignore INTO warehouse (username, gameName,time) VALUES (?, ?, NOW())";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, gameName);
-            return pstmt.executeUpdate() > 0;
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, gameName);
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("数据库异常,添加到库存失败");
             e.printStackTrace();
@@ -27,10 +26,10 @@ public class WarehouseDaoImpl implements WDao {
     public boolean queryGameByUser(String username, String gameName) {
         String sql = "select count(*)  from warehouse  where username = ? and gameName = ?";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, gameName);
-            ResultSet rs = pstmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, gameName);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);
                 return count >0;

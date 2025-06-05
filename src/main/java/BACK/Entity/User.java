@@ -4,9 +4,9 @@ public class User {
     private int id;
     private String name;
     private String password;
-    private double balance=0;
+    private double balance=0.0;
     private int packages=0;
-    //完全构造方法,一般只用来获取全部信息
+    //全参构造方法,一般只用来获取全部信息
     public User(int id, String name, String password, double balance, int packages) {
         this.id = id;
         this.name = name;
@@ -19,7 +19,6 @@ public class User {
         this.id = id;
         this.name = name;
         this.password = password;
-
     }
     public int getId() {
         return id;

@@ -132,7 +132,7 @@ public class WareFrame extends JFrame implements ActionListener {
     // 刷新香蕉和包裹信息
     private void refreshInfo() {
         // 重新获取最新的用户数据
-        User updatedUser = us.getUser(curUser.getName());
+        User updatedUser = us.getUserInfo(curUser.getName());
         if (updatedUser != null) {
             curUser.setPackages(updatedUser.getPackages());
         }

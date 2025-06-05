@@ -7,6 +7,6 @@ public interface GameDao {
     boolean add(Game game);
     boolean delete(int id);
     boolean update(int id);
-    List<Game> query(int id);
+    boolean query(int id);
     List<Game> getAll();
 }

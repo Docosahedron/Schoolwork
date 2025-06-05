@@ -1,10 +1,7 @@
 package FRONT.GUI;
 
 import BACK.Entity.Banana;
-import BACK.Entity.BananaTemp;
 import BACK.Entity.User;
-import BACK.Dao.DaoImpl.BananaDaoImpl;
-import BACK.Dao.DaoImpl.UserDaoImpl;
 import BACK.Service.SerImpl.UserSerImpl;
 
 import javax.swing.*;
@@ -15,8 +12,6 @@ public class MarketFrame extends JFrame{
     private final User curUser;
     private Banana banana;
     private final UserSerImpl us = new UserSerImpl();
-    private final BananaDaoImpl bananaDao = new BananaDaoImpl();
-    private final UserDaoImpl userDao = new UserDaoImpl();
     
     private JPanel mainPanel;
     private JPanel bananaInfoPanel;
@@ -243,7 +238,7 @@ public class MarketFrame extends JFrame{
         JComboBox<String> typeComboBox = new JComboBox<>(bananaTypes);
         
         JLabel amountLabel = new JLabel("出售数量:");
-        JSpinner amountSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 9999, 1));
+        JSpinner numSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 9999, 1));
         
         JLabel totalLabel = new JLabel("预计获得:");
         JLabel totalValueLabel = new JLabel("¥1.0");
@@ -251,35 +246,34 @@ public class MarketFrame extends JFrame{
         selectionPanel.add(typeLabel);
         selectionPanel.add(typeComboBox);
         selectionPanel.add(amountLabel);
-        selectionPanel.add(amountSpinner);
+        selectionPanel.add(numSpinner);
         selectionPanel.add(totalLabel);
         selectionPanel.add(totalValueLabel);
         
         // 更新预计获得金额
         typeComboBox.addActionListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();
-            int amount = (int) amountSpinner.getValue();
+            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
+            int num = (int) numSpinner.getValue();
             double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * amount));
+            totalValueLabel.setText("¥" + (price * num));
         });
         
-        amountSpinner.addChangeListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();
-            int amount = (int) amountSpinner.getValue();
+        numSpinner.addChangeListener(e -> {
+            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
+            int num = (int) numSpinner.getValue();
             double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * amount));
+            totalValueLabel.setText("¥" + (price * num));
         });
         
         // 出售按钮
         JButton sellButton = new JButton("出售");
         sellButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         sellButton.addActionListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();
-            int amount = (int) amountSpinner.getValue();
-            double price = us.getBananaPrice(selectedType);
-            
-            BananaTemp bananaTemp = new BananaTemp(curUser.getName(), selectedType, price, amount);
-            if (us.sellBanana(curUser, bananaTemp)) {
+            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
+            //获取数量
+            int num = (int) numSpinner.getValue();
+            Banana temp= new Banana(curUser.getName(),selectedType,num);
+            if (us.sellBanana(curUser, temp)) {
                 refreshData();
             }
         });
@@ -301,7 +295,7 @@ public class MarketFrame extends JFrame{
     private void refreshData() {
         try {
             // 更新用户数据 - 使用仅需用户名的方法
-            User updatedUser = userDao.getUserByName(curUser.getName());
+            User updatedUser = us.getUserInfo(curUser.getName());
             if (updatedUser != null) {
                 curUser.setBalance(updatedUser.getBalance());
                 curUser.setPackages(updatedUser.getPackages());
@@ -319,7 +313,7 @@ public class MarketFrame extends JFrame{
             packageCountLabel.setText("香蕉包: " + curUser.getPackages() + "个");
             
             // 获取香蕉数据
-            banana = bananaDao.getOne(curUser.getName());
+            banana = us.getBanana(curUser);
             if (banana != null) {
                 bananaCountLabels[0].setText("N: " + banana.getN());
                 bananaCountLabels[1].setText("R: " + banana.getR());

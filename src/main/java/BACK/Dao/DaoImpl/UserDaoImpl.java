@@ -39,14 +39,15 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) {
 
     }
+
     //查询是否有此用户
-    public boolean query(User user) {
+    public boolean query(String name,String password) {
         String sql = "SELECT COUNT(*) FROM users WHERE name = ? AND password = ?";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1,user.getName() );
-            pstmt.setString(2, user.getPassword());
-            try (ResultSet rs = pstmt.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1,name);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
                 }
@@ -57,8 +58,9 @@ public class UserDaoImpl implements UserDao {
         }
         return false;
     }
+
     //获取某个用户的所有信息
-    public User getOne(String name) {
+    public User getInfo(String name) {
         String sql = "SELECT * FROM users WHERE name = ?";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -80,7 +82,7 @@ public class UserDaoImpl implements UserDao {
     }
     //获取所有用户的所有信息
     @Override
-    public List<User> getAll() {
+    public List<User> getAllInfo() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users"; // 查询所有游戏数据
 
@@ -97,13 +99,14 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
+
     //更新余额
-    public boolean updateBalance(User user, double price) {
+    public boolean updateBalance(String name, double price) {
         String sql = "update ignore users set balance = balance + ? where name = ? and balance + ? >= 0";
         try {Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, price);
-            ps.setString(2, user.getName());
+            ps.setString(2, name);
             ps.setDouble(3, price);
             return ps.executeUpdate()> 0;
         }catch (SQLException e) {
@@ -112,6 +115,7 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
     }
+
     //更新香蕉袋数量
     public boolean updatePackage(String name, int num) {
         String sql = " update ignore users set package = package + ? where name = ? and package + ? >= 0 ";
@@ -127,25 +131,26 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
     }
-    //通过用户名获取用户信息（不需要密码）
-    public User getUserByName(String username) {
-        String sql = "SELECT * FROM users WHERE name = ?";
-        try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return new User(rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("password"),
-                            rs.getDouble("balance"),
-                            rs.getInt("package"));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("数据库异常,获取用户信息失败");
-        }
-        return null;
-    }
+
+//    //通过用户名获取用户信息（不需要密码）
+//    public User getUserByName(String username) {
+//        String sql = "SELECT * FROM users WHERE name = ?";
+//        try (Connection conn = DBUtils.getConnection();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setString(1, username);
+//            try (ResultSet rs = pstmt.executeQuery()) {
+//                if (rs.next()) {
+//                    return new User(rs.getInt("id"),
+//                            rs.getString("name"),
+//                            rs.getString("password"),
+//                            rs.getDouble("balance"),
+//                            rs.getInt("package"));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.out.println("数据库异常,获取用户信息失败");
+//        }
+//        return null;
+//    }
 }

@@ -8,7 +8,6 @@ import java.util.*;
 
 public class GameSerImpl implements GameSer {
     GameDaoImpl gd = new GameDaoImpl();
-
     //添加游戏到系统
     public boolean addGame(Game g) {
         if (gd.add(g)) {

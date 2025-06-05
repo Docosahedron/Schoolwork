@@ -1,6 +1,7 @@
 package front.Controller;
 
 import back.SERVICE.SerImpl.UserSerImpl;
+import front.MainApp;
 import front.Views.LoginView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,7 +11,23 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import back.ENTITY.*;
 
+import java.io.IOException;
+
 public class  LoginController {
+    private MainApp mainApp;  // 保存主应用引用
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    @FXML
+    private void handleLogin() throws IOException {
+        String nameInput = usernameField.getText();
+        String passwordInput = passwordField.getText();
+        User u = new User(0,nameInput,passwordInput);
+        if (usi.login(u)) mainApp.goToUserStage();  // 调用主应用中的方法
+    }
+
     UserSerImpl usi = new UserSerImpl();
     // 注入 FXML 组件
     @FXML
@@ -31,14 +48,6 @@ public class  LoginController {
         // 可以在这里进行初始化操作
     }
 
-    // 登录按钮点击事件
-    @FXML
-    private void handleLogin() {
-        String nameInput = usernameField.getText();
-        String passwordInput = passwordField.getText();
-        User u = new User(0,nameInput,passwordInput);
-        if (usi.login(u)) LoginView.close();
-    }
 
     // 弹出提示框方法
     public void showAlert(String title, String message) {
@@ -54,9 +63,8 @@ public class  LoginController {
         Platform.exit();
     }
     @FXML
-    private void handleRegister() {
-        showAlert("立入禁止!", "前方的区域以后再来探索吧!");
-        //LoginView.changeView("register.fxml");
+    private void handleRegister() throws IOException {
+        mainApp.goToResiterStage();
     }
 }
 

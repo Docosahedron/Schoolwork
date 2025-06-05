@@ -3,6 +3,7 @@ package front.Controller;
 import back.DAO.DaoImpl.GameDaoImpl;
 import back.DAO.GameDao;
 import back.ENTITY.Game;
+import front.MainApp;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,11 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 public class userController {
+    private MainApp mainApp;  // 保存主应用引用
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
 
     @FXML private ToggleButton unpurchased;
     @FXML private ToggleButton gather;

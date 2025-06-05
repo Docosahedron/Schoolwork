@@ -15,16 +15,4 @@ public class UserView extends Application{
         stage.setScene(scene);
         stage.show();
     }
-    public static void close() {
-        if (userStage != null) {
-            userStage.close();
-        }
-    }
-    public static void open(){
-        try {
-            new UserView().start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

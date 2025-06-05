@@ -12,4 +12,7 @@ module org.demo {
     exports front.Views;
     exports front.Controller;
     opens front.Controller to javafx.fxml;
+
+    opens front to javafx.fxml, javafx.graphics;
+    exports front;
 }

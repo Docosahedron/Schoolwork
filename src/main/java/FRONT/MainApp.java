@@ -3,6 +3,9 @@ package FRONT;
 import FRONT.Controller.LoginController;
 import FRONT.Controller.registerController;
 import FRONT.Controller.userController;
+import BACK.Entity.*;
+import FRONT.Controller.gameController;
+import FRONT.View.UserView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +20,7 @@ public class MainApp extends Application {
     private Stage loginStage;
     private Stage userStage;
     private Stage registerStage;
+    private Stage gamestage;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -59,7 +63,12 @@ public class MainApp extends Application {
             registerStage.close();
         }
     }
-    public void goToUserStage() throws IOException {
+    public void exgame() throws IOException {
+        if (gamestage != null){
+            gamestage.close();
+        }
+    }
+    public void goToUserStage(User user) throws IOException {
         FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/views/user.fxml"));
         Parent root = userLoader.load();
 
@@ -70,7 +79,7 @@ public class MainApp extends Application {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/user.css")).toExternalForm());
 
         userStage = new Stage();
-        userStage.setTitle("用户界面");
+        userStage.setTitle(user.getName()+"用户界面");
         userStage.setScene(scene);
         userStage.show();
 
@@ -93,7 +102,28 @@ public class MainApp extends Application {
 
         loginStage.close();
     }
+    public void goToGameStage(User user , Game game) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserView.class.getResource("/views/Game.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // 获取控制器并注入 user/game 数据（可选）
+        gameController controller = fxmlLoader.getController();
+        controller.setUser(user);
+        controller.setGame(game);
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/Game.css")).toExternalForm());
+
+        if (gamestage == null) {
+            gamestage = new Stage();
+        }
+        gamestage.setResizable(false);
+        gamestage.setTitle(game.getName());
+        gamestage.setScene(scene);
+        gamestage.show();
+    }
     public static void main(String[] args) {
         launch(args);
     }
+
 }

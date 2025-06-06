@@ -21,12 +21,12 @@ public class LoginView extends Application {
         Loginstage = stage;
 
         // 加载FXML文件
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("views/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("/views/login.fxml"));
         Parent root = fxmlLoader.load();
 
         // 创建一个透明背景的场景
         Scene scene = new Scene(root, 700, 420);
-        scene.getStylesheets().add(LoginView.class.getResource("views/Login.css").toExternalForm());
+        scene.getStylesheets().add(LoginView.class.getResource("/views/Login.css").toExternalForm());
         scene.setFill(Color.TRANSPARENT); // 设置透明背景
 
         // 设置窗口为无边框模式

@@ -10,7 +10,7 @@ public class UserView extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         userStage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(UserView.class.getResource("views/user.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserView.class.getResource("/views/user.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 990, 500);
         stage.setScene(scene);
         stage.show();

@@ -20,7 +20,7 @@ public class GameSerImpl implements GameSer {
 
     //通过游戏名查询游戏所有信息
     public Game getGameInfo(String name) {
-        return gd.getByName(name);
+        return gd.getInfoByName(name);
     }
     //获取检索后所有游戏
     public List<Game> getGameBySearch(String type, double min, double max) {

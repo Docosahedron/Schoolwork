@@ -8,5 +8,6 @@ public interface GameDao {
     boolean delete(int id);
     boolean update(int id);
     boolean query(int id);
+    Game getInfoByName(String name);
     List<Game> getAll();
 }

@@ -19,7 +19,7 @@ public class UserSerImpl implements UserSer {
             return true;
         }
         else if(ud.query(enrollee.getName(),enrollee.getPassword())) {
-            new UserFrame(ud.getInfo(enrollee.getName()));
+            new UserFrame(ud.getInfoByName(enrollee.getName()));
             return true;
         }
         else {
@@ -85,7 +85,7 @@ public class UserSerImpl implements UserSer {
     }
     //获取用户信息
     public User getUserInfo(String name){
-        return ud.getInfo(name);
+        return ud.getInfoByName(name);
     }
 
     //获取用户的香蕉信息

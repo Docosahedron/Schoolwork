@@ -77,7 +77,7 @@ public class GameDaoImpl implements GameDao {
         return games;
     }
     //从名字检索游戏
-    public Game getByName(String name) {
+    public Game getInfoByName(String name) {
         Game game = null;
         String sql = "SELECT * FROM games WHERE name = ? ";
         try (Connection conn = DBUtils.getConnection();

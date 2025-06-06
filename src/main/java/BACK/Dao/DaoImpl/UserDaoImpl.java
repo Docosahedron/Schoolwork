@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     //获取某个用户的所有信息
-    public User getInfo(String name) {
+    public User getInfoByName(String name) {
         String sql = "SELECT * FROM users WHERE name = ?";
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

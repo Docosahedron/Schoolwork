@@ -7,5 +7,6 @@ public interface UserDao {
     void delete(User user);
     void update(User user);
     boolean query(String username,String password);
+    User getInfoByName(String username);
     List<User> getAllInfo();
 }

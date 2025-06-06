@@ -10,7 +10,8 @@ import FRONT.GUI.*;
 public class UserSerImpl implements UserSer {
     UserDaoImpl ud = new UserDaoImpl();
     BananaDaoImpl bd = new BananaDaoImpl();
-    WarehouseDaoImpl wd = new WarehouseDaoImpl();//用户登录
+    WarehouseDaoImpl wd = new WarehouseDaoImpl();
+    //用户登录
     @Override
     public boolean login(User enrollee) {
         if (enrollee.getName().equals( "ad") && enrollee.getPassword().equals( "ad" )) {

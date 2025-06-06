@@ -34,7 +34,7 @@ public class WishlistSerImpl {
     }
 
     //删除心愿单所有游戏
-    public void removeWholeWishlist(User u) {
+    public void removeWishlist(User u) {
         boolean flag = wd.removeAll(u.getName());
         if (flag) JOptionPane.showMessageDialog(null, "已成功清空心愿单!！");
         else JOptionPane.showMessageDialog(null, "移除失败！");

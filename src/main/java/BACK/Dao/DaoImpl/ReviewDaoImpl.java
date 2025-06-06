@@ -19,7 +19,7 @@ public class ReviewDaoImpl implements ReviewDao {
     }
     //获取某个游戏的评论
 
-    public List<Review> getByGameName(String gameName) {
+    public List<Review> getByGame(String gameName) {
         List<Review> reviews = new ArrayList<>();
         String sql = "SELECT * FROM reviews WHERE gameName = ? order by time desc"; // 精确查询
         try (Connection conn = DBUtils.getConnection();

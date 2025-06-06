@@ -81,7 +81,7 @@ public class WishlistFrame extends JFrame {
                 if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
                     int row = gameTable.rowAtPoint(e.getPoint());
                     if (row >= 0) {
-                        Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 1));
+                        Game curGame = gs.getGameInfo((String) tableModel.getValueAt(row, 1));
                         new GameDetailsFrame(curUser,curGame);
                     }
                 }
@@ -112,7 +112,7 @@ public class WishlistFrame extends JFrame {
         removeOneItem.addActionListener(e -> {
             int row = gameTable.getSelectedRow();
             if (row >= 0) {
-                Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 1));
+                Game curGame = gs.getGameInfo((String) tableModel.getValueAt(row, 1));
                 int confirm = JOptionPane.showConfirmDialog(
                         WishlistFrame.this,
                         "确定要将 [" + curGame.getName() + "] 从心愿单中移除吗？",
@@ -132,7 +132,7 @@ public class WishlistFrame extends JFrame {
                     "确认清空",
                     JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                ws.removeWholeWishlist(curUser);
+                ws.removeWishlist(curUser);
                 refresh();
             }
         });

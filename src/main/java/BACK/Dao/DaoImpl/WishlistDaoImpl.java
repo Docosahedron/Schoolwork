@@ -27,10 +27,10 @@ public class WishlistDaoImpl implements WDao {
     public boolean queryGameByUser(String username, String gameName) {
         String sql = "select count(*)  from wishlist  where username = ? and gameName = ?";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, gameName);
-            ResultSet rs = pstmt.executeQuery();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, gameName);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1); // ✅ 现在可以取数据了
                 return count >0;
@@ -46,10 +46,10 @@ public class WishlistDaoImpl implements WDao {
     public boolean removeOne(String username, String gameName) {
             String sql = " delete from wishlist  where username = ? and gameName = ? ";
             try (Connection conn = DBUtils.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, username);
-                pstmt.setString(2, gameName);
-                return pstmt.executeUpdate() > 0;
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ps.setString(2, gameName);
+                return ps.executeUpdate() > 0;
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("数据库异常,移除心愿单失败");

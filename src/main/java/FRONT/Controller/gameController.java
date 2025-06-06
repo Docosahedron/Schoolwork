@@ -103,7 +103,7 @@ public class gameController {
     }
     private void loadReviews() {
 
-        List<Review> reviews = reviewDao.getByGameName(game.getName());
+        List<Review> reviews = reviewDao.getByGame(game.getName());
         ObservableList<Review> observableReviews = FXCollections.observableArrayList(reviews);
         reviewtable.setItems(observableReviews);
     }

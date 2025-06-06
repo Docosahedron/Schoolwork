@@ -132,26 +132,4 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
     }
-
-//    //通过用户名获取用户信息（不需要密码）
-//    public User getUserByName(String username) {
-//        String sql = "SELECT * FROM users WHERE name = ?";
-//        try (Connection conn = DBUtils.getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setString(1, username);
-//            try (ResultSet rs = pstmt.executeQuery()) {
-//                if (rs.next()) {
-//                    return new User(rs.getInt("id"),
-//                            rs.getString("name"),
-//                            rs.getString("password"),
-//                            rs.getDouble("balance"),
-//                            rs.getInt("package"));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            System.out.println("数据库异常,获取用户信息失败");
-//        }
-//        return null;
-//    }
 }

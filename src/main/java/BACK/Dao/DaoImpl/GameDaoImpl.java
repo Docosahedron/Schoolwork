@@ -10,17 +10,17 @@ public class GameDaoImpl implements GameDao {
     public boolean add(Game game){
         String sql = "INSERT INTO games (name,type,score,price) VALUES (?,?, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setString(1, game.getName());
-            pstmt.setString(2, game.getType());
-            pstmt.setInt(3,game.getScore());
-            pstmt.setDouble(4, game.getPrice());
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, game.getName());
+            ps.setString(2, game.getType());
+            ps.setInt(3,game.getScore());
+            ps.setDouble(4, game.getPrice());
             // 执行插入，返回受影响的行数
-            int affectedRows = pstmt.executeUpdate();
+            int affectedRows = ps.executeUpdate();
             // 如果只需要知道是否成功
             return affectedRows > 0;
         /* 如果需要获取生成的ID
-        try (ResultSet rs = pstmt.getGeneratedKeys()) {
+        try (ResultSet rs = ps.getGeneratedKeys()) {
             if (rs.next()) {
                 int id = rs.getInt(1); // 获取自增ID
                 return id > 0;

@@ -76,7 +76,7 @@ public class MainApp extends Application {
         controller.setMainApp(this);
 
         Scene scene = new Scene(root, 990, 500);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/user.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/User.css")).toExternalForm());
 
         userStage = new Stage();
         userStage.setTitle(user.getName()+"用户界面");
@@ -93,7 +93,7 @@ public class MainApp extends Application {
         controller.setMainApp(this);
 
         Scene scene = new Scene(root, 600, 505);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/register.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/Register.css")).toExternalForm());
 
         registerStage = new Stage();
         registerStage.setResizable(false);

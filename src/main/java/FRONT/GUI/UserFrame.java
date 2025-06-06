@@ -173,7 +173,7 @@ public class UserFrame extends JFrame {
                 if (evt.getClickCount() == 2) { // 双击情况下才会跳转
                     int row = gameTable.rowAtPoint(evt.getPoint());
                     if (row >= 0) {
-                        Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 1));
+                        Game curGame = gs.getGameInfo((String) tableModel.getValueAt(row, 1));
                         new GameDetailsFrame(curUser,curGame);
                     }
                 }

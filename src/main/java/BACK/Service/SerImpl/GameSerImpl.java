@@ -17,7 +17,6 @@ public class GameSerImpl implements GameSer {
             return false;
         }
     }
-
     //通过游戏名查询游戏所有信息
     public Game getWholeInfo(String name) {
         return gd.getByName(name);
@@ -27,6 +26,9 @@ public class GameSerImpl implements GameSer {
         return gd.getBySearch(type, min, max);
     }
 
+    public List<Game> getAllGame() {
+        return gd.getAll();
+    }
     //获取精选游戏
     public List<Game> getGameByScore(int score){
         return gd.getByScore(score);

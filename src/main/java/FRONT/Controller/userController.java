@@ -1,8 +1,7 @@
 package FRONT.Controller;
 
-import BACK.Dao.DaoImpl.GameDaoImpl;
-import BACK.Dao.GameDao;
 import BACK.Entity.*;
+import BACK.Service.SerImpl.GameSerImpl;
 import FRONT.MainApp;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -64,7 +63,7 @@ public class userController {
     @FXML private MenuItem walllet;
     @FXML private MenuItem wishList;
 
-    private final GameDao gameDao = new GameDaoImpl();
+    GameSerImpl gd = new GameSerImpl();
 
     @FXML
     public void initialize() {
@@ -149,7 +148,7 @@ public class userController {
     }
 
     private void loadGameData() {
-        List<Game> games = gameDao.getAll();
+        List<Game> games = gd.getAllGame();
         ObservableList<Game> observableGames = FXCollections.observableArrayList(games);
         shoptable.setItems(observableGames);
     }

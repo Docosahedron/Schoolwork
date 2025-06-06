@@ -1,9 +1,7 @@
 package FRONT.Controller;
 
-
-import BACK.Dao.DaoImpl.ReviewDaoImpl;
-import BACK.Dao.ReviewDao;
 import BACK.Entity.*;
+import BACK.Service.SerImpl.ReviewSerImpl;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,7 +43,7 @@ public class gameController {
     @FXML
     private Button wishlistButton;
 
-    private final ReviewDao reviewDao = new ReviewDaoImpl();
+    ReviewSerImpl rw = new ReviewSerImpl();
 
     private Game game;
     public void setGame(Game game) {
@@ -103,7 +101,7 @@ public class gameController {
     }
     private void loadReviews() {
 
-        List<Review> reviews = reviewDao.getByGameName(game.getName());
+        List<Review> reviews = rw.getReviews(game);
         ObservableList<Review> observableReviews = FXCollections.observableArrayList(reviews);
         reviewtable.setItems(observableReviews);
     }

@@ -3,10 +3,11 @@ package BACK.Entity;
 public class Banana {
     private String username;
     private int N;
-    private int R;
-    private int SR;
-    private int SSR;
-    private int UR;
+    private int R=0;
+    private int SR=0;
+    private int SSR=0;
+    private int UR=0;
+    private String type;private int num;
     public Banana(String username, int N, int R, int SR, int SSR, int UR) {
         this.username = username;
         this.N = N;
@@ -14,6 +15,12 @@ public class Banana {
         this.SR = SR;
         this.SSR = SSR;
         this.UR = UR;
+    }
+    //卖香蕉时临时构造类
+    public Banana(String username,String type,int num){
+        this.username = username;
+        this.type = type;
+        this.num = num;
     }
 
     public String getUsername() {
@@ -62,5 +69,13 @@ public class Banana {
 
     public void setUR(int UR) {
         this.UR = UR;
+    }
+
+    public String getType(){
+        return this.type;
+    }
+
+    public int getNum(){
+        return num;
     }
 }

@@ -90,7 +90,7 @@ public class GameDetailsFrame extends JFrame {
 
         // 按钮事件监听保持不变
         addWishlist.addActionListener(e->{
-            if(flag1) flag1=!ws.removeWishlist(this.curUser,this.curGame);
+            if(flag1) flag1=!ws.removeSelected(this.curUser,this.curGame);
             else flag1=ws.addWishlist(this.curUser,this.curGame);
             if (flag1) addWishlist.setText("移出心愿单");
             else addWishlist.setText("加入心愿单");

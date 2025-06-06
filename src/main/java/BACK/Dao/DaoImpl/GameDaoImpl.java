@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 public class GameDaoImpl implements GameDao {
+    //添加游戏
     public boolean add(Game game){
         String sql = "INSERT INTO games (name,type,score,price) VALUES (?,?, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
@@ -31,14 +32,17 @@ public class GameDaoImpl implements GameDao {
             return false;
         }
     }
+    //删除游戏
     public boolean delete(int id) {
         return true;
     }
+    //更新游戏信息
     public boolean update(int id) {
         return true;
     }
-    public List<Game> query(int id) {
-        return List.of();
+
+    public boolean query(int id) {
+        return false;
     }
 
     //检索游戏
@@ -105,14 +109,14 @@ public class GameDaoImpl implements GameDao {
             pstmt.setInt(1, score);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                     Game game = new Game(
+                    Game game = new Game(
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
                             rs.getDouble("price"),
                             rs.getString("overview")
                     );
-                     games.add(game);
+                    games.add(game);
                 }
             }
         } catch (SQLException e) {

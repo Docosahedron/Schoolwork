@@ -11,7 +11,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class LoginView extends Application {
-    private static Stage Registerstage;
     private static Stage Loginstage;
     private double xOffset = 0;
     private double yOffset = 0;

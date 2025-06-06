@@ -6,7 +6,6 @@ import java.sql.*;
 import java.util.*;
 
 public class GameDaoImpl implements GameDao {
-    //添加游戏
     public boolean add(Game game){
         String sql = "INSERT INTO games (name,type,score,price) VALUES (?,?, ?, ?)";
         try (Connection conn = DBUtils.getConnection();
@@ -14,7 +13,7 @@ public class GameDaoImpl implements GameDao {
             pstmt.setString(1, game.getName());
             pstmt.setString(2, game.getType());
             pstmt.setInt(3,game.getScore());
-            pstmt.setBigDecimal(4, game.getPrice());
+            pstmt.setDouble(4, game.getPrice());
             // 执行插入，返回受影响的行数
             int affectedRows = pstmt.executeUpdate();
             // 如果只需要知道是否成功
@@ -32,17 +31,14 @@ public class GameDaoImpl implements GameDao {
             return false;
         }
     }
-    //删除游戏
     public boolean delete(int id) {
         return true;
     }
-    //更新游戏信息
     public boolean update(int id) {
         return true;
     }
-
-    public boolean query(int id) {
-        return false;
+    public List<Game> query(int id) {
+        return List.of();
     }
 
     //检索游戏
@@ -64,7 +60,7 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getBigDecimal("price"),
+                            rs.getDouble("price"),
                             rs.getString("overview")
                     );
                     games.add(game);
@@ -89,7 +85,7 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getBigDecimal("price"),
+                            rs.getDouble("price"),
                             rs.getString("overview")
                     );
                 }
@@ -113,7 +109,7 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getBigDecimal("price"),
+                            rs.getDouble("price"),
                             rs.getString("overview")
                     );
                      games.add(game);
@@ -138,7 +134,7 @@ public class GameDaoImpl implements GameDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getBigDecimal("price"),
+                            rs.getDouble("price"),
                             rs.getString("overview")
                     );
                     games.add(game);
@@ -164,7 +160,7 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("name"),
                         rs.getString("type"),
                         rs.getInt("score"),
-                        rs.getBigDecimal("price"),
+                        rs.getDouble("price"),
                         rs.getString("overview")
                 );
                 games.add(game);

@@ -1,19 +1,22 @@
 package FRONT.GUI;
 
 import BACK.Entity.Banana;
+import BACK.Entity.BananaTemp;
 import BACK.Entity.User;
+import BACK.Dao.DaoImpl.BananaDaoImpl;
+import BACK.Dao.DaoImpl.UserDaoImpl;
 import BACK.Service.SerImpl.UserSerImpl;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class MarketFrame extends JFrame{
     private final User curUser;
     private Banana banana;
     private final UserSerImpl us = new UserSerImpl();
+    private final BananaDaoImpl bananaDao = new BananaDaoImpl();
+    private final UserDaoImpl userDao = new UserDaoImpl();
     
     private JPanel mainPanel;
     private JPanel bananaInfoPanel;
@@ -72,7 +75,7 @@ public class MarketFrame extends JFrame{
         JPanel userInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
         userInfoPanel.setBorder(new TitledBorder("用户信息"));
         
-        balanceLabel = new JLabel("余额: ¥" + curUser.getBalance().setScale(2,RoundingMode.FLOOR));
+        balanceLabel = new JLabel("余额: ¥" + curUser.getBalance());
         balanceLabel.setFont(new Font("宋体", Font.BOLD, 14));
         
         packageCountLabel = new JLabel("香蕉包: " + curUser.getPackages() + "个");
@@ -240,7 +243,7 @@ public class MarketFrame extends JFrame{
         JComboBox<String> typeComboBox = new JComboBox<>(bananaTypes);
         
         JLabel amountLabel = new JLabel("出售数量:");
-        JSpinner numSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 9999, 1));
+        JSpinner amountSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 9999, 1));
         
         JLabel totalLabel = new JLabel("预计获得:");
         JLabel totalValueLabel = new JLabel("¥1.0");
@@ -248,34 +251,35 @@ public class MarketFrame extends JFrame{
         selectionPanel.add(typeLabel);
         selectionPanel.add(typeComboBox);
         selectionPanel.add(amountLabel);
-        selectionPanel.add(numSpinner);
+        selectionPanel.add(amountSpinner);
         selectionPanel.add(totalLabel);
         selectionPanel.add(totalValueLabel);
         
         // 更新预计获得金额
         typeComboBox.addActionListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
-            int num = (int) numSpinner.getValue();
-            BigDecimal price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + price.multiply(BigDecimal.valueOf(num)).setScale(2, RoundingMode.FLOOR));
+            String selectedType = (String) typeComboBox.getSelectedItem();
+            int amount = (int) amountSpinner.getValue();
+            double price = us.getBananaPrice(selectedType);
+            totalValueLabel.setText("¥" + (price * amount));
         });
         
-        numSpinner.addChangeListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
-            int num = (int) numSpinner.getValue();
-            BigDecimal price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + price.multiply(BigDecimal.valueOf(num)).setScale(2, RoundingMode.FLOOR));
+        amountSpinner.addChangeListener(e -> {
+            String selectedType = (String) typeComboBox.getSelectedItem();
+            int amount = (int) amountSpinner.getValue();
+            double price = us.getBananaPrice(selectedType);
+            totalValueLabel.setText("¥" + (price * amount));
         });
         
         // 出售按钮
         JButton sellButton = new JButton("出售");
         sellButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         sellButton.addActionListener(e -> {
-            String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
-            //获取数量
-            int num = (int) numSpinner.getValue();
-            Banana temp= new Banana(curUser.getName(),selectedType,num);
-            if (us.sellBanana(curUser, temp)) {
+            String selectedType = (String) typeComboBox.getSelectedItem();
+            int amount = (int) amountSpinner.getValue();
+            double price = us.getBananaPrice(selectedType);
+            
+            BananaTemp bananaTemp = new BananaTemp(curUser.getName(), selectedType, price, amount);
+            if (us.sellBanana(curUser, bananaTemp)) {
                 refreshData();
             }
         });
@@ -297,7 +301,7 @@ public class MarketFrame extends JFrame{
     private void refreshData() {
         try {
             // 更新用户数据 - 使用仅需用户名的方法
-            User updatedUser = us.getUserInfo(curUser.getName());
+            User updatedUser = userDao.getUserByName(curUser.getName());
             if (updatedUser != null) {
                 curUser.setBalance(updatedUser.getBalance());
                 curUser.setPackages(updatedUser.getPackages());
@@ -311,11 +315,11 @@ public class MarketFrame extends JFrame{
             }
             
             // 更新界面显示
-            balanceLabel.setText("余额: ¥" + curUser.getBalance().setScale(2,RoundingMode.FLOOR));
+            balanceLabel.setText("余额: ¥" + curUser.getBalance());
             packageCountLabel.setText("香蕉包: " + curUser.getPackages() + "个");
             
             // 获取香蕉数据
-            banana = us.getBanana(curUser);
+            banana = bananaDao.getOne(curUser.getName());
             if (banana != null) {
                 bananaCountLabels[0].setText("N: " + banana.getN());
                 bananaCountLabels[1].setText("R: " + banana.getR());
@@ -376,7 +380,7 @@ public class MarketFrame extends JFrame{
     
     public static void main(String[] args) {
         // 测试用
-        User test = new User(1, "测试用户", "password", BigDecimal.ZERO, 10);
+        User test = new User(1, "测试用户", "password", 1000, 10);
         new MarketFrame(test);
     }
 } 

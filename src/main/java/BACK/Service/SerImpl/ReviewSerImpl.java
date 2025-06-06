@@ -8,6 +8,6 @@ public class ReviewSerImpl {
     ReviewDaoImpl rd = new ReviewDaoImpl();
     //通过游戏名字获取评论
     public List<Review> getReviews(Game game) {
-        return rd.getByGameName(game.getName());
+        return rd.getByName(game.getName());
     }
 }

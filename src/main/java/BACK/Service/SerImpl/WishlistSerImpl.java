@@ -12,11 +12,6 @@ public class WishlistSerImpl {
         return wd.queryGameByUser(user.getName(), game.getName());
     }
 
-    //查询心愿单所有游戏
-    public List<Game> getAllWishlistGame(User user) {
-        return wd.getAllGames(user.getName());
-    }
-
     //游戏加入心愿单
     public boolean addWishlist(User u, Game g) {
         boolean flag= wd.add(u.getName(), g.getName());
@@ -24,9 +19,13 @@ public class WishlistSerImpl {
         else JOptionPane.showMessageDialog(null,"添加失败!");
         return flag;
     }
+    //查询心愿单所有游戏
+    public List<Game> getAllWishlistGame(User u) {
+        return wd.getAllGames(u.getName());
+    }
 
     //删除心愿单选中游戏
-    public boolean removeSelected(User u, Game g) {
+    public boolean removeWishlist(User u, Game g) {
         boolean flag = wd.removeOne(u.getName(), g.getName());
         if(flag) JOptionPane.showMessageDialog(null,"移除成功!");
         else JOptionPane.showMessageDialog(null,"移除失败!");
@@ -34,7 +33,7 @@ public class WishlistSerImpl {
     }
 
     //删除心愿单所有游戏
-    public void removeWholeWishlist(User u) {
+    public void removeWishlistAll(User u) {
         boolean flag = wd.removeAll(u.getName());
         if (flag) JOptionPane.showMessageDialog(null, "已成功清空心愿单!！");
         else JOptionPane.showMessageDialog(null, "移除失败！");

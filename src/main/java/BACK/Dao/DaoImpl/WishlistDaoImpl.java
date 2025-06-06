@@ -86,7 +86,7 @@ public class WishlistDaoImpl implements WDao {
                             rs.getString("name"),
                             rs.getString("type"),
                             rs.getInt("score"),
-                            rs.getBigDecimal("price"),
+                            rs.getDouble("price"),
                             rs.getString("overview")
                     );
                     games.add(game);

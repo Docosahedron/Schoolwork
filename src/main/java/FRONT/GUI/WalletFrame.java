@@ -5,7 +5,6 @@ import BACK.Service.SerImpl.UserSerImpl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.math.BigDecimal;
 import java.net.URL;
 
 
@@ -120,16 +119,16 @@ public class WalletFrame extends JFrame {
         diy.setBounds(660, 500,100, 25);
         this.getContentPane().add(diy);
         c50.addActionListener(e->{
-            if (us.recharge(curUser, BigDecimal.valueOf(50))) dispose();
+            if (us.recharge(curUser,50)) dispose();
         });
         c100.addActionListener(e->{
-            if (us.recharge(curUser, BigDecimal.valueOf(100))) dispose();
+            if (us.recharge(curUser,100)) dispose();
         });
         c200.addActionListener(e->{
-            if (us.recharge(curUser, BigDecimal.valueOf(200))) dispose();
+            if (us.recharge(curUser,200)) dispose();
         });
         c500.addActionListener(e->{
-            if (us.recharge(curUser, BigDecimal.valueOf(500))) dispose();
+            if (us.recharge(curUser,500)) dispose();
         });
         diy.addActionListener(e->{
             new PayFrame();

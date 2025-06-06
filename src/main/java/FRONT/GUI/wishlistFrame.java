@@ -120,7 +120,7 @@ public class wishlistFrame extends JFrame {
                         JOptionPane.YES_NO_OPTION);
 
                 if (confirm == JOptionPane.YES_OPTION) {
-                    ws.removeSelected(curUser, curGame);
+                    ws.removeWishlist(curUser, curGame);
                     refresh();
                 }
             }
@@ -132,7 +132,7 @@ public class wishlistFrame extends JFrame {
                     "确认清空",
                     JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                ws.removeWholeWishlist(curUser);
+                ws.removeWishlistAll(curUser);
                 refresh();
             }
         });

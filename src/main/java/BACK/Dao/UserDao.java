@@ -6,7 +6,6 @@ public interface UserDao {
     boolean add(User user);
     void delete(User user);
     void update(User user);
-    boolean  query(String username,String password);
-    User getInfo(String username);
-    List<User> getAllInfo();
+    boolean  query(User user);
+    List<User> getAll();
 }

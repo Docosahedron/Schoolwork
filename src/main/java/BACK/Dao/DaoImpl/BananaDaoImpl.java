@@ -7,20 +7,19 @@ import java.sql.*;
 import java.util.*;
 
 public class BananaDaoImpl {
-    //注册时初始化表
     public boolean init(String name){
         String sql = "INSERT INTO bananas (username,N,R,SR,SSR,UR)  values (?,0,0,0,0,0) ";
         try (Connection conn = DBUtils.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, name);
-            return ps.executeUpdate() > 0;
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("数据库异常,初始化香蕉失败");
             return false;
         }
     }
-    //增加某种类型的香蕉数量
+    //某种类型的香蕉数量增加
     public boolean addNum(String username, List<String> list) {
         //哈希统计,提高性能
         HashMap<String,Integer> type = new HashMap<>();
@@ -68,7 +67,7 @@ public class BananaDaoImpl {
     }
     
     // 获取用户的香蕉数量
-    public Banana getNum(String username) {
+    public Banana getOne(String username) {
         Banana b = null;
         String sql = " SELECT * FROM bananas WHERE username = ? ";
         try (Connection conn = DBUtils.getConnection();

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,11 +15,14 @@ public class RegisterView extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-
-    public static void showAlert(String 注册失败, String 密码不一致) {
-
+    public static void showAlert(String title, String message) {
+        // JavaFX 警告框实现逻辑，例如：
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
     @Override
     public void start(Stage stage) throws Exception {
         Registerstage = stage;

@@ -1,7 +1,5 @@
 package BACK.Service.SerImpl;
 import javax.swing.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 
 import BACK.Dao.DaoImpl.*;
@@ -14,13 +12,13 @@ public class UserSerImpl implements UserSer {
     BananaDaoImpl bd = new BananaDaoImpl();
     WarehouseDaoImpl wd = new WarehouseDaoImpl();//用户登录
     @Override
-    public boolean login(User enrollee) {
-        if (enrollee.getName().equals( "ad") && enrollee.getPassword().equals( "ad" )) {
+    public boolean login(User temp) {
+        if (temp.getName().equals( "ad") && temp.getPassword().equals( "ad" )) {
             new AdminFrame();
             return true;
         }
-        else if(ud.query(enrollee.getName(),enrollee.getPassword())) {
-            new UserFrame(ud.getInfo(enrollee.getName()));
+        else if(ud.query(temp)) {
+            new UserFrame(ud.getOne(temp.getName()));
             return true;
         }
         else {
@@ -49,14 +47,14 @@ public class UserSerImpl implements UserSer {
     public boolean buy(User curUser, Game curGame){
         int flag= JOptionPane.showConfirmDialog(null,"是否确认购买?");
         if(flag==JOptionPane.YES_OPTION){
-            if(ud.updateBalance(curUser.getName(),curGame.getPrice().negate())){
-                curUser.setBalance(curUser.getBalance().subtract(curGame.getPrice()));
+            if(ud.updateBalance(curUser,-curGame.getPrice())){
+                curUser.setBalance(curUser.getBalance()-curGame.getPrice());
                 wd.add(curUser.getName(), curGame.getName());
                 
                 // 购买奖励机制：每消费1元有10%获得一个香蕉包
                 int reward = 0;
-                int times = curGame.getPrice().setScale(0, RoundingMode.FLOOR).intValue();
-                while(times-->0) if (Math.random()<0.1) reward++;
+                for(int i=0;i<curGame.getPrice();i++) if (Math.random()<0.1) reward++;
+
                 if (reward > 0) {
                     ud.updatePackage(curUser.getName(), reward);
                     curUser.setPackages(curUser.getPackages() + reward);
@@ -73,9 +71,9 @@ public class UserSerImpl implements UserSer {
     }
 
     //用户充值
-    public boolean recharge(User curUser,BigDecimal price){
-        if(ud.updateBalance(curUser.getName(),price)){
-            curUser.setBalance(curUser.getBalance().add(price));
+    public boolean recharge(User curUser,double price){
+        if(ud.updateBalance(curUser,price)){
+            curUser.setBalance(curUser.getBalance()+price);
             JOptionPane.showMessageDialog(null,"充值成功!");
             new WalletFrame(curUser);
             return true;
@@ -85,13 +83,13 @@ public class UserSerImpl implements UserSer {
         }
     }
     //获取用户信息
-    public User getUserInfo(String name){
-        return ud.getInfo(name);
+    public User getUser(String name){
+        return ud.getOne(name);
     }
 
     //获取用户的香蕉信息
     public Banana getBanana(User curUser){
-        return bd.getNum(curUser.getName());
+        return bd.getOne(curUser.getName());
     }
 
     //开包
@@ -114,35 +112,38 @@ public class UserSerImpl implements UserSer {
             else if (n <= 995) {list.add("SSR");countSSR++;}
             else {list.add("UR");countUR++;}
         }
+        
         if (countN > 0) result.append("N: ").append(countN).append("个\n");
         if (countR > 0) result.append("R: ").append(countR).append("个\n");
         if (countSR > 0) result.append("SR: ").append(countSR).append("个\n");
         if (countSSR > 0) result.append("SSR: ").append(countSSR).append("个\n");
         if (countUR > 0) result.append("UR: ").append(countUR).append("个\n");
+        
         if (bd.addNum(curUser.getName(), list)) {
             JOptionPane.showMessageDialog(null, result.toString());
             return true;
         }
         return false;
     }
-
+    
     // 购买香蕉包
     public boolean buyPackage(User curUser, int amount) {
-        BigDecimal totalPrice = BigDecimal.TWO.multiply(BigDecimal.valueOf(amount)); // 2元一个包
-        if (curUser.getBalance().compareTo(totalPrice)<0) {
+        double totalPrice = amount * 2.0; // 2元一个包
+        if (curUser.getBalance() < totalPrice) {
             JOptionPane.showMessageDialog(null, "余额不足，无法购买!");
             return false;
         }
-        if (ud.updateBalance(curUser.getName(), totalPrice.negate())) {
-            curUser.setBalance(curUser.getBalance().subtract(totalPrice));
+        
+        if (ud.updateBalance(curUser, -totalPrice)) {
+            curUser.setBalance(curUser.getBalance() - totalPrice);
             // 更新香蕉包数量
             if (ud.updatePackage(curUser.getName(), amount)) {
                 curUser.setPackages(curUser.getPackages() + amount);
                 JOptionPane.showMessageDialog(null, "成功购买 " + amount + " 个香蕉包!");
                 return true;
             } else {
-                ud.updateBalance(curUser.getName(), totalPrice);
-                curUser.setBalance(curUser.getBalance().add(totalPrice));
+                ud.updateBalance(curUser, totalPrice);
+                curUser.setBalance(curUser.getBalance() + totalPrice);
                 JOptionPane.showMessageDialog(null, "购买失败: 系统无法更新香蕉包数量!");
                 return false;
             }
@@ -151,16 +152,16 @@ public class UserSerImpl implements UserSer {
             return false;
         }
     }
-
     // 出售香蕉
-    public boolean sellBanana(User curUser,Banana banana) {
-        if(!bd.removeNum(banana.getUsername(), banana.getType(), banana.getNum())){
+    public boolean sellBanana(User curUser, BananaTemp bt) {
+        if(!bd.removeNum(curUser.getName(), bt.getBananaType(), bt.getNum())){
             JOptionPane.showMessageDialog(null,"出售失败,数量不足!");
             return false;
         }
-        BigDecimal earned = BigDecimal.valueOf(banana.getNum()).multiply(getBananaPrice(banana.getType()));
-        if (ud.updateBalance(banana.getUsername(), earned)) {
-            curUser.setBalance(curUser.getBalance().add(earned));
+        
+        double earned = bt.getNum() * bt.getPrice();
+        if (ud.updateBalance(curUser, earned)) {
+            curUser.setBalance(curUser.getBalance() + earned);
             JOptionPane.showMessageDialog(null,"出售成功! 获得 " + earned + " 元");
             return true;
         }
@@ -169,16 +170,16 @@ public class UserSerImpl implements UserSer {
     }
     
     // 获取香蕉价格
-    public BigDecimal getBananaPrice(String type) {
-        Random r  =new Random();
-        BigDecimal change= BigDecimal.valueOf(r.nextInt(800, 1200)).multiply(BigDecimal.valueOf(0.001));
+    public double getBananaPrice(String type) {
+        Random r = new Random();
+        double dev = r.nextInt(900,1100)*0.001;
         return switch (type) {
-            case "N" -> BigDecimal.valueOf(0.1).multiply(change).setScale(2,RoundingMode.FLOOR);
-            case "R" -> BigDecimal.valueOf(1).multiply(change).setScale(2,RoundingMode.FLOOR);
-            case "SR" -> BigDecimal.valueOf(5).multiply(change).setScale(2,RoundingMode.FLOOR);
-            case "SSR" -> BigDecimal.valueOf(20).multiply(change).setScale(2,RoundingMode.FLOOR);
-            case "UR" -> BigDecimal.valueOf(100).multiply(change).setScale(2,RoundingMode.FLOOR);
-            default -> BigDecimal.ZERO;
+            case "N" -> 0.1*dev;
+            case "R" -> dev;
+            case "SR" -> 5.0*dev;
+            case "SSR" -> 20.0*dev;
+            case "UR" -> 100.0*dev;
+            default -> 0;
         };
     }
 }

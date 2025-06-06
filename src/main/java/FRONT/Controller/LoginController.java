@@ -24,7 +24,7 @@ public class  LoginController {
         String nameInput = usernameField.getText();
         String passwordInput = passwordField.getText();
         User u = new User(0,nameInput,passwordInput);
-        if (usi.login(u)) mainApp.goToUserStage();  // 调用主应用中的方法
+        if (usi.login(u)) mainApp.goToUserStage(u);  // 调用主应用中的方法
     }
 
     UserSerImpl usi = new UserSerImpl();

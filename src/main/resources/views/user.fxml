@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane style="-fx-background-color: #1E1E2E;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FRONT.Controller.userController">
     <!-- 顶部区域 - 深色主题 -->
@@ -50,6 +49,7 @@
             <columns>
                 <TableColumn fx:id="pictureTable" style="-fx-text-fill: #E0E0FF;" text="图片" />
                 <TableColumn fx:id="nameTable" style="-fx-text-fill: #E0E0FF;" text="名称" />
+            <TableColumn fx:id="typetable" style="-fx-text-fill: #E0E0FF;" text="类型" />
                 <TableColumn fx:id="blanceTable" style="-fx-text-fill: #E0E0FF;" text="评分" />
                 <TableColumn fx:id="priceTable" style="-fx-text-fill: #E0E0FF;" text="价格" />
             </columns>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: #1E1E2E;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FRONT.Controller.userController">
+    <!-- 顶部区域 - 深色主题 -->
+    <top>
+        <VBox spacing="8" style="-fx-padding: 10; -fx-background-color: #252540;">
+            <MenuBar style="-fx-background-color: #c3dee8;">
+                <menus>
+                    <Menu fx:id="MenuName" style="-fx-text-fill: #E0E0FF;" text="首页" />
+                </menus>
+            </MenuBar>
+            <HBox spacing="10">
+                <MenuButton fx:id="homepage" style="-fx-background-color: #cbcbfd; -fx-text-fill: #E0E0FF;" text="首页" textFill="#92e0d1">
+                    <items>
+                        <MenuItem fx:id="homeButton" style="-fx-text-fill: #1E1E2E;" text="首页" />
+                    </items>
+                </MenuButton>
+                <MenuButton fx:id="shop" style="-fx-background-color: #CBCBFDFF; -fx-text-fill: #E0E0FF;" text="商店">
+                    <items>
+                        <MenuItem fx:id="choiceness" style="-fx-text-fill: #1E1E2E;" text="精选" />
+                        <MenuItem fx:id="find" style="-fx-text-fill: #1E1E2E;" text="探索队列" />
+                        <MenuItem fx:id="wishList" style="-fx-text-fill: #1E1E2E;" text="心愿单" />
+                    </items>
+                </MenuButton>
+                <MenuButton fx:id="community" style="-fx-background-color: #CBCBFDFF; -fx-text-fill: #E0E0FF;" text="社区">
+                    <items>
+                        <MenuItem fx:id="market" style="-fx-text-fill: #1E1E2E;" text="市场" />
+                        <MenuItem fx:id="download" style="-fx-text-fill: #1E1E2E;" text="下载" />
+                    </items>
+                </MenuButton>
+                <MenuButton fx:id="account" style="-fx-background-color: #CBCBFDFF; -fx-text-fill: #E0E0FF;" text="账户">
+                    <items>
+                        <MenuItem fx:id="walllet" style="-fx-text-fill: #1E1E2E;" text="钱包" />
+                        <MenuItem fx:id="inventory" style="-fx-text-fill: #1E1E2E;" text="库存" />
+                        <MenuItem fx:id="lock" style="-fx-text-fill: #1E1E2E;" text="锁定" />
+                        <MenuItem fx:id="exsit" style="-fx-text-fill: #1E1E2E;" text="退出" />
+                    </items>
+                </MenuButton>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- 中央区域 - 深色表格 -->
+    <center>
+        <TableView fx:id="shoptable" style="-fx-base: #252540; -fx-control-inner-background: #252540; -fx-table-header-border-color: transparent; -fx-table-cell-border-color: #3A3A5A;" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="pictureTable" style="-fx-text-fill: #E0E0FF;" text="图片" />
+                <TableColumn fx:id="nameTable" style="-fx-text-fill: #E0E0FF;" text="名称" />
+            <TableColumn fx:id="typetable" style="-fx-text-fill: #E0E0FF;" text="类型" />
+                <TableColumn fx:id="blanceTable" style="-fx-text-fill: #E0E0FF;" text="评分" />
+                <TableColumn fx:id="priceTable" style="-fx-text-fill: #E0E0FF;" text="价格" />
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- 右侧区域 - 深色面板 -->
+    <right>
+        <VBox prefWidth="300" spacing="12" style="-fx-padding: 15; -fx-background-color: #252540;">
+            <Label text="依价格缩小范围" textFill="#A0A0CC">
+                <font><Font size="16.0" /></font>
+            </Label>
+            <Slider fx:id="priceRange" style="-fx-control-inner-background: #3A3A5A;" />
+            <Label text="选择标签" textFill="#A0A0CC">
+                <font><Font size="16.0" /></font>
+            </Label>
+            <ToggleButton fx:id="gather" style="-fx-background-color: #3A3A5A; -fx-text-fill: #E0E0FF;" text="并集" />
+            <TitledPane fx:id="tabbar" style="-fx-text-fill: #E0E0FF;" text="展开标签选择">
+                <content>
+                    <AnchorPane prefHeight="100" style="-fx-background-color: #2A2A45;" />
+                </content>
+            </TitledPane>
+            <ToggleButton fx:id="unpurchased" layoutX="25.0" layoutY="233.0" style="-fx-background-color: #3A3A5A; -fx-text-fill: #E0E0FF;" text="未购买" />
+            <Button fx:id="searching" maxWidth="Infinity" style="-fx-background-color: #5A5A8A; -fx-text-fill: white; -fx-font-weight: bold;" text="检索" />
+            <Button fx:id="reset" maxWidth="Infinity" style="-fx-background-color: #3A3A5A; -fx-text-fill: #E0E0FF;" text="重置" />
+        </VBox>
+    </right>
+
+    <!-- 底部区域 - 深色工具栏 -->
+    <bottom>
+        <ToolBar style="-fx-padding: 10; -fx-background-color: #252540;">
+            <Button fx:id="DownLoadGo" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="下载" />
+        </ToolBar>
+    </bottom>
+</BorderPane>

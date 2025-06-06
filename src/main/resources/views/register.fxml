@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FRONT.Controller.registerController">
+   <children>
+      <BorderPane prefHeight="480.0" prefWidth="600.0">
+         <center>
+            <Pane prefHeight="440.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="创建您的账户">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="20.0" layoutY="60.0" prefHeight="300.0" prefWidth="510.0">
+                     <children>
+                        <Text layoutY="12.0" text="请输入您的账号">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="usernameField" layoutY="30.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <Text layoutY="80.0" text="请设置您的密码">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="passwordField" layoutY="98.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <Text layoutY="148.0" text="请确定您的密码">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="passwordField_ag" layoutY="166.0" prefHeight="36.0" prefWidth="510.0" />
+
+                        <CheckBox layoutY="220.0" mnemonicParsing="false" text="我是人" fx:id="checkbox">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </Pane>
+
+                  <Button fx:id="registerButton" onAction="#handleRegister" layoutX="180.0" layoutY="370.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="180.0" text="注册" textFill="WHITE" styleClass="register-button" />
+                  <Button fx:id="exitButton" onAction="#handleBack" layoutX="440.0" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="120.0" text="我已有账号" textFill="RED" />
+               </children>
+            </Pane>
+         </center>
+         <left>
+            <Rectangle width="10" height="480" fill="#315980" stroke="BLACK" />
+         </left>
+         <right>
+            <Rectangle width="10" height="480" fill="#315980" stroke="BLACK" />
+         </right>
+         <top>
+            <Rectangle width="600" height="10" fill="#315980" stroke="BLACK" />
+         </top>
+         <bottom>
+            <Rectangle width="600" height="10" fill="#315980" stroke="BLACK" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

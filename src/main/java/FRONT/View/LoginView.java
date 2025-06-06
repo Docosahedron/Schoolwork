@@ -21,7 +21,7 @@ public class LoginView extends Application {
         Loginstage = stage;
 
         // 加载FXML文件
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("/views/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("/views/Login.fxml"));
         Parent root = fxmlLoader.load();
 
         // 创建一个透明背景的场景

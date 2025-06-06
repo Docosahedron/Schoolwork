@@ -26,7 +26,7 @@ public class RegisterView extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         Registerstage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("views/register.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginView.class.getResource("views/Register.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 832, 772);
 
         stage.setScene(scene);

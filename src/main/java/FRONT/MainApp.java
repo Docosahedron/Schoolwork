@@ -31,7 +31,7 @@ public class MainApp extends Application {
     }
 
     public void goToLoginStage() throws IOException {
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
         Parent root = loginLoader.load();
 
         LoginController controller = loginLoader.getController();
@@ -69,7 +69,7 @@ public class MainApp extends Application {
         }
     }
     public void goToUserStage(User user) throws IOException {
-        FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/views/user.fxml"));
+        FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/views/User.fxml"));
         Parent root = userLoader.load();
 
         userController controller = userLoader.getController();
@@ -86,7 +86,7 @@ public class MainApp extends Application {
         loginStage.close();
     }
     public void goToResiterStage() throws IOException {
-        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/views/register.fxml"));
+        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/views/Register.fxml"));
         Parent root = registerLoader.load();
 
         registerController controller = registerLoader.getController();

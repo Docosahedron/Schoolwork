@@ -11,14 +11,14 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class wishlistFrame extends JFrame {
+public class WishlistFrame extends JFrame {
     private final User curUser;
     GameSerImpl gs = new GameSerImpl();
     WishlistSerImpl ws = new WishlistSerImpl();
     JPanel gameShow;
     DefaultTableModel tableModel;
     
-    public wishlistFrame(User user) {
+    public WishlistFrame(User user) {
         super(user.getName()+"的心愿单");
         curUser = user;
         showWishlist();
@@ -114,7 +114,7 @@ public class wishlistFrame extends JFrame {
             if (row >= 0) {
                 Game curGame = gs.getWholeInfo((String) tableModel.getValueAt(row, 1));
                 int confirm = JOptionPane.showConfirmDialog(
-                        wishlistFrame.this,
+                        WishlistFrame.this,
                         "确定要将 [" + curGame.getName() + "] 从心愿单中移除吗？",
                         "确认移除",
                         JOptionPane.YES_NO_OPTION);
@@ -127,7 +127,7 @@ public class wishlistFrame extends JFrame {
         });
         removeAllItem.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(
-                    wishlistFrame.this,
+                    WishlistFrame.this,
                     "确定要清空您的整个心愿单吗？",
                     "确认清空",
                     JOptionPane.YES_NO_OPTION);

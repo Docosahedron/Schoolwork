@@ -80,7 +80,7 @@ public class UserFrame extends JFrame {
         });
         discovery.addActionListener(e->{});
         //打开心愿单
-        wishList.addActionListener(e-> new wishlistFrame(curUser));
+        wishList.addActionListener(e-> new WishlistFrame(curUser));
         //打开市场
         market.addActionListener(e-> new MarketFrame(curUser));
         //

@@ -171,12 +171,14 @@ public class UserSerImpl implements UserSer {
     
     // 获取香蕉价格
     public double getBananaPrice(String type) {
+        Random r = new Random();
+        double dev = r.nextInt(900,1100)*0.001;
         return switch (type) {
-            case "N" -> 0.1;
-            case "R" -> 1.0;
-            case "SR" -> 5.0;
-            case "SSR" -> 20.0;
-            case "UR" -> 100.0;
+            case "N" -> 0.1*dev;
+            case "R" -> dev;
+            case "SR" -> 5.0*dev;
+            case "SSR" -> 20.0*dev;
+            case "UR" -> 100.0*dev;
             default -> 0;
         };
     }

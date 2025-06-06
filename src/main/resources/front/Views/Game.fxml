@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" stylesheets="@Game.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.Controller.gameController">
+
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="580.0" spacing="15.0" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
+            <children>
+                <!-- 标题 -->
+                <Label text="游戏详情">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+
+                <!-- 游戏信息区域 -->
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="80.0" />
+                        <ColumnConstraints halignment="LEFT" />
+                    </columnConstraints>
+                    <children>
+                        <Label text="类型：" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label fx:id="genreLabel" text="无" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="评分：" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label fx:id="ratingLabel" text="无" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Label text="价格：" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label fx:id="priceLabel" text="￥00.00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                        <Label text="简介：" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <TextArea fx:id="descriptionArea" editable="false" prefColumnCount="30" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <!-- 评论列表 -->
+                <VBox alignment="TOP_LEFT" spacing="5.0">
+                    <children>
+                        <Label text="评论：" />
+                  <TableView fx:id="reviewtable" prefHeight="223.0" prefWidth="580.0">
+                    <columns>
+                      <TableColumn fx:id="conteenttable" prefWidth="75.0" text="评论" />
+                      <TableColumn fx:id="authortable" prefWidth="75.0" text="玩家" />
+                        <TableColumn fx:id="timetable" prefWidth="75.0" text="时间" />
+                    </columns>
+                  </TableView>
+                    </children>
+                </VBox>
+
+                <!-- 按钮区域 -->
+                <HBox alignment="CENTER" prefHeight="39.0" prefWidth="580.0" spacing="20.0">
+                    <children>
+                        <Button fx:id="wishlistButton" text="加入愿望单" />
+                        <Button fx:id="buyButton" text="购买" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

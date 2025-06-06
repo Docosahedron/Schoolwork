@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: #1E1E2E;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.Controller.userController">
+<BorderPane style="-fx-background-color: #1E1E2E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.Controller.userController">
     <!-- 顶部区域 - 深色主题 -->
     <top>
         <VBox spacing="8" style="-fx-padding: 10; -fx-background-color: #252540;">
@@ -50,6 +64,7 @@
             <columns>
                 <TableColumn fx:id="pictureTable" style="-fx-text-fill: #E0E0FF;" text="图片" />
                 <TableColumn fx:id="nameTable" style="-fx-text-fill: #E0E0FF;" text="名称" />
+            <TableColumn fx:id="typetable" style="-fx-text-fill: #E0E0FF;" text="类型" />
                 <TableColumn fx:id="blanceTable" style="-fx-text-fill: #E0E0FF;" text="评分" />
                 <TableColumn fx:id="priceTable" style="-fx-text-fill: #E0E0FF;" text="价格" />
             </columns>

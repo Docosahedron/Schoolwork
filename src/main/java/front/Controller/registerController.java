@@ -41,6 +41,7 @@ public class registerController {
         String password = passwordField.getText();
         String password_ag = passwordField_ag.getText();
         if (password.equals(password_ag)) {
+            System.out.println("注册成功");
             User u = new User(1,username,password);
             if (usi.register(u)) {
                 RegisterView.close();
@@ -49,6 +50,7 @@ public class registerController {
             }
         }
         else {
+            System.out.println("注册失败");
             showAlert("注册失败", "密码不一致");
         }
     }

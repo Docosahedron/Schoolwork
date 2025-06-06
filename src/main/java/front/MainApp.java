@@ -1,16 +1,18 @@
 package front;
 
+import back.ENTITY.Game;
+import back.ENTITY.User;
 import front.Controller.LoginController;
+import front.Controller.gameController;
 import front.Controller.registerController;
 import front.Controller.userController;
-import front.Views.LoginView;
+import front.Views.UserView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class MainApp extends Application {
     private Stage loginStage;
     private Stage userStage;
     private Stage registerStage;
+    private Stage gamestage;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -61,7 +64,12 @@ public class MainApp extends Application {
             registerStage.close();
         }
     }
-    public void goToUserStage() throws IOException {
+    public void exgame() throws IOException {
+        if (gamestage != null){
+            gamestage.close();
+        }
+    }
+    public void goToUserStage(User user) throws IOException {
         FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/front/Views/user.fxml"));
         Parent root = userLoader.load();
 
@@ -72,7 +80,7 @@ public class MainApp extends Application {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/front/Views/user.css")).toExternalForm());
 
         userStage = new Stage();
-        userStage.setTitle("用户界面");
+        userStage.setTitle(user.getName()+"用户界面");
         userStage.setScene(scene);
         userStage.show();
 
@@ -95,7 +103,28 @@ public class MainApp extends Application {
 
         loginStage.close();
     }
+    public void goToGameStage(User user , Game game) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserView.class.getResource("Game.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // 获取控制器并注入 user/game 数据（可选）
+        gameController controller = fxmlLoader.getController();
+        controller.setUser(user);
+        controller.setGame(game);
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/front/Views/Game.css")).toExternalForm());
+
+        if (gamestage == null) {
+            gamestage = new Stage();
+        }
+        gamestage.setResizable(false);
+        gamestage.setTitle(game.getName());
+        gamestage.setScene(scene);
+        gamestage.show();
+    }
     public static void main(String[] args) {
         launch(args);
     }
+
 }

@@ -3,6 +3,8 @@ package front.Controller;
 import back.DAO.DaoImpl.GameDaoImpl;
 import back.DAO.GameDao;
 import back.ENTITY.Game;
+import back.ENTITY.User;
+import front.GUI.GameDetailsFrame;
 import front.MainApp;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -19,13 +21,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.List;
 
 public class userController {
-    private MainApp mainApp;  // 保存主应用引用
+    private MainApp mainApp;// 保存主应用引用
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @FXML private ToggleButton unpurchased;
@@ -47,6 +56,7 @@ public class userController {
     @FXML private TableColumn<Game, String> nameTable;
     @FXML private TableColumn<Game, String> pictureTable;
     @FXML private TableColumn<Game, Double> priceTable;
+    @FXML private TableColumn<Game, String> typetable;
     @FXML private Slider priceRange;
     @FXML private Button reset;
     @FXML private Button searching;
@@ -61,15 +71,17 @@ public class userController {
     @FXML
     public void initialize() {
         pictureTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.10));
-        nameTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.40));
+        nameTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.25));
         blanceTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.15));
-        priceTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.35));
+        priceTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.20));
+        typetable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.30));
 
         // 设置列与属性的绑定
         pictureTable.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         nameTable.setCellValueFactory(new PropertyValueFactory<>("name"));
         blanceTable.setCellValueFactory(new PropertyValueFactory<>("score"));
         priceTable.setCellValueFactory(new PropertyValueFactory<>("price"));
+        typetable.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         // 设置表格自定义图片列渲染
         pictureTable.setCellFactory(column -> new TableCell<>() {
@@ -105,11 +117,33 @@ public class userController {
         nameTable.setResizable(false);
         blanceTable.setResizable(false);
         priceTable.setResizable(false);
+        typetable.setResizable(false);
 
         shoptable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         // 加载游戏数据
         loadGameData();
+
+        // 添加双击监听
+        shoptable.setRowFactory(tv -> {
+            TableRow<Game> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    try {
+                        mainApp.exgame();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        Game game = row.getItem();
+                        mainApp.goToGameStage(user, game);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
 
         // 其他按钮逻辑
         unpurchased.setOnAction(event -> unpurchased.setText(unpurchased.isSelected() ? "已购买" : "未购买"));
@@ -122,7 +156,6 @@ public class userController {
         shoptable.setItems(observableGames);
     }
 
-    // 🆕 生成占位图：黑色背景，白色字（游戏名首字）
     private Image generatePlaceholder(String name) {
         String firstChar = name != null && !name.isBlank() ? name.substring(0, 1).toUpperCase() : "?";
         int width = 60;

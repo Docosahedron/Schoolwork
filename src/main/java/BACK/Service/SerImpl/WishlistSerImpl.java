@@ -20,8 +20,8 @@ public class WishlistSerImpl {
     //游戏加入心愿单
     public boolean addWishlist(User u, Game g) {
         boolean flag= wd.add(u.getName(), g.getName());
-        if(flag) JOptionPane.showMessageDialog(null,"添加成功!");
-        else JOptionPane.showMessageDialog(null,"添加失败!");
+        //if(flag) JOptionPane.showMessageDialog(null,"添加成功!");
+        //else JOptionPane.showMessageDialog(null,"添加失败!");
         return flag;
     }
 

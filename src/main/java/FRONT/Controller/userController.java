@@ -2,6 +2,7 @@ package FRONT.Controller;
 
 import BACK.Entity.*;
 import BACK.Service.SerImpl.GameSerImpl;
+import BACK.Service.SerImpl.UserSerImpl;
 import FRONT.MainApp;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class userController {
+    UserSerImpl us = new UserSerImpl();
+    GameSerImpl gd = new GameSerImpl();
     private MainApp mainApp;// 保存主应用引用
 
     public void setMainApp(MainApp mainApp) {
@@ -63,8 +66,17 @@ public class userController {
     @FXML private MenuItem walllet;
     @FXML private MenuItem wishList;
 
-    GameSerImpl gd = new GameSerImpl();
 
+
+    @FXML
+    public void lockaction() throws IOException {
+        mainApp.goToLoginStage();
+        mainApp.exStage();
+    }
+    @FXML
+    public void exsitaction() throws IOException {
+        mainApp.exStage();
+    }
     @FXML
     public void initialize() {
         pictureTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.10));
@@ -123,6 +135,7 @@ public class userController {
 
         // 添加双击监听
         shoptable.setRowFactory(tv -> {
+            User user = this.user;
             TableRow<Game> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -133,7 +146,7 @@ public class userController {
                     }
                     try {
                         Game game = row.getItem();
-                        mainApp.goToGameStage(user, game);
+                        mainApp.goToGameStage(us.getUserInfo(user.getName()), game);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

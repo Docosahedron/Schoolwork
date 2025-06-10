@@ -79,6 +79,7 @@ public class MainApp extends Application {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/views/user.css")).toExternalForm());
 
         userStage = new Stage();
+        controller.setUser(user);
         userStage.setTitle(user.getName()+"用户界面");
         userStage.setScene(scene);
         userStage.show();

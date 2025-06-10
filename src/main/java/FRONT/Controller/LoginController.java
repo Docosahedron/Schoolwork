@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class  LoginController {
     private MainApp mainApp;  // 保存主应用引用
-
+    UserSerImpl usi = new UserSerImpl();
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
@@ -24,10 +24,9 @@ public class  LoginController {
         String nameInput = usernameField.getText();
         String passwordInput = passwordField.getText();
         User u = new User(0,nameInput,passwordInput);
-        if (usi.login(u)) mainApp.goToUserStage(u);  // 调用主应用中的方法
+        if (usi.login(u)) mainApp.goToUserStage(usi.getUserInfo(u.getName()));  // 调用主应用中的方法
     }
 
-    UserSerImpl usi = new UserSerImpl();
     // 注入 FXML 组件
     @FXML
     private TextField usernameField;

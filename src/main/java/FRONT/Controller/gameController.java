@@ -1,7 +1,10 @@
 package FRONT.Controller;
 
 import BACK.Entity.*;
+import BACK.Service.SerImpl.GameSerImpl;
 import BACK.Service.SerImpl.ReviewSerImpl;
+import BACK.Service.SerImpl.UserSerImpl;
+import BACK.Service.SerImpl.WishlistSerImpl;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +15,13 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
+import static FRONT.View.GameView.showAlert;
+
 public class gameController {
+    private Game game;
+    private User user;
+    UserSerImpl us = new UserSerImpl();
+    GameSerImpl gd = new GameSerImpl();
     @FXML
     private TableColumn<?, ?> authortable;
 
@@ -43,15 +52,33 @@ public class gameController {
     @FXML
     private Button wishlistButton;
 
+    WishlistSerImpl wd = new WishlistSerImpl();
+    @FXML
+    public void wishAddAction(){
+        if(!(wd.queryAdded(user,game))) {
+            wd.addWishlist(user, game);
+            showAlert(null, "添加成功");
+        }
+        else {
+            showAlert(null, "添加失败");
+        }
+    }
+    @FXML
+    public void addAction() {
+        us.buy(user,game);
+    }
     ReviewSerImpl rw = new ReviewSerImpl();
 
-    private Game game;
+
     public void setGame(Game game) {
         this.game = game;
         loadGameData();
     }
-    private User user;
+
     public void setUser(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User 不能为空");
+        }
         this.user = user;
     }
     private void loadGameData() {

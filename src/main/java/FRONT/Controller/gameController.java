@@ -8,6 +8,7 @@ import BACK.Service.SerImpl.WishlistSerImpl;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -55,18 +56,62 @@ public class gameController {
     WishlistSerImpl wd = new WishlistSerImpl();
     @FXML
     public void wishAddAction(){
-        if(!(wd.queryAdded(user,game))) {
-            wd.addWishlist(user, game);
-            showAlert(null, "添加成功");
-        }
-        else {
-            showAlert(null, "添加失败");
-        }
+        Task<Boolean> task = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return !wd.queryAdded(user, game) && wd.addWishlist(user, game);
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            boolean success = task.getValue();
+            if (success) {
+                showAlert(null, "添加成功");
+            } else {
+                showAlert(null, "添加失败");
+            }
+        });
+
+        task.setOnFailed(e -> {
+            showAlert(null, "添加失败: " + task.getException().getMessage());
+        });
+
+        new Thread(task).start();
     }
+
     @FXML
     public void addAction() {
-        us.buy(user,game);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("确认购买");
+        confirm.setHeaderText(null);
+        confirm.setContentText("确定要购买该游戏吗？");
+
+        // 显示确认框并等待用户操作
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // 用户确认后再执行耗时操作
+                Task<Void> task = new Task<>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        us.buy(user, game);
+                        return null;
+                    }
+                };
+
+                task.setOnSucceeded(e -> {
+                    showAlert(null, "购买成功！");
+                });
+
+                task.setOnFailed(e -> {
+                    showAlert(null, "购买失败：" + task.getException().getMessage());
+                });
+
+                new Thread(task).start();
+            }
+        });
     }
+
+
     ReviewSerImpl rw = new ReviewSerImpl();
 
 
@@ -76,9 +121,6 @@ public class gameController {
     }
 
     public void setUser(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("User 不能为空");
-        }
         this.user = user;
     }
     private void loadGameData() {
@@ -121,10 +163,6 @@ public class gameController {
         // 加载评论
         loadReviews();
         // 模拟评论数据
-    }
-    public void initData() {
-        System.out.println("用户名：" + user.getName());
-        System.out.println("游戏名：" + game.getName());
     }
     private void loadReviews() {
 

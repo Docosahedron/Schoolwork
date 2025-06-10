@@ -3,10 +3,15 @@ package FRONT.Controller;
 import BACK.Entity.*;
 import BACK.Service.SerImpl.GameSerImpl;
 import BACK.Service.SerImpl.UserSerImpl;
+import FRONT.GUI.MarketFrame;
+import FRONT.GUI.WalletFrame;
+import FRONT.GUI.WareFrame;
+import FRONT.GUI.WishlistFrame;
 import FRONT.MainApp;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -78,6 +83,29 @@ public class userController {
         mainApp.exStage();
     }
     @FXML
+    void goToInventory(ActionEvent event) {
+        WareFrame wareFrame = new WareFrame(user,us.getBanana(user)); // 你可以自己构造 JavaFX 窗口
+        wareFrame.show();
+    }
+
+    @FXML
+    void goToMarket(ActionEvent event) {
+        MarketFrame marketFrame = new MarketFrame(user);
+        marketFrame.show();
+    }
+
+    @FXML
+    void goToWallet(ActionEvent event) {
+        WalletFrame walletFrame = new WalletFrame(user);
+        walletFrame.show();
+    }
+
+    @FXML
+    void goToWish(ActionEvent event) {
+        WishlistFrame wishlistFrame = new WishlistFrame(user);
+        wishlistFrame.show();
+    }
+    @FXML
     public void initialize() {
         pictureTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.10));
         nameTable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.25));
@@ -86,7 +114,6 @@ public class userController {
         typetable.prefWidthProperty().bind(Bindings.multiply(shoptable.widthProperty(), 0.30));
 
         // 设置列与属性的绑定
-        pictureTable.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         nameTable.setCellValueFactory(new PropertyValueFactory<>("name"));
         blanceTable.setCellValueFactory(new PropertyValueFactory<>("score"));
         priceTable.setCellValueFactory(new PropertyValueFactory<>("price"));

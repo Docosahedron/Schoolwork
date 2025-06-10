@@ -37,19 +37,19 @@
                     <items>
                         <MenuItem fx:id="choiceness" style="-fx-text-fill: #1E1E2E;" text="精选" />
                         <MenuItem fx:id="find" style="-fx-text-fill: #1E1E2E;" text="探索队列" />
-                        <MenuItem fx:id="wishList" style="-fx-text-fill: #1E1E2E;" text="心愿单" />
+                        <MenuItem fx:id="wishList" onAction="#goToWish" style="-fx-text-fill: #1E1E2E;" text="心愿单" />
                     </items>
                 </MenuButton>
                 <MenuButton fx:id="community" style="-fx-background-color: #CBCBFDFF; -fx-text-fill: #E0E0FF;" text="社区">
                     <items>
-                        <MenuItem fx:id="market" style="-fx-text-fill: #1E1E2E;" text="市场" />
+                        <MenuItem fx:id="market" onAction="#goToMarket" style="-fx-text-fill: #1E1E2E;" text="市场" />
                         <MenuItem fx:id="download" style="-fx-text-fill: #1E1E2E;" text="下载" />
                     </items>
                 </MenuButton>
                 <MenuButton fx:id="account" style="-fx-background-color: #CBCBFDFF; -fx-text-fill: #E0E0FF;" text="账户">
                     <items>
-                        <MenuItem fx:id="walllet" style="-fx-text-fill: #1E1E2E;" text="钱包" />
-                        <MenuItem fx:id="inventory" style="-fx-text-fill: #1E1E2E;" text="库存" />
+                        <MenuItem fx:id="walllet" onAction="#goToWallet" style="-fx-text-fill: #1E1E2E;" text="钱包" />
+                        <MenuItem fx:id="inventory" onAction="#goToInventory" style="-fx-text-fill: #1E1E2E;" text="库存" />
                         <MenuItem fx:id="lock" onAction="#lockaction" style="-fx-text-fill: #1E1E2E;" text="锁定" />
                         <MenuItem fx:id="exsit" onAction="#exsitaction" style="-fx-text-fill: #1E1E2E;" text="退出" />
                     </items>

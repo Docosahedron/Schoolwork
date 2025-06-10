@@ -36,24 +36,56 @@ public class registerController {
     private Button exitButton;
 
     UserSerImpl usi = new UserSerImpl();
-    public void handleRegister(ActionEvent actionEvent) throws IOException {
+    public void handleRegister(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String password_ag = passwordField_ag.getText();
-        if (password.equals(password_ag)) {
-            System.out.println("注册成功");
-            User u = new User(1,username,password);
-            if (usi.register(u)) {
-                RegisterView.close();
-                mainApp.goToLoginStage();
-                mainApp.exStage();
-            }
-        }
-        else {
+
+        if (!password.equals(password_ag)) {
             System.out.println("注册失败");
             showAlert("注册失败", "密码不一致");
+            return;
         }
+
+        System.out.println("开始注册");
+
+        // 创建 User 实体
+        User u = new User(1, username, password);
+
+        // 使用 Task 在线程中执行注册逻辑
+        javafx.concurrent.Task<Boolean> task = new javafx.concurrent.Task<>() {
+            @Override
+            protected Boolean call() {
+                return usi.register(u);  // 后台执行
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            boolean success = task.getValue();
+            if (success) {
+                System.out.println("注册成功");
+                try {
+                    RegisterView.close();
+                    mainApp.goToLoginStage();
+                    mainApp.exStage();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    showAlert("注册失败", "页面跳转失败");
+                }
+            } else {
+                showAlert("注册失败", "用户名已存在或其他错误");
+            }
+        });
+
+        task.setOnFailed(e -> {
+            System.out.println("注册线程失败：" + task.getException());
+            showAlert("注册失败", "系统错误，请重试");
+        });
+
+        // 启动后台线程
+        new Thread(task).start();
     }
+
 
     @FXML
     private void handleBack() throws IOException {

@@ -15,14 +15,14 @@ public class UserSerImpl implements UserSer {
     public boolean login(User enrollee) {
         if (enrollee.getName().equals( "ad") && enrollee.getPassword().equals( "ad" )) {
             new AdminFrame();
-            return true;
+            return false;
         }
         else if(ud.query(enrollee.getName(),enrollee.getPassword())) {
-            new UserFrame(ud.getInfo(enrollee.getName()));
+            //new UserFrame(ud.getInfo(enrollee.getName()));
             return true;
         }
         else {
-            JOptionPane.showMessageDialog(null, "用户名或密码错误!");
+            //JOptionPane.showMessageDialog(null, "用户名或密码错误!");
             return false;
         }
 
@@ -32,11 +32,11 @@ public class UserSerImpl implements UserSer {
     @Override
     public boolean register(User u){
         if (ud.add(u)&&bd.init(u.getName())){
-            JOptionPane.showMessageDialog(null, "注册成功!");
-            new LoginFrame();
+            //JOptionPane.showMessageDialog(null, "注册成功!");
+            //new LoginFrame();
             return true;
         }else {
-            JOptionPane.showMessageDialog(null, "注册失败!");
+            //JOptionPane.showMessageDialog(null, "注册失败!");
             return false;
         }
 
@@ -58,12 +58,11 @@ public class UserSerImpl implements UserSer {
                 if (reward > 0) {
                     ud.updatePackage(curUser.getName(), reward);
                     curUser.setPackages(curUser.getPackages() + reward);
-                    JOptionPane.showMessageDialog(null,
-                            "购买成功!\n恭喜您获得 " + reward + " 个香蕉包!");
+                    JOptionPane.showMessageDialog(null,"购买成功!\n恭喜您获得 " + reward + " 个香蕉包!");
                 } else JOptionPane.showMessageDialog(null, "购买成功!\n很遗憾本次没有获得香蕉包");
                 return true;
             }else {
-                JOptionPane.showMessageDialog(null,"余额不足,购买失败!");
+                //JOptionPane.showMessageDialog(null,"余额不足,购买失败!");
                 return false;
             }
         }

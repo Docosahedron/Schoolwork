@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class RegisterView extends Application{
     private static Stage Registerstage;
-
     public static void main(String[] args) {
         launch(args);
     }

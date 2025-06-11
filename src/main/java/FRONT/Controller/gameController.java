@@ -1,10 +1,8 @@
 package FRONT.Controller;
 
+import BACK.Dao.DaoImpl.WarehouseDaoImpl;
 import BACK.Entity.*;
-import BACK.Service.SerImpl.GameSerImpl;
-import BACK.Service.SerImpl.ReviewSerImpl;
-import BACK.Service.SerImpl.UserSerImpl;
-import BACK.Service.SerImpl.WishlistSerImpl;
+import BACK.Service.SerImpl.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +21,7 @@ public class gameController {
     private User user;
     UserSerImpl us = new UserSerImpl();
     GameSerImpl gd = new GameSerImpl();
+    WarehouseSerImpl whd =  new WarehouseSerImpl();
     @FXML
     private TableColumn<?, ?> authortable;
 
@@ -54,12 +53,89 @@ public class gameController {
     private Button wishlistButton;
 
     WishlistSerImpl wd = new WishlistSerImpl();
+
     @FXML
-    public void wishAddAction(){
+    public void initialize() {
+        // This will be called when the FXML is loaded
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+        loadGameData();
+        updateWishlistButtonState();
+        updateBuyButtonState();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        updateWishlistButtonState();
+        updateBuyButtonState();
+    }
+
+    private void updateBuyButtonState() {
+        if (user == null || game == null) return;
+
+        Task<Boolean> checkTask = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return whd.queryBought(user, game);
+            }
+        };
+
+        checkTask.setOnSucceeded(e -> {
+            boolean isPurchased = checkTask.getValue();
+            if (isPurchased) {
+                buyButton.setText("已购买");
+                buyButton.setDisable(true);
+                buyButton.setStyle("-fx-background-color: #cccccc;"); // Optional: gray out the button
+            } else {
+                buyButton.setText("购买");
+                buyButton.setDisable(false);
+                buyButton.setStyle(""); // Reset to default style
+            }
+        });
+
+        checkTask.setOnFailed(e -> {
+            showAlert(null, "检查购买状态失败: " + checkTask.getException().getMessage());
+        });
+
+        new Thread(checkTask).start();
+    }
+
+    private void updateWishlistButtonState() {
+        if (user == null || game == null) return;
+
+        Task<Boolean> checkTask = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return wd.queryAdded(user, game);
+            }
+        };
+
+        checkTask.setOnSucceeded(e -> {
+            boolean isInWishlist = checkTask.getValue();
+            if (isInWishlist) {
+                wishlistButton.setText("移除心愿单");
+                wishlistButton.setOnAction(event -> removeFromWishlist());
+            } else {
+                wishlistButton.setText("添加到心愿单");
+                wishlistButton.setOnAction(event -> wishAddAction());
+            }
+        });
+
+        checkTask.setOnFailed(e -> {
+            showAlert(null, "检查心愿单状态失败: " + checkTask.getException().getMessage());
+        });
+
+        new Thread(checkTask).start();
+    }
+
+    @FXML
+    public void wishAddAction() {
         Task<Boolean> task = new Task<>() {
             @Override
             protected Boolean call() throws Exception {
-                return !wd.queryAdded(user, game) && wd.addWishlist(user, game);
+                return wd.addWishlist(user, game);
             }
         };
 
@@ -67,6 +143,7 @@ public class gameController {
             boolean success = task.getValue();
             if (success) {
                 showAlert(null, "添加成功");
+                updateWishlistButtonState();
             } else {
                 showAlert(null, "添加失败");
             }
@@ -79,6 +156,31 @@ public class gameController {
         new Thread(task).start();
     }
 
+    private void removeFromWishlist() {
+        Task<Boolean> task = new Task<>() {
+            @Override
+            protected Boolean call() throws Exception {
+                return wd.removeSelected(user, game);
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            boolean success = task.getValue();
+            if (success) {
+                showAlert(null, "移除成功");
+                updateWishlistButtonState();
+            } else {
+                showAlert(null, "移除失败");
+            }
+        });
+
+        task.setOnFailed(e -> {
+            showAlert(null, "移除失败: " + task.getException().getMessage());
+        });
+
+        new Thread(task).start();
+    }
+
     @FXML
     public void addAction() {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -86,10 +188,8 @@ public class gameController {
         confirm.setHeaderText(null);
         confirm.setContentText("确定要购买该游戏吗？");
 
-        // 显示确认框并等待用户操作
         confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                // 用户确认后再执行耗时操作
                 Task<Void> task = new Task<>() {
                     @Override
                     protected Void call() throws Exception {
@@ -100,6 +200,7 @@ public class gameController {
 
                 task.setOnSucceeded(e -> {
                     showAlert(null, "购买成功！");
+                    updateBuyButtonState(); // Update button state after purchase
                 });
 
                 task.setOnFailed(e -> {
@@ -111,18 +212,8 @@ public class gameController {
         });
     }
 
-
     ReviewSerImpl rw = new ReviewSerImpl();
 
-
-    public void setGame(Game game) {
-        this.game = game;
-        loadGameData();
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
     private void loadGameData() {
         if (game == null) return;
 
@@ -135,16 +226,13 @@ public class gameController {
         authortable.prefWidthProperty().bind(Bindings.multiply(reviewtable.widthProperty(), 0.15));
         timetable.prefWidthProperty().bind(Bindings.multiply(reviewtable.widthProperty(), 0.20));
 
-        // 设置列与属性的绑定
         conteenttable.setCellValueFactory(new PropertyValueFactory<>("content"));
-
         conteenttable.setCellFactory(column -> new TableCell<>() {
             private final Text text = new Text();
 
             {
-                // 绑定列宽，使文字能自动换行
                 text.wrappingWidthProperty().bind(conteenttable.widthProperty().subtract(10));
-                setPrefHeight(Control.USE_COMPUTED_SIZE); // 关键：撑高行高
+                setPrefHeight(Control.USE_COMPUTED_SIZE);
             }
 
             @Override
@@ -160,15 +248,12 @@ public class gameController {
         });
         authortable.setCellValueFactory(new PropertyValueFactory<>("author"));
         timetable.setCellValueFactory(new PropertyValueFactory<>("time"));
-        // 加载评论
         loadReviews();
-        // 模拟评论数据
     }
-    private void loadReviews() {
 
+    private void loadReviews() {
         List<Review> reviews = rw.getReviews(game);
         ObservableList<Review> observableReviews = FXCollections.observableArrayList(reviews);
         reviewtable.setItems(observableReviews);
     }
-
 }

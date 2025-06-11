@@ -23,13 +23,11 @@ public class MainApp extends Application {
     private Stage gamestage;
     private double xOffset = 0;
     private double yOffset = 0;
-
     @Override
     public void start(Stage stage) throws Exception {
         loginStage = stage;
         goToLoginStage();  // 显示无边框登录界面
     }
-
     public void goToLoginStage() throws IOException {
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
         Parent root = loginLoader.load();
@@ -126,5 +124,4 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

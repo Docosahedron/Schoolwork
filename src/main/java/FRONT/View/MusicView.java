@@ -61,7 +61,6 @@ public class MusicView extends Application {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("音频文件", "*.mp3", "*.wav", "*.aac")
         );
-
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             if (mediaPlayer != null) {

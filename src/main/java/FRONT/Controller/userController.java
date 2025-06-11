@@ -13,6 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
@@ -20,14 +23,25 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
+import static FRONT.View.UserView.showAlert;
+
 public class userController {
+
+    @FXML public MenuItem song1Button;
+     @FXML public MenuItem song1Button2;
     UserSerImpl us = new UserSerImpl();
     GameSerImpl gd = new GameSerImpl();
     private MainApp mainApp;// 保存主应用引用
@@ -143,7 +157,7 @@ public class userController {
                 }
 
                 imageView.setImage(image);
-                imageView.setFitHeight(60);
+                imageView.setFitHeight(120);
                 imageView.setPreserveRatio(true);
                 setGraphic(imageView);
             }
@@ -186,13 +200,11 @@ public class userController {
         unpurchased.setOnAction(event -> unpurchased.setText(unpurchased.isSelected() ? "已购买" : "未购买"));
         gather.setOnAction(event -> gather.setText(gather.isSelected() ? "交集" : "并集"));
     }
-
     private void loadGameData() {
         List<Game> games = gd.getAllGame();
         ObservableList<Game> observableGames = FXCollections.observableArrayList(games);
         shoptable.setItems(observableGames);
     }
-
     private Image generatePlaceholder(String name) {
         String firstChar = name != null && !name.isBlank() ? name.substring(0, 1).toUpperCase() : "?";
         int width = 60;
@@ -219,6 +231,125 @@ public class userController {
         WritableImage snapshot = new WritableImage(width, height);
         canvas.snapshot(null, snapshot);
         return snapshot;
+    }
+
+    // 音乐播放相关变量
+    private MediaPlayer mediaPlayer;
+    private final String defaultMusicPath = "/resources/music/song1.mp3";
+    private String currentMusicPath;
+    @FXML public Button chooseMusicButton;
+    @FXML public Button playButton;
+    @FXML public Button pauseButton;
+    @FXML public Button landchoose;
+    // 初始化音乐播放器
+    private void initMusicPlayer() {
+        // 禁用播放按钮直到加载音乐
+        playButton.setDisable(true);
+        pauseButton.setDisable(true);
+    }
+    // 加载默认音乐
+    private void loadDefaultMusic() {
+        try {
+            currentMusicPath = defaultMusicPath;
+            loadMusic(currentMusicPath);
+        } catch (Exception e) {
+            showAlert("音乐加载失败", "无法加载默认音乐: " + e.getMessage());
+        }
+    }
+    // 加载音乐文件
+    private void loadMusic(String musicPath) {
+        try {
+            // 停止当前播放
+            stopMusic();
+            // 获取音乐文件URL
+            String musicUrl;
+            if (musicPath.startsWith("/")) { // 资源路径
+                musicUrl = getClass().getResource(musicPath).toExternalForm();
+            } else { // 文件路径
+                musicUrl = Paths.get(musicPath).toUri().toString();
+            }
+            // 创建媒体和播放器
+            Media media = new Media(musicUrl);
+            mediaPlayer = new MediaPlayer(media);
+            // 监听播放状态变化
+            mediaPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == MediaPlayer.Status.READY) {
+                    // 音乐准备好后启用播放按钮
+                    playButton.setDisable(false);
+                    pauseButton.setDisable(true);
+                } else if (newValue == MediaPlayer.Status.PLAYING) {
+                    playButton.setDisable(true);
+                    pauseButton.setDisable(false);
+                } else if (newValue == MediaPlayer.Status.PAUSED) {
+                    playButton.setDisable(false);
+                    pauseButton.setDisable(true);
+                } else if (newValue == MediaPlayer.Status.STOPPED) {
+                    playButton.setDisable(false);
+                    pauseButton.setDisable(true);
+                }
+            });
+            // 添加播放结束监听
+            mediaPlayer.setOnEndOfMedia(() -> {
+                playButton.setDisable(false);
+                pauseButton.setDisable(true);
+            });
+        } catch (Exception e) {
+            showAlert("音乐加载失败", "无法加载音乐: " + e.getMessage());
+            System.out.println( e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    // 停止当前音乐播放
+    private void stopMusic() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+            mediaPlayer = null;
+        }
+
+        playButton.setDisable(true);
+        pauseButton.setDisable(true);
+    }
+    //currentMusicPath = "/music/song1.mp3";
+    //loadMusic(currentMusicPath);
+    // 播放音乐
+    @FXML
+    public void playAction(ActionEvent actionEvent) {
+        if (mediaPlayer != null) {
+            mediaPlayer.play();
+        }
+    }
+    // 暂停音乐
+    @FXML
+    public void pauseAction(ActionEvent actionEvent) {
+        if (mediaPlayer != null) {
+            mediaPlayer.pause();
+        }
+    }
+
+    public void landAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("选择音乐文件");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("音频文件", "*.mp3", "*.wav", "*.ogg"),
+                new FileChooser.ExtensionFilter("所有文件", "*.*")
+        );
+        Stage stage = (Stage) landchoose.getScene().getWindow();
+        java.io.File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            currentMusicPath = file.getAbsolutePath();
+            loadMusic(currentMusicPath);
+        }
+    }
+
+    public void song1Action(ActionEvent actionEvent) {
+        currentMusicPath = "/music/song1.mp3";
+        loadMusic(currentMusicPath);
+    }
+
+    public void song2Action(ActionEvent actionEvent) {
+        currentMusicPath = "/music/song2.mp3";
+        loadMusic(currentMusicPath);
     }
 }
 

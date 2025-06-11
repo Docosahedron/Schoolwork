@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane style="-fx-background-color: #1E1E2E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FRONT.Controller.userController">
-    <!-- 顶部区域 - 深色主题 -->
+    <!-- 顶部区域 - 保持不变 -->
     <top>
         <VBox spacing="8" style="-fx-padding: 10; -fx-background-color: #252540;">
             <MenuBar style="-fx-background-color: #c3dee8;">
@@ -58,20 +58,20 @@
         </VBox>
     </top>
 
-    <!-- 中央区域 - 深色表格 -->
+    <!-- 中央区域 - 保持不变 -->
     <center>
         <TableView fx:id="shoptable" style="-fx-base: #252540; -fx-control-inner-background: #252540; -fx-table-header-border-color: transparent; -fx-table-cell-border-color: #3A3A5A;" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="pictureTable" style="-fx-text-fill: #E0E0FF;" text="图片" />
                 <TableColumn fx:id="nameTable" style="-fx-text-fill: #E0E0FF;" text="名称" />
-            <TableColumn fx:id="typetable" style="-fx-text-fill: #E0E0FF;" text="类型" />
+                <TableColumn fx:id="typetable" style="-fx-text-fill: #E0E0FF;" text="类型" />
                 <TableColumn fx:id="blanceTable" style="-fx-text-fill: #E0E0FF;" text="评分" />
                 <TableColumn fx:id="priceTable" style="-fx-text-fill: #E0E0FF;" text="价格" />
             </columns>
         </TableView>
     </center>
 
-    <!-- 右侧区域 - 深色面板 -->
+    <!-- 右侧区域 - 保持不变 -->
     <right>
         <VBox prefWidth="300" spacing="12" style="-fx-padding: 15; -fx-background-color: #252540;">
             <Label text="依价格缩小范围" textFill="#A0A0CC">
@@ -93,10 +93,23 @@
         </VBox>
     </right>
 
-    <!-- 底部区域 - 深色工具栏 -->
+    <!-- 底部区域 - 修改为只包含下载按钮 -->
     <bottom>
         <ToolBar style="-fx-padding: 10; -fx-background-color: #252540;">
             <Button fx:id="DownLoadGo" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="下载" />
+            <!-- 使用HBox作为占位元素将音乐播放器推到右侧 -->
+            <HBox HBox.hgrow="ALWAYS" />
+            <!-- 音乐播放器控件区域 - 移动到右侧 -->
+            <Label style="-fx-font-weight: bold;" text="🎵 播放器：" textFill="#E0E0FF" />
+         <Button fx:id="landchoose" onAction="#landAction" style="-fx-background-color: #6ebfff; -fx-text-fill: white;" text="选择本地歌曲" />
+         <MenuButton mnemonicParsing="false" style="-fx-background-color: #cbcbfd; -fx-text-fill: white;" text="选歌">
+           <items>
+             <MenuItem fx:id="song1Button" mnemonicParsing="false" onAction="#song1Action" text="両翼のBrilliance" />
+               <MenuItem fx:id="song1Button2" mnemonicParsing="false" onAction="#song2Action" text="深海少女" />
+           </items>
+         </MenuButton>
+            <Button fx:id="playButton" onAction="#playAction" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="▶ 播放" />
+            <Button fx:id="pauseButton" onAction="#pauseAction" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="⏸ 暂停" />
         </ToolBar>
     </bottom>
 </BorderPane>

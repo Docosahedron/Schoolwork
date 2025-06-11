@@ -20,7 +20,6 @@ public class WareFrame extends JFrame implements ActionListener {
     private JPanel bananaPanel;
     private DefaultTableModel tableModel;
     UserSerImpl us = new UserSerImpl();
-    GameSerImpl gs = new GameSerImpl();
     WarehouseSerImpl ws = new WarehouseSerImpl();
     
     public WareFrame(User user,Banana banana) {

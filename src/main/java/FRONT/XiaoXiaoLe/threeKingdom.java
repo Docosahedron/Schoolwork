@@ -1,4 +1,4 @@
-package FRONT.Xiaoxiaole.game;
+package FRONT.XiaoXiaoLe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.BasicStroke;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class XiaoXiaoLe extends JFrame {
+public class threeKingdom extends JFrame {
     private static final int ROWS = 9;
     private static final int COLS = 9;
     private static final int TYPES = 8; // 元素种类
@@ -41,9 +41,8 @@ public class XiaoXiaoLe extends JFrame {
     private final int ANIMATION_SPEED = 15; // 动画速度，值越小越快
     private ImageIcon[][] cachedIcons = new ImageIcon[TYPES][2]; // 缓存图标 [类型][是否强化]
 
-    public XiaoXiaoLe() {
+    public threeKingdom() {
         setTitle("三国消消乐");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(630, 680); // 增加高度以容纳状态栏
         
         // 创建状态面板
@@ -121,7 +120,7 @@ public class XiaoXiaoLe extends JFrame {
 
     private void loadIcons() {
         for (int i = 0; i < TYPES; i++) {
-            String path = "../games/images/" + (i + 1) + ".png";
+            String path = "src/main/java/FRONT/XiaoXiaoLe/images/" + (i + 1) + ".png";
             File file = new File(path);
             if (!file.exists()) {
                 System.err.println("图片不存在: " + path);
@@ -523,6 +522,6 @@ public class XiaoXiaoLe extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(XiaoXiaoLe::new);
+        SwingUtilities.invokeLater(threeKingdom::new);
     }
 } 

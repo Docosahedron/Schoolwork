@@ -1,8 +1,7 @@
 package FRONT.GUI;
 import BACK.Service.SerImpl.*;
 import BACK.Entity.*;
-import BACK.Service.Check;
-import FRONT.Xiaoxiaole.game.XiaoXiaoLe;
+import FRONT.XiaoXiaoLe.threeKingdom;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -84,7 +83,7 @@ public class UserFrame extends JFrame {
         //打开市场
         market.addActionListener(e-> new MarketFrame(curUser));
         //
-        classic.addActionListener(e->new XiaoXiaoLe());
+        classic.addActionListener(e->new threeKingdom());
         //打开钱包
         wallet.addActionListener(e->new WalletFrame(curUser));
         //打开库存

@@ -78,7 +78,7 @@ public class GameDetailsFrame extends JFrame {
                 closeButton.setBackground(new Color(30, 30, 36));
             }
         });
-        closeButton.addActionListener(e -> System.exit(0));
+        closeButton.addActionListener(e -> dispose());
 
         titleBar.add(titleLabel, BorderLayout.WEST);
         titleBar.add(closeButton, BorderLayout.EAST);
@@ -142,7 +142,7 @@ public class GameDetailsFrame extends JFrame {
             }
         });
 
-        setSize(500, 700);
+        setSize(500, 900);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.curGame = game;
@@ -357,7 +357,7 @@ public class GameDetailsFrame extends JFrame {
             int lineHeight = getFontMetrics(getFont()).getHeight();
             int textLength = getText().length();
             int rows = (textLength / 40) + 1;
-            table.setRowHeight(row, lineHeight * rows);
+            table.setRowHeight(row, lineHeight * rows + 10);
 
             return this;
         }

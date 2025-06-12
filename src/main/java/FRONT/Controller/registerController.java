@@ -1,6 +1,7 @@
 package FRONT.Controller;
 
 import BACK.Entity.User;
+import BACK.Service.Check;
 import BACK.Service.SerImpl.UserSerImpl;
 import FRONT.MainApp;
 import FRONT.View.RegisterView;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import static FRONT.View.RegisterView.showAlert;
 
 public class registerController {
+    Check ch =new Check();
     private MainApp mainApp;  // 保存主应用引用
 
     public void setMainApp(MainApp mainApp) {
@@ -45,6 +47,9 @@ public class registerController {
             System.out.println("注册失败");
             showAlert("注册失败", "密码不一致");
             return;
+        }
+        if (!(ch.checkUserName(username)&&ch.checkPassword(password))) {
+            showAlert("注册失败", "注册失败!\n用户名只能包含中文,英文或者\"_\",且长度在4-10位\n密码必须同时包含英文和数字,且长度在8-16位");
         }
 
         System.out.println("开始注册");

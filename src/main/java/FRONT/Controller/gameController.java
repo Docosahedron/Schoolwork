@@ -20,7 +20,6 @@ public class gameController {
     private Game game;
     private User user;
     UserSerImpl us = new UserSerImpl();
-    GameSerImpl gd = new GameSerImpl();
     WarehouseSerImpl whd =  new WarehouseSerImpl();
     @FXML
     private TableColumn<?, ?> authortable;

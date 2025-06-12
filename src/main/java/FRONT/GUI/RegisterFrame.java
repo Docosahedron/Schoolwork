@@ -41,9 +41,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
     public void init() {
         p.setLayout(null);
         name.setBounds(10, 10, 50, 30);
-        nameIn.setBounds(100, 10, 100, 30);
+        nameIn.setBounds(70, 10, 130, 30);
         password.setBounds(10, 50, 50, 30);
-        passwordIn.setBounds(100, 50, 100, 30);
+        passwordIn.setBounds(70, 50, 130, 30);
         confirm.setBounds(10, 100, 100, 30);
 
         p.add(name);

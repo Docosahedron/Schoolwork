@@ -30,7 +30,6 @@ public class LoginFrame extends JFrame implements ActionListener {
                 dispose();
             }
         }else if (e.getSource()==register) {
-            dispose();
             new RegisterFrame();
         }else if (e.getSource()==exit) {
             System.exit(0);

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="zx" uuid="d07d8157-5da7-464c-8c66-d8a59f123a79">
-      <driver-ref>mysql_aurora.aws_wrapper</driver-ref>
       <synchronize>true</synchronize>
       <remarks>steam</remarks>
       <jdbc-driver>software.amazon.jdbc.Driver</jdbc-driver>
@@ -40,7 +39,6 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="steam@localhost" uuid="af684672-c323-4460-ab98-7e03db80e639">
-      <driver-ref>mysql_aurora.aws_wrapper</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>software.amazon.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:aws-wrapper:mysql://localhost:3306/steam</jdbc-url>

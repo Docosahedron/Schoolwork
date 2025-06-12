@@ -523,14 +523,16 @@ public class MarketFrame extends JFrame{
             String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
             int num = (int) numSpinner.getValue();
             double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * num));
+            String show = String.format("%.2f", price*num);
+            totalValueLabel.setText("¥" + show);
         });
 
         numSpinner.addChangeListener(e -> {
             String selectedType = (String) typeComboBox.getSelectedItem();assert selectedType != null;
             int num = (int) numSpinner.getValue();
             double price = us.getBananaPrice(selectedType);
-            totalValueLabel.setText("¥" + (price * num));
+            String show = String.format("%.2f", price*num);
+            totalValueLabel.setText("¥" + show);
         });
 
         // 出售按钮
@@ -623,7 +625,8 @@ public class MarketFrame extends JFrame{
             }
 
             // 更新界面显示
-            balanceLabel.setText("余额: ¥" + curUser.getBalance());
+            String show = String.format("%.2f",curUser.getBalance());
+            balanceLabel.setText("余额: ¥" + show);
             packageCountLabel.setText("香蕉包: " + curUser.getPackages() + "个");
 
             // 获取香蕉数据
@@ -688,7 +691,7 @@ public class MarketFrame extends JFrame{
 
     public static void main(String[] args) {
         // 测试用
-        User test = new User(1, "测试用户", "password", 1000, 10);
+        User test = new User(1, "测试用户", "password", 100.00, 10);
         new MarketFrame(test);
     }
 }

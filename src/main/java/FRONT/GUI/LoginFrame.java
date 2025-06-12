@@ -25,7 +25,10 @@ public class LoginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==login) {
             User u = new User(0,nameInput.getText(),passwordInput.getText());
-            if (us.login(u)) dispose();
+            if (us.login(u)){
+                new UserFrame(us.getUserInfo(u.getName()));
+                dispose();
+            }
         }else if (e.getSource()==register) {
             dispose();
             new RegisterFrame();

@@ -161,7 +161,8 @@ public class WalletFrame extends JFrame {
         balanceTitle2.setBounds(10, 10, 100, 25);
         balancePanel.add(balanceTitle2);
 
-        balanceNum = new JLabel("¥ " + curUser.getBalance());
+        String show = String.format("%.2f", curUser.getBalance());
+        balanceNum = new JLabel("¥ " + show);
         Font font3 = new Font("宋体", Font.BOLD, 24);
         balanceNum.setFont(font3);
         balanceNum.setForeground(new Color(240, 240, 240));   //设置字体颜色为蓝色

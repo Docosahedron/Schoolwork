@@ -1,6 +1,6 @@
 package BACK.Service;
 
-class check {
+public class check {
     public boolean checkNum(String num) {
         return num.matches("[0-9]*");
     }

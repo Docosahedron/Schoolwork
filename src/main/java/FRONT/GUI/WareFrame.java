@@ -15,7 +15,7 @@ import java.util.List;
 public class WareFrame extends JFrame implements ActionListener {
     private final User curUser;
     private final Banana curBanana;
-    private JPanel mainPanel;
+    private final JPanel mainPanel;
     private JPanel wareShow;
     private JPanel bananaPanel;
     private DefaultTableModel tableModel;

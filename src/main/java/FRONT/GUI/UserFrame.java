@@ -1,6 +1,8 @@
 package FRONT.GUI;
 import BACK.Service.SerImpl.*;
 import BACK.Entity.*;
+import BACK.Service.check;
+import FRONT.Xiaoxiaole.game.XiaoXiaoLe;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,7 @@ public class UserFrame extends JFrame {
     private final Banana curBanana;
     GameSerImpl gs =new GameSerImpl();
     UserSerImpl us = new UserSerImpl();
+    check ch = new check();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
@@ -40,19 +43,19 @@ public class UserFrame extends JFrame {
     public void setMenuBar(){
         JMenuBar menuBar = new JMenuBar();
         JMenu homePage = new JMenu("首页");
-        JMenuItem home = new JMenuItem("首页");
+        JMenuItem home = new JMenuItem("首 页");
         JMenu store = new JMenu("商 店");//
-        JMenuItem features = new JMenuItem("精选");
+        JMenuItem features = new JMenuItem("精 选");
         JMenuItem discovery = new JMenuItem("探索队列");
         JMenuItem wishList = new JMenuItem("心愿单");
         JMenu community = new JMenu("社 区");//
-        JMenuItem market = new JMenuItem("市场");
-        JMenuItem download = new JMenuItem("下载");
+        JMenuItem market = new JMenuItem("市 场");
+        JMenuItem classic = new JMenuItem("经典游戏");
         JMenu accountOp = new JMenu("账 户");//
-        JMenuItem wallet = new JMenuItem("钱包");
-        JMenuItem ware = new JMenuItem("库存");
-        JMenuItem lock = new JMenuItem("锁定");
-        JMenuItem exit = new JMenuItem("退出");
+        JMenuItem wallet = new JMenuItem("钱 包");
+        JMenuItem ware = new JMenuItem("库 存");
+        JMenuItem lock = new JMenuItem("锁 定");
+        JMenuItem exit = new JMenuItem("退 出");
         //添加组件
         menuBar.add(homePage);//
         menuBar.add(store);
@@ -63,7 +66,7 @@ public class UserFrame extends JFrame {
         store.add(discovery);
         store.add(wishList);
         community.add(market);//
-        community.add(download);
+        community.add(classic);
         accountOp.add(wallet);//
         accountOp.add(ware);
         accountOp.addSeparator(); // 添加分割线
@@ -84,7 +87,7 @@ public class UserFrame extends JFrame {
         //打开市场
         market.addActionListener(e-> new MarketFrame(curUser));
         //
-        download.addActionListener(e->{});
+        classic.addActionListener(e->new XiaoXiaoLe());
         //打开钱包
         wallet.addActionListener(e->new WalletFrame(curUser));
         //打开库存
@@ -121,11 +124,16 @@ public class UserFrame extends JFrame {
         searchArea.add(refresh);
         searchButton.addActionListener(e->{
             double min;double max;
-            if (minPriceIn.getText().isEmpty()) min = 0;
-            else min = Double.parseDouble(minPriceIn.getText());
-            if (maxPriceIn.getText().isEmpty()) max = 1e9;
-            else max = Double.parseDouble(maxPriceIn.getText());
-            showSearched(typeIn.getText(),min,max);
+            try{
+                if (minPriceIn.getText().isEmpty()) min = 0;
+                else min = Double.parseDouble(minPriceIn.getText());
+                if (maxPriceIn.getText().isEmpty()) max = 1000;
+                else max = Double.parseDouble(maxPriceIn.getText());
+                showSearched(typeIn.getText(),min,max);
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "非法价格输入!");
+            }
+
         });
         refresh.addActionListener(e-> refresh("",0,1000));
         mainPanel.add(searchArea, BorderLayout.NORTH);

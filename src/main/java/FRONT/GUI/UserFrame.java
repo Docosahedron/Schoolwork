@@ -18,7 +18,6 @@ public class UserFrame extends JFrame {
     private final Banana curBanana;
     GameSerImpl gs =new GameSerImpl();
     UserSerImpl us = new UserSerImpl();
-    Check ch = new Check();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
@@ -78,9 +77,7 @@ public class UserFrame extends JFrame {
         //设置交互
         home.addActionListener(e-> gameShow.setVisible(true));
         //检索精选游戏
-        features.addActionListener(e->{
-            showFeatures(80);
-        });
+        features.addActionListener(e->showFeatures(80));
         discovery.addActionListener(e->{});
         //打开心愿单
         wishList.addActionListener(e-> new WishlistFrame(curUser));

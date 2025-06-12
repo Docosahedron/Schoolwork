@@ -1,7 +1,7 @@
 package FRONT.GUI;
 import BACK.Service.SerImpl.*;
 import BACK.Entity.*;
-import BACK.Service.check;
+import BACK.Service.Check;
 import FRONT.Xiaoxiaole.game.XiaoXiaoLe;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class UserFrame extends JFrame {
     private final Banana curBanana;
     GameSerImpl gs =new GameSerImpl();
     UserSerImpl us = new UserSerImpl();
-    check ch = new check();
+    Check ch = new Check();
     DefaultTableModel tableModel;
     JPanel mainPanel; // 主面板，使用BorderLayout
     JPanel searchArea;//筛选
@@ -289,7 +289,7 @@ public class UserFrame extends JFrame {
         g.setColor(Color.WHITE);
         g.setFont(new Font("宋体", Font.BOLD, 24));
         
-        String initial = gameName.length() > 0 ? gameName.substring(0, 1).toUpperCase() : "G";
+        String initial = !gameName.isEmpty() ? gameName.substring(0, 1).toUpperCase() : "G";
         FontMetrics metrics = g.getFontMetrics();
         int x = (60 - metrics.stringWidth(initial)) / 2;
         int y = ((50 - metrics.getHeight()) / 2) + metrics.getAscent();

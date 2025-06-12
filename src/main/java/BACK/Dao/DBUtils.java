@@ -4,7 +4,7 @@ import java.sql.*;
 public class DBUtils {
     static private final String url = "jdbc:mysql://localhost:3306/steam";
     static private final String username = "root";
-    static private final String password = "zx220904";
+    static private final String password = "liyixin23";
     //建立连接;;;
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
